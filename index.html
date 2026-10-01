@@ -8,46 +8,44 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#04060b;--navy:#0a1224;--lift:#111f3d;--gold:#c9a54b;--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--bar:68px}
+:root{--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
 *{box-sizing:border-box;margin:0}
 html{color-scheme:dark}
-body{min-height:100dvh;background:radial-gradient(120% 80% at 50% 0%,#0d1a33 0%,var(--ink) 62%);color:var(--text);font:400 16px/1.5 Inter,system-ui,sans-serif}
+body{min-height:100dvh;background:#000;color:var(--text);font:400 16px/1.5 Inter,system-ui,sans-serif}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
 .bar{position:sticky;top:0;z-index:30;height:var(--bar);padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,6,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.burger{width:44px;height:44px;display:grid;place-content:center;gap:6px;background:none;border:1px solid var(--line);border-radius:12px}
-.burger span{display:block;width:22px;height:2px;background:var(--gold);transition:transform .3s,opacity .3s}
-.menu-open .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-.menu-open .burger span:nth-child(2){opacity:0}
-.menu-open .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.burger{width:36px;height:36px;margin-left:-8px;padding:0;display:grid;place-content:center;gap:4px;background:none;border:0}
+.burger span{display:block;width:20px;height:2px;background:#fff}
 .actions{display:flex;gap:10px}
-.btn{padding:10px 22px;border:1px solid var(--gold);border-radius:999px;background:transparent;color:var(--gold-hi);font-weight:500;transition:background .25s,color .25s}
-.btn:hover{background:rgba(201,165,75,.12)}
-.btn.is-active,.cta{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:#1a1405}
-.btn.is-active{border-color:transparent}
-.scrim{position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
-.drawer{position:fixed;z-index:20;top:var(--bar);bottom:0;left:0;width:min(320px,84vw);padding:20px 14px;display:flex;flex-direction:column;gap:6px;background:linear-gradient(180deg,var(--navy),var(--ink));border-right:1px solid var(--line);transform:translateX(-100%);visibility:hidden;transition:transform .35s cubic-bezier(.22,.8,.3,1),visibility 0s .35s}
+.btn,.cta{border:0;background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);color:#1a1405;font-weight:600;transition:filter .2s}
+.btn{padding:7px 20px;border-radius:999px;font-size:14px}
+.btn:hover{filter:brightness(1.08)}
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.drawer{position:fixed;z-index:50;top:0;bottom:0;left:0;width:min(260px,72vw);padding:20px 14px;display:flex;flex-direction:column;gap:6px;background:#000;border-right:1px solid var(--silver);transform:translateX(-100%);visibility:hidden;transition:transform .35s cubic-bezier(.22,.8,.3,1),visibility 0s .35s}
 .menu-open .scrim{opacity:1;visibility:visible;transition:opacity .3s}
 .menu-open .drawer{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.22,.8,.3,1)}
-.nav-item{padding:14px 16px;text-align:left;background:none;border:0;border-left:2px solid transparent;border-radius:0 10px 10px 0;font-size:17px;transition:background .2s,color .2s}
+.nav-item{padding:14px 16px;text-align:left;background:none;border:0;border-radius:10px;font-size:17px;transition:background .2s}
 .nav-item:hover{background:rgba(201,165,75,.1)}
-.nav-item.is-active{border-left-color:var(--gold);background:rgba(201,165,75,.08);color:var(--gold-hi)}
-main{min-height:calc(100dvh - var(--bar));display:grid;place-items:center;padding:32px 20px}
-.card{width:100%;max-width:440px;padding:44px 36px 36px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(160deg,var(--lift),var(--navy) 55%,var(--ink));box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(236,212,138,.18)}
-h1{font:600 38px/1.1 "Cormorant Garamond",Georgia,serif;color:var(--gold-hi)}
-.lead{margin:10px 0 24px;color:var(--muted)}
-label{display:block;margin:18px 0 8px;font-size:14px;color:var(--muted)}
-input{width:100%;padding:14px 16px;border:1px solid rgba(138,147,168,.28);border-radius:12px;background:rgba(4,6,11,.6);transition:border-color .2s,box-shadow .2s}
+dialog{width:min(400px,92vw);padding:0;border:1px solid var(--silver);border-radius:16px;background:#000;color:inherit}
+dialog::backdrop{background:rgba(0,0,0,.72)}
+.panel{display:flex;flex-direction:column;gap:14px;padding:32px 28px 28px}
+.panel h2{font:600 30px/1.15 "Cormorant Garamond",Georgia,serif;color:#f2f2f2}
+.note{font-size:14px;color:var(--muted)}
+input{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;background:transparent;transition:border-color .2s,box-shadow .2s}
 input::placeholder{color:#566079}
-input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,165,75,.18)}
-.cta{width:100%;margin-top:26px;padding:14px;border:0;border-radius:12px;font-weight:600;transition:filter .2s}
+input:focus{outline:0;border-color:var(--silver-hi);box-shadow:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16)}
+input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-color .2s,box-shadow .2s,background-color 9999s}
+.link{align-self:flex-end;padding:0;background:none;border:0;font-size:14px;color:var(--muted)}
+.link:hover{color:var(--silver-hi)}
+.cta{width:100%;padding:14px;border-radius:12px}
 .cta:hover{filter:brightness(1.08)}
 .cta:disabled{opacity:.6;cursor:wait}
-.status{min-height:22px;margin-top:16px;font-size:14px;text-align:center;color:var(--muted)}
+.status{min-height:20px;font-size:14px;text-align:center;color:var(--muted)}
 .status[data-type=error]{color:#e8847a}
-.status[data-type=ok]{color:var(--gold-hi)}
-@media(max-width:480px){.bar{padding:0 14px}.btn{padding:9px 16px;font-size:14px}.card{padding:36px 22px 28px}h1{font-size:34px}}
+.status[data-type=ok]{color:var(--silver-hi)}
+@media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important}}
 </style>
 </head>
@@ -55,83 +53,102 @@ input:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,165
 <header class="bar">
 <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
 <div class="actions">
-<button class="btn is-active" type="button" data-mode="signup">Sign Up</button>
-<button class="btn" type="button" data-mode="login">Log In</button>
+<button class="btn" type="button" data-open="signup">Sign Up</button>
+<button class="btn" type="button" data-open="login">Log In</button>
 </div>
 </header>
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer" aria-label="Main menu">
-<button class="nav-item is-active" type="button">Home</button>
+<button class="nav-item" type="button">Home</button>
 <button class="nav-item" type="button">Plans</button>
 <button class="nav-item" type="button">About Us</button>
 <button class="nav-item" type="button">Terms and Conditions</button>
 </nav>
-<main>
-<section class="card">
-<h1 id="title"></h1>
-<p class="lead" id="lead"></p>
-<form id="form">
-<label for="email">Email</label>
-<input id="email" type="email" required autocomplete="email" placeholder="name@example.com">
-<label for="password">Password</label>
-<input id="password" type="password" required minlength="8" placeholder="At least 8 characters">
-<button class="cta" id="submit" type="submit"></button>
-<p class="status" id="status" role="status" aria-live="polite"></p>
+<dialog id="signup" aria-label="Sign Up">
+<form class="panel" id="signup-form">
+<input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
+<input name="password" type="password" required minlength="8" autocomplete="new-password" placeholder="Password" aria-label="Password">
+<input name="confirm" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm Password" aria-label="Confirm Password">
+<input name="invite" type="text" required autocomplete="off" placeholder="Invite Code" aria-label="Invite Code">
+<button class="cta" type="submit">Create Account</button>
+<p class="status" role="status" aria-live="polite"></p>
 </form>
-</section>
-</main>
+</dialog>
+<dialog id="login" aria-label="Log In">
+<form class="panel" id="login-form">
+<input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
+<input name="password" type="password" required autocomplete="current-password" placeholder="Password" aria-label="Password">
+<button class="link" id="forgot" type="button">Forgot Password</button>
+<button class="cta" type="submit">Log In</button>
+<p class="status" role="status" aria-live="polite"></p>
+</form>
+</dialog>
+<dialog id="reset" aria-label="Reset Password">
+<form class="panel" id="reset-form">
+<h2>Reset Password</h2>
+<p class="note">Enter the email address on your account. Our team will review the request and contact you.</p>
+<input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
+<button class="cta" type="submit">Send Request</button>
+<p class="status" role="status" aria-live="polite"></p>
+</form>
+</dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const db = window.supabase.createClient("https://cskguqtpvvclcphuarkr.supabase.co", "sb_publishable_I2_oFR8ZlJWvNqI17m5aEg_Mlq2gzYp");
 const $ = (s) => document.querySelector(s);
-const copy = {
-  signup: { title: "Create your account", lead: "Register with your email and a password.", cta: "Sign Up", auto: "new-password" },
-  login: { title: "Welcome back", lead: "Log in with your email and password.", cta: "Log In", auto: "current-password" }
-};
-let mode = "signup";
-const setStatus = (text, type = "") => {
-  const s = $("#status");
+const setStatus = (form, text, type = "") => {
+  const s = form.querySelector(".status");
   s.textContent = text;
   s.dataset.type = type;
 };
-const setMode = (m) => {
-  mode = m;
-  $("#title").textContent = copy[m].title;
-  $("#lead").textContent = copy[m].lead;
-  $("#submit").textContent = copy[m].cta;
-  $("#password").autocomplete = copy[m].auto;
-  document.querySelectorAll("[data-mode]").forEach((b) => b.classList.toggle("is-active", b.dataset.mode === m));
-  setStatus("");
-};
+const fail = (text) => ({ text, type: "error" });
+const ok = (text) => ({ text, type: "ok" });
 const toggleMenu = (open) => {
   document.body.classList.toggle("menu-open", open);
   $("#burger").setAttribute("aria-expanded", open);
-  $("#burger").setAttribute("aria-label", open ? "Close menu" : "Open menu");
 };
-document.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode)));
+document.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", () => $("#" + b.dataset.open).showModal()));
+$("#forgot").addEventListener("click", () => {
+  $("#login").close();
+  $("#reset").showModal();
+});
+document.querySelectorAll("dialog").forEach((d) => {
+  const f = d.querySelector("form");
+  d.addEventListener("click", (e) => e.target === d && d.close());
+  d.addEventListener("close", () => {
+    f.reset();
+    setStatus(f, "");
+  });
+});
 $("#burger").addEventListener("click", () => toggleMenu(!document.body.classList.contains("menu-open")));
 $("#scrim").addEventListener("click", () => toggleMenu(false));
 document.addEventListener("keydown", (e) => e.key === "Escape" && toggleMenu(false));
-document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click", () => {
-  document.querySelectorAll(".nav-item").forEach((i) => i.classList.toggle("is-active", i === b));
-  toggleMenu(false);
-}));
-$("#form").addEventListener("submit", async (e) => {
+document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click", () => toggleMenu(false)));
+const handle = (selector, task) => $(selector).addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = $("#email").value.trim();
-  const password = $("#password").value;
-  $("#submit").disabled = true;
-  setStatus("Please wait...");
-  const { data, error } = mode === "signup"
-    ? await db.auth.signUp({ email, password })
-    : await db.auth.signInWithPassword({ email, password });
-  $("#submit").disabled = false;
-  if (error) return setStatus(error.message, "error");
-  if (mode === "login") return setStatus("Logged in as " + data.user.email, "ok");
-  if (data.user && data.user.identities && !data.user.identities.length) return setStatus("This email is already registered. Log in instead.", "error");
-  setStatus(data.session ? "Account created." : "Check your inbox to confirm your email.", "ok");
+  const f = e.target;
+  const btn = f.querySelector(".cta");
+  btn.disabled = true;
+  setStatus(f, "Please wait...");
+  const r = await task(Object.fromEntries(new FormData(f)));
+  btn.disabled = false;
+  setStatus(f, r.text, r.type);
 });
-setMode("signup");
+handle("#signup-form", async (v) => {
+  if (v.password !== v.confirm) return fail("Passwords do not match.");
+  const { data, error } = await db.auth.signUp({ email: v.email.trim(), password: v.password, options: { data: { invite_code: v.invite.trim() } } });
+  if (error) return fail(error.message);
+  if (data.user && data.user.identities && !data.user.identities.length) return fail("This email is already registered. Log in instead.");
+  return ok(data.session ? "Account created." : "Check your inbox to confirm your email.");
+});
+handle("#login-form", async (v) => {
+  const { data, error } = await db.auth.signInWithPassword({ email: v.email.trim(), password: v.password });
+  return error ? fail(error.message) : ok("Logged in as " + data.user.email);
+});
+handle("#reset-form", async (v) => {
+  const { error } = await db.from("password_requests").insert({ email: v.email.trim() });
+  return error ? fail("Could not send the request. Try again later.") : ok("Request sent. Our team will contact you.");
+});
 </script>
 </body>
 </html>
