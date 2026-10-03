@@ -11,6 +11,7 @@
 :root{--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
 *{box-sizing:border-box;margin:0}
 html{color-scheme:dark}
+[hidden]{display:none!important}
 body{min-height:100dvh;background:#000;color:var(--text);font:400 16px/1.5 Inter,system-ui,sans-serif}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -31,8 +32,14 @@ button{cursor:pointer}
 dialog{width:min(400px,92vw);padding:0;border:1px solid var(--silver);border-radius:16px;background:#000;color:inherit}
 dialog::backdrop{background:rgba(0,0,0,.72)}
 .panel{display:flex;flex-direction:column;gap:14px;padding:32px 28px 28px}
-.panel h2{font:600 30px/1.15 "Cormorant Garamond",Georgia,serif;color:#f2f2f2}
+.panel h2,.page h2{font:600 30px/1.15 "Cormorant Garamond",Georgia,serif;color:#f2f2f2}
 .note{font-size:14px;color:var(--muted)}
+main{padding:32px 20px}
+.stack{display:flex;flex-direction:column;gap:14px;padding:0;list-style:none}
+.page{width:min(520px,100%);margin:0 auto}
+.box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;overflow-wrap:anywhere}
+.code{font-weight:600;letter-spacing:.12em}
+.meta{font-size:14px;color:var(--muted);white-space:nowrap}
 input{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;background:transparent;transition:border-color .2s,box-shadow .2s}
 input::placeholder{color:#566079}
 input:focus{outline:0;border-color:var(--silver-hi);box-shadow:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16)}
@@ -53,17 +60,38 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <header class="bar">
 <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
 <div class="actions">
-<button class="btn" type="button" data-open="signup">Sign Up</button>
-<button class="btn" type="button" data-open="login">Log In</button>
+<button class="btn" type="button" data-auth="out" data-open="signup">Sign Up</button>
+<button class="btn" type="button" data-auth="out" data-open="login">Log In</button>
+<button class="btn" id="logout" type="button" data-auth="in" hidden>Log Out</button>
 </div>
 </header>
 <div class="scrim" id="scrim"></div>
 <nav class="drawer" id="drawer" aria-label="Main menu">
-<button class="nav-item" type="button">Home</button>
-<button class="nav-item" type="button">Plans</button>
-<button class="nav-item" type="button">About Us</button>
-<button class="nav-item" type="button">Terms and Conditions</button>
+<button class="nav-item" type="button" data-auth="out">Home</button>
+<button class="nav-item" type="button" data-auth="out">Plans</button>
+<button class="nav-item" type="button" data-auth="out">About Us</button>
+<button class="nav-item" type="button" data-auth="out">Terms and Conditions</button>
+<button class="nav-item" type="button" data-auth="in" data-view="dashboard" hidden>Dashboard</button>
+<button class="nav-item" type="button" data-auth="in" data-view="profile" hidden>Profile</button>
+<button class="nav-item" type="button" data-auth="in" data-view="network" hidden>Network</button>
+<button class="nav-item" type="button" data-auth="in" data-view="settings" hidden>Settings</button>
+<button class="nav-item" type="button" data-auth="in" data-view="support" hidden>Support</button>
 </nav>
+<main>
+<section class="page stack" id="profile" hidden>
+<h2>Profile</h2>
+<p class="note">Email</p>
+<div class="box"><span id="profile-email"></span></div>
+</section>
+<section class="page stack" id="network" hidden>
+<h2>Network</h2>
+<p class="note">Your invite code</p>
+<div class="box"><span class="code" id="code"></span><button class="btn" id="copy" type="button">Copy</button></div>
+<p class="note">People you invited</p>
+<ul class="stack" id="team"></ul>
+<p class="note" id="empty">No one has joined with your code yet.</p>
+</section>
+</main>
 <dialog id="signup" aria-label="Sign Up">
 <form class="panel" id="signup-form">
 <input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
@@ -103,6 +131,25 @@ const setStatus = (form, text, type = "") => {
 };
 const fail = (text) => ({ text, type: "error" });
 const ok = (text) => ({ text, type: "ok" });
+const done = { done: true };
+const cell = (text, className = "") => Object.assign(document.createElement("span"), { textContent: text, className });
+let userId = null;
+const loadNetwork = async () => {
+  const [{ data: me }, { data: team }] = await Promise.all([db.from("profiles").select("invite_code").single(), db.rpc("my_network")]);
+  const rows = team || [];
+  $("#code").textContent = me ? me.invite_code : "";
+  $("#empty").hidden = rows.length > 0;
+  $("#team").replaceChildren(...rows.map((m) => {
+    const li = document.createElement("li");
+    li.className = "box";
+    li.append(cell(m.email), cell(new Date(m.joined_at).toLocaleDateString(), "meta"));
+    return li;
+  }));
+};
+const showView = (name) => {
+  document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
+  if (name === "network") loadNetwork();
+};
 const toggleMenu = (open) => {
   document.body.classList.toggle("menu-open", open);
   $("#burger").setAttribute("aria-expanded", open);
@@ -123,7 +170,24 @@ document.querySelectorAll("dialog").forEach((d) => {
 $("#burger").addEventListener("click", () => toggleMenu(!document.body.classList.contains("menu-open")));
 $("#scrim").addEventListener("click", () => toggleMenu(false));
 document.addEventListener("keydown", (e) => e.key === "Escape" && toggleMenu(false));
-document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click", () => toggleMenu(false)));
+document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click", () => {
+  showView(b.dataset.view);
+  toggleMenu(false);
+}));
+$("#logout").addEventListener("click", () => db.auth.signOut());
+$("#copy").addEventListener("click", async () => {
+  await navigator.clipboard.writeText($("#code").textContent);
+  $("#copy").textContent = "Copied";
+  setTimeout(() => ($("#copy").textContent = "Copy"), 1500);
+});
+db.auth.onAuthStateChange((_, session) => {
+  const id = session ? session.user.id : null;
+  if (id === userId) return;
+  userId = id;
+  document.querySelectorAll("[data-auth]").forEach((el) => (el.hidden = (el.dataset.auth === "in") !== Boolean(id)));
+  $("#profile-email").textContent = session ? session.user.email : "";
+  showView(null);
+});
 const handle = (selector, task) => $(selector).addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = e.target;
@@ -132,18 +196,19 @@ const handle = (selector, task) => $(selector).addEventListener("submit", async 
   setStatus(f, "Please wait...");
   const r = await task(Object.fromEntries(new FormData(f)));
   btn.disabled = false;
+  if (r.done) return f.closest("dialog").close();
   setStatus(f, r.text, r.type);
 });
 handle("#signup-form", async (v) => {
   if (v.password !== v.confirm) return fail("Passwords do not match.");
   const { data, error } = await db.auth.signUp({ email: v.email.trim(), password: v.password, options: { data: { invite_code: v.invite.trim() } } });
-  if (error) return fail(error.message);
+  if (error) return fail(error.message.includes("Database error") ? "Invalid invite code." : error.message);
   if (data.user && data.user.identities && !data.user.identities.length) return fail("This email is already registered. Log in instead.");
-  return ok(data.session ? "Account created." : "Check your inbox to confirm your email.");
+  return data.session ? done : ok("Check your inbox to confirm your email.");
 });
 handle("#login-form", async (v) => {
-  const { data, error } = await db.auth.signInWithPassword({ email: v.email.trim(), password: v.password });
-  return error ? fail(error.message) : ok("Logged in as " + data.user.email);
+  const { error } = await db.auth.signInWithPassword({ email: v.email.trim(), password: v.password });
+  return error ? fail(error.message) : done;
 });
 handle("#reset-form", async (v) => {
   const { error } = await db.from("password_requests").insert({ email: v.email.trim() });
