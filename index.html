@@ -6,7 +6,7 @@
 <title>Sign Up</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
 *{box-sizing:border-box;margin:0}
@@ -29,10 +29,10 @@ button{cursor:pointer}
 .menu-open .drawer{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.22,.8,.3,1)}
 .nav-item{padding:14px 16px;text-align:left;background:none;border:0;border-radius:10px;font-size:17px;transition:background .2s}
 .nav-item:hover{background:rgba(201,165,75,.1)}
-dialog{width:min(400px,92vw);padding:0;border:1px solid var(--silver);border-radius:16px;background:#000;color:inherit}
+dialog{width:min(400px,92vw);margin:auto;padding:0;border:1px solid var(--silver);border-radius:16px;background:#000;color:inherit}
 dialog::backdrop{background:rgba(0,0,0,.72)}
 .panel{display:flex;flex-direction:column;gap:14px;padding:32px 28px 28px}
-.panel h2,.page h2{font:600 30px/1.15 "Cormorant Garamond",Georgia,serif;color:#f2f2f2}
+.panel h2{font-size:22px;font-weight:600;color:#f2f2f2}
 .note{font-size:14px;color:var(--muted)}
 main{padding:32px 20px}
 .stack{display:flex;flex-direction:column;gap:14px;padding:0;list-style:none}
@@ -40,18 +40,26 @@ main{padding:32px 20px}
 .box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;overflow-wrap:anywhere}
 .code{font-weight:600;letter-spacing:.12em}
 .meta{font-size:14px;color:var(--muted);white-space:nowrap}
+.value{flex:1}
 input{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;background:transparent;transition:border-color .2s,box-shadow .2s}
 input::placeholder{color:#566079}
 input:focus{outline:0;border-color:var(--silver-hi);box-shadow:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16)}
 input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-color .2s,box-shadow .2s,background-color 9999s}
 .link{align-self:flex-end;padding:0;background:none;border:0;font-size:14px;color:var(--muted)}
 .link:hover{color:var(--silver-hi)}
-.cta{width:100%;padding:14px;border-radius:12px}
+.cta{width:100%;padding:11px;border-radius:999px;font-size:15px}
 .cta:hover{filter:brightness(1.08)}
 .cta:disabled{opacity:.6;cursor:wait}
-.status{min-height:20px;font-size:14px;text-align:center;color:var(--muted)}
-.status[data-type=error]{color:#e8847a}
-.status[data-type=ok]{color:var(--silver-hi)}
+.bad,.bad:focus{border-color:#e5484d;box-shadow:0 0 0 1px rgba(229,72,77,.45),0 0 14px rgba(229,72,77,.2)}
+.field{position:relative}
+.field input{padding-right:48px}
+.eye{display:grid;place-items:center;width:32px;height:32px;padding:0;background:none;border:0;color:var(--muted)}
+.field .eye{position:absolute;top:50%;right:8px;transform:translateY(-50%)}
+.eye:hover{color:var(--silver-hi)}
+.eye svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.eye .slash{display:none}
+.eye[aria-pressed=true] .slash{display:block}
+.toast{inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:14px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 @media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important}}
 </style>
@@ -62,7 +70,6 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <div class="actions">
 <button class="btn" type="button" data-auth="out" data-open="signup">Sign Up</button>
 <button class="btn" type="button" data-auth="out" data-open="login">Log In</button>
-<button class="btn" id="logout" type="button" data-auth="in" hidden>Log Out</button>
 </div>
 </header>
 <div class="scrim" id="scrim"></div>
@@ -76,69 +83,140 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <button class="nav-item" type="button" data-auth="in" data-view="network" hidden>Network</button>
 <button class="nav-item" type="button" data-auth="in" data-view="settings" hidden>Settings</button>
 <button class="nav-item" type="button" data-auth="in" data-view="support" hidden>Support</button>
+<button class="nav-item" id="logout" type="button" data-auth="in" hidden>Log Out</button>
 </nav>
 <main>
 <section class="page stack" id="profile" hidden>
-<h2>Profile</h2>
-<p class="note">Email</p>
-<div class="box"><span id="profile-email"></span></div>
+<div class="box"><span class="note">Email</span><span class="value" id="profile-email"></span></div>
 </section>
 <section class="page stack" id="network" hidden>
-<h2>Network</h2>
 <p class="note">Your invite code</p>
-<div class="box"><span class="code" id="code"></span><button class="btn" id="copy" type="button">Copy</button></div>
-<p class="note">People you invited</p>
+<div class="box"><span class="code" id="code"></span><button class="btn" data-copy="code" type="button">Copy</button></div>
+<p class="note">Your invite link</p>
+<div class="box"><span id="link"></span><button class="btn" data-copy="link" type="button">Copy</button></div>
 <ul class="stack" id="team"></ul>
-<p class="note" id="empty">No one has joined with your code yet.</p>
 </section>
 </main>
 <dialog id="signup" aria-label="Sign Up">
-<form class="panel" id="signup-form">
-<input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
-<input name="password" type="password" required minlength="8" autocomplete="new-password" placeholder="Password" aria-label="Password">
-<input name="confirm" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm Password" aria-label="Confirm Password">
-<input name="invite" type="text" required autocomplete="off" placeholder="Invite Code" aria-label="Invite Code">
+<form class="panel" id="signup-form" novalidate>
+<input name="email" type="email" data-rule="email" autocomplete="email" placeholder="Email Address" aria-label="Email Address">
+<input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="Password" aria-label="Password">
+<input name="confirm" type="password" data-rule="password" autocomplete="new-password" placeholder="Confirm Password" aria-label="Confirm Password">
+<input name="invite" type="text" inputmode="numeric" maxlength="10" data-rule="digits" autocomplete="off" placeholder="Invite Code" aria-label="Invite Code">
 <button class="cta" type="submit">Create Account</button>
-<p class="status" role="status" aria-live="polite"></p>
 </form>
 </dialog>
 <dialog id="login" aria-label="Log In">
-<form class="panel" id="login-form">
-<input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
-<input name="password" type="password" required autocomplete="current-password" placeholder="Password" aria-label="Password">
+<form class="panel" id="login-form" novalidate>
+<input name="email" type="email" data-rule="email" autocomplete="email" placeholder="Email Address" aria-label="Email Address">
+<input name="password" type="password" data-rule="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
 <button class="link" id="forgot" type="button">Forgot Password</button>
 <button class="cta" type="submit">Log In</button>
-<p class="status" role="status" aria-live="polite"></p>
 </form>
 </dialog>
 <dialog id="reset" aria-label="Reset Password">
-<form class="panel" id="reset-form">
+<form class="panel" id="reset-form" novalidate>
 <h2>Reset Password</h2>
-<p class="note">Enter the email address on your account. Our team will review the request and contact you.</p>
-<input name="email" type="email" required autocomplete="email" placeholder="Email Address" aria-label="Email Address">
+<p class="note">Enter the email address on your account. We will send a 6-digit code to it.</p>
+<input name="email" type="email" data-rule="email" autocomplete="email" placeholder="Email Address" aria-label="Email Address">
 <button class="cta" type="submit">Send Request</button>
-<p class="status" role="status" aria-live="polite"></p>
 </form>
 </dialog>
+<dialog id="verify" aria-label="Verification Code">
+<form class="panel" id="verify-form" novalidate>
+<p class="note">Enter the 6-digit code we sent to your email.</p>
+<input name="code" type="text" inputmode="numeric" maxlength="6" data-rule="digits" autocomplete="one-time-code" placeholder="6-Digit Code" aria-label="6-Digit Code">
+<button class="cta" type="submit">Confirm</button>
+</form>
+</dialog>
+<dialog id="newpass" aria-label="Change Password">
+<form class="panel" id="newpass-form" novalidate>
+<input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="New Password" aria-label="New Password">
+<input name="confirm" type="password" data-rule="password" autocomplete="new-password" placeholder="Confirm Password" aria-label="Confirm Password">
+<button class="cta" type="submit">Change Password</button>
+</form>
+</dialog>
+<div class="toast" id="toast" popover="manual" role="alert"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const db = window.supabase.createClient("https://cskguqtpvvclcphuarkr.supabase.co", "sb_publishable_I2_oFR8ZlJWvNqI17m5aEg_Mlq2gzYp");
 const $ = (s) => document.querySelector(s);
-const setStatus = (form, text, type = "") => {
-  const s = form.querySelector(".status");
-  s.textContent = text;
-  s.dataset.type = type;
+const strip = { email: /[^A-Za-z0-9@._%+-]/g, password: /[^\x21-\x7E]/g, digits: /\D/g };
+const checks = {
+  email: (v) => /^[\w.%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(v) ? "" : "Enter a valid email address.",
+  password: (v) => v.length < 8 ? "Password must be at least 8 characters." : /[A-Z]/.test(v) && /[a-z]/.test(v) ? "" : "Password needs an uppercase and a lowercase letter.",
+  confirm: (v, f) => v === f.password.value ? "" : "Passwords do not match.",
+  invite: (v) => /^\d{10}$/.test(v) ? "" : "Invite code must be 10 digits.",
+  code: (v) => /^\d{6}$/.test(v) ? "" : "Enter the 6-digit code."
 };
-const fail = (text) => ({ text, type: "error" });
-const ok = (text) => ({ text, type: "ok" });
-const done = { done: true };
+let pending = null;
+let toastAt = 0;
+const toast = (text) => {
+  if (Date.now() - toastAt < 3000) return;
+  toastAt = Date.now();
+  const t = $("#toast");
+  t.textContent = text;
+  t.showPopover();
+  setTimeout(() => t.hidePopover(), 2600);
+};
+const validate = (f) => {
+  let first = "";
+  for (const el of f.elements) {
+    const msg = checks[el.name] ? checks[el.name](el.value, f) : "";
+    el.classList.toggle("bad", Boolean(msg));
+    first = first || msg;
+  }
+  if (first) toast(first);
+  return !first;
+};
+const problem = (f, text, ...names) => {
+  names.forEach((n) => f.elements[n].classList.add("bad"));
+  toast(text);
+};
+const advance = (f, id) => {
+  f.closest("dialog").close();
+  if (id) $(id).showModal();
+};
+const eyeIcon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="slash" d="M4 4l16 16"/></svg>`;
+const eye = (pressed, onToggle) => {
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "eye", innerHTML: eyeIcon });
+  b.setAttribute("aria-label", "Show or hide");
+  b.setAttribute("aria-pressed", pressed);
+  b.addEventListener("click", () => {
+    const on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", on);
+    onToggle(on);
+  });
+  return b;
+};
+document.querySelectorAll("input[type=password]").forEach((input) => {
+  const wrap = document.createElement("div");
+  wrap.className = "field";
+  input.autocapitalize = "off";
+  input.spellcheck = false;
+  input.replaceWith(wrap);
+  wrap.append(input, eye(false, (shown) => (input.type = shown ? "text" : "password")));
+});
+let profileEmail = "";
+let emailShown = true;
+const renderEmail = () => ($("#profile-email").textContent = emailShown ? profileEmail : "•".repeat(profileEmail.length));
+$("#profile .box").append(eye(true, (shown) => {
+  emailShown = shown;
+  renderEmail();
+}));
+document.addEventListener("input", (e) => {
+  const el = e.target;
+  const clean = el.dataset.rule ? el.value.replace(strip[el.dataset.rule], "") : el.value;
+  if (clean !== el.value) el.value = clean;
+  el.classList.remove("bad");
+});
 const cell = (text, className = "") => Object.assign(document.createElement("span"), { textContent: text, className });
 let userId = null;
 const loadNetwork = async () => {
   const [{ data: me }, { data: team }] = await Promise.all([db.from("profiles").select("invite_code").single(), db.rpc("my_network")]);
   const rows = team || [];
   $("#code").textContent = me ? me.invite_code : "";
-  $("#empty").hidden = rows.length > 0;
+  $("#link").textContent = me ? location.origin + location.pathname + "?ref=" + me.invite_code : "";
   $("#team").replaceChildren(...rows.map((m) => {
     const li = document.createElement("li");
     li.className = "box";
@@ -164,7 +242,8 @@ document.querySelectorAll("dialog").forEach((d) => {
   d.addEventListener("click", (e) => e.target === d && d.close());
   d.addEventListener("close", () => {
     f.reset();
-    setStatus(f, "");
+    f.querySelectorAll(".bad").forEach((el) => el.classList.remove("bad"));
+    f.querySelectorAll(".eye[aria-pressed=true]").forEach((b) => b.click());
   });
 });
 $("#burger").addEventListener("click", () => toggleMenu(!document.body.classList.contains("menu-open")));
@@ -175,45 +254,66 @@ document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click"
   toggleMenu(false);
 }));
 $("#logout").addEventListener("click", () => db.auth.signOut());
-$("#copy").addEventListener("click", async () => {
-  await navigator.clipboard.writeText($("#code").textContent);
-  $("#copy").textContent = "Copied";
-  setTimeout(() => ($("#copy").textContent = "Copy"), 1500);
-});
-db.auth.onAuthStateChange((_, session) => {
+document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+  await navigator.clipboard.writeText($("#" + b.dataset.copy).textContent);
+  b.textContent = "Copied";
+  setTimeout(() => (b.textContent = "Copy"), 1500);
+}));
+db.auth.onAuthStateChange((event, session) => {
+  if (event === "PASSWORD_RECOVERY") return;
   const id = session ? session.user.id : null;
   if (id === userId) return;
   userId = id;
   document.querySelectorAll("[data-auth]").forEach((el) => (el.hidden = (el.dataset.auth === "in") !== Boolean(id)));
-  $("#profile-email").textContent = session ? session.user.email : "";
+  profileEmail = session ? session.user.email : "";
+  renderEmail();
   showView(null);
 });
 const handle = (selector, task) => $(selector).addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = e.target;
+  if (!validate(f)) return;
   const btn = f.querySelector(".cta");
   btn.disabled = true;
-  setStatus(f, "Please wait...");
-  const r = await task(Object.fromEntries(new FormData(f)));
+  await task(f, Object.fromEntries(new FormData(f)));
   btn.disabled = false;
-  if (r.done) return f.closest("dialog").close();
-  setStatus(f, r.text, r.type);
 });
-handle("#signup-form", async (v) => {
-  if (v.password !== v.confirm) return fail("Passwords do not match.");
-  const { data, error } = await db.auth.signUp({ email: v.email.trim(), password: v.password, options: { data: { invite_code: v.invite.trim() } } });
-  if (error) return fail(error.message.includes("Database error") ? "Invalid invite code." : error.message);
-  if (data.user && data.user.identities && !data.user.identities.length) return fail("This email is already registered. Log in instead.");
-  return data.session ? done : ok("Check your inbox to confirm your email.");
+handle("#signup-form", async (f, v) => {
+  const { data, error } = await db.auth.signUp({ email: v.email, password: v.password, options: { data: { invite_code: v.invite } } });
+  if (error) return error.message.includes("Database error") ? problem(f, "Invalid invite code.", "invite") : problem(f, error.message, "email");
+  if (data.user && data.user.identities && !data.user.identities.length) return problem(f, "This email is already registered. Log in instead.", "email");
+  pending = { email: v.email, type: "signup" };
+  advance(f, data.session ? "" : "#verify");
 });
-handle("#login-form", async (v) => {
-  const { error } = await db.auth.signInWithPassword({ email: v.email.trim(), password: v.password });
-  return error ? fail(error.message) : done;
+handle("#login-form", async (f, v) => {
+  const { error } = await db.auth.signInWithPassword({ email: v.email, password: v.password });
+  if (error) return problem(f, error.message === "Invalid login credentials" ? "Incorrect email or password." : error.message, "email", "password");
+  advance(f);
 });
-handle("#reset-form", async (v) => {
-  const { error } = await db.from("password_requests").insert({ email: v.email.trim() });
-  return error ? fail("Could not send the request. Try again later.") : ok("Request sent. Our team will contact you.");
+handle("#reset-form", async (f, v) => {
+  const { error } = await db.auth.resetPasswordForEmail(v.email);
+  if (error) return problem(f, error.message, "email");
+  pending = { email: v.email, type: "recovery" };
+  advance(f, "#verify");
 });
+handle("#verify-form", async (f, v) => {
+  const { error } = await db.auth.verifyOtp({ email: pending.email, token: v.code, type: pending.type });
+  if (error) return problem(f, "Invalid or expired code.", "code");
+  advance(f, pending.type === "recovery" ? "#newpass" : "");
+});
+handle("#newpass-form", async (f, v) => {
+  const { error } = await db.auth.updateUser({ password: v.password });
+  if (error) return problem(f, error.message, "password");
+  advance(f);
+});
+const ref = new URLSearchParams(location.search).get("ref");
+if (ref && /^\d{10}$/.test(ref)) {
+  db.auth.getSession().then(({ data }) => {
+    if (data.session) return;
+    $("#signup-form").invite.value = ref;
+    $("#signup").showModal();
+  });
+}
 </script>
 </body>
 </html>
