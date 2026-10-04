@@ -3,51 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>try{const p=JSON.parse(localStorage.getItem("prefs"));document.documentElement.dataset.theme=p.theme;document.documentElement.style.fontSize=p.text_size+"px"}catch{}</script>
 <title>Sign Up</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
+:root{--bg:#000;--strong:#fff;--ph:#566079;--bar-bg:rgba(4,6,11,.82);--danger:#ff7b7f;--ring:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16);--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
+:root[data-theme=light]{color-scheme:light;--bg:#fff;--strong:#111;--ph:#98a0b3;--bar-bg:rgba(255,255,255,.88);--danger:#c42b30;--ring:0 0 0 1px rgba(59,66,82,.45),0 0 14px rgba(59,66,82,.12);--text:#1c1a14;--muted:#5d667a;--line:rgba(160,120,20,.35);--silver:rgba(60,70,90,.3);--silver-hi:#3b4252}
 *{box-sizing:border-box;margin:0}
 html{color-scheme:dark}
 [hidden]{display:none!important}
-body{min-height:100dvh;background:#000;color:var(--text);font:400 16px/1.5 Inter,system-ui,sans-serif}
+body{min-height:100dvh;background:var(--bg);color:var(--text);font:400 1rem/1.5 Inter,system-ui,sans-serif}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
-.bar{position:sticky;top:0;z-index:30;height:var(--bar);padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,6,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:30;height:var(--bar);padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--bar-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .burger{width:36px;height:36px;margin-left:-8px;padding:0;display:grid;place-content:center;gap:4px;background:none;border:0}
-.burger span{display:block;width:20px;height:2px;background:#fff}
+.burger span{display:block;width:20px;height:2px;background:var(--strong)}
 .actions{display:flex;gap:10px}
 .btn,.cta{border:0;background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);color:#1a1405;font-weight:600;transition:filter .2s}
-.btn{padding:7px 20px;border-radius:999px;font-size:14px}
+.btn{padding:7px 20px;border-radius:999px;font-size:.875rem}
 .btn:hover{filter:brightness(1.08)}
 .scrim{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
-.drawer{position:fixed;z-index:50;top:0;bottom:0;left:0;width:min(260px,72vw);padding:20px 14px;display:flex;flex-direction:column;gap:6px;background:#000;border-right:1px solid var(--silver);transform:translateX(-100%);visibility:hidden;transition:transform .35s cubic-bezier(.22,.8,.3,1),visibility 0s .35s}
+.drawer{position:fixed;z-index:50;top:0;bottom:0;left:0;width:min(260px,72vw);padding:20px 14px;display:flex;flex-direction:column;gap:6px;background:var(--bg);border-right:1px solid var(--silver);transform:translateX(-100%);visibility:hidden;transition:transform .35s cubic-bezier(.22,.8,.3,1),visibility 0s .35s}
 .menu-open .scrim{opacity:1;visibility:visible;transition:opacity .3s}
 .menu-open .drawer{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.22,.8,.3,1)}
-.nav-item{padding:14px 16px;text-align:left;background:none;border:0;border-radius:10px;font-size:17px;transition:background .2s}
+.nav-item{padding:14px 16px;text-align:left;background:none;border:0;border-radius:10px;font-size:1.0625rem;transition:background .2s}
 .nav-item:hover{background:rgba(201,165,75,.1)}
-dialog{width:min(400px,92vw);margin:auto;padding:0;border:1px solid var(--silver);border-radius:16px;background:#000;color:inherit}
+dialog{width:min(400px,92vw);margin:auto;padding:0;border:1px solid var(--silver);border-radius:16px;background:var(--bg);color:inherit}
 dialog::backdrop{background:rgba(0,0,0,.72)}
 .panel{display:flex;flex-direction:column;gap:14px;padding:32px 28px 28px}
-.panel h2{font-size:22px;font-weight:600;color:#f2f2f2}
-.note{font-size:14px;color:var(--muted)}
+.panel h2,.card h2{font-size:1.375rem;font-weight:600;color:var(--strong)}
+.note{font-size:.875rem;color:var(--muted)}
 main{padding:32px 20px}
 .stack{display:flex;flex-direction:column;gap:14px;padding:0;list-style:none}
 .page{width:min(520px,100%);margin:0 auto}
 .box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;overflow-wrap:anywhere}
 .code{font-weight:600;letter-spacing:.12em}
-.meta{font-size:14px;color:var(--muted);white-space:nowrap}
+.meta{font-size:.875rem;color:var(--muted);white-space:nowrap}
 .value{flex:1}
+.card{padding:20px;border:1px solid var(--silver);border-radius:16px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:16px;border:1px solid var(--silver);border-radius:14px;background:transparent;text-align:left;transition:background .2s}
+.row:hover{background:rgba(201,165,75,.08)}
+.row::after{content:"›";font-size:1.25rem;color:var(--muted)}
+.row.out::after{content:none}
+.row small{display:block}
+.back{align-self:flex-start;width:40px;height:40px;padding:0;background:none;border:0;font-size:1.75rem;line-height:1;color:var(--strong)}
+.split{display:flex;border:1px solid var(--silver);border-radius:999px;overflow:hidden}
+.split button{flex:1;padding:10px;border:0;background:transparent;font-size:.875rem}
+.split button[aria-pressed=true]{background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);color:#1a1405;font-weight:600}
+#theme button[data-mode=light]{background:#fff;color:#111}
+#theme button[data-mode=dark]{background:#000;color:#fff}
+#theme button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--gold-hi)}
+.pin{display:flex;gap:8px;justify-content:center}
+.pin input{flex:1;width:auto;min-width:0;max-width:52px;aspect-ratio:1;padding:0;text-align:center;font-size:1.25rem}
+.size{display:flex;align-items:center;justify-content:space-between}
+.size button{width:52px;height:40px;border:1px solid var(--silver);border-radius:10px;background:transparent;font-weight:600}
+.info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.info .meta{white-space:normal;overflow-wrap:anywhere}
+.cta.danger{background:transparent;border:1px solid #e5484d;color:var(--danger)}
+#lock{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0}
+#lock[open]{display:grid;place-items:center}
+#lock .panel{width:min(360px,92vw)}
+#lock .note{text-align:center}
+.toast.ok{background:#1f7a46}
 input{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;background:transparent;transition:border-color .2s,box-shadow .2s}
-input::placeholder{color:#566079}
-input:focus{outline:0;border-color:var(--silver-hi);box-shadow:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16)}
+input::placeholder{color:var(--ph)}
+input:focus{outline:0;border-color:var(--silver-hi);box-shadow:var(--ring)}
 input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-color .2s,box-shadow .2s,background-color 9999s}
-.link{align-self:flex-end;padding:0;background:none;border:0;font-size:14px;color:var(--muted)}
+.link{align-self:flex-end;padding:0;background:none;border:0;font-size:.875rem;color:var(--muted)}
 .link:hover{color:var(--silver-hi)}
-.cta{width:100%;padding:11px;border-radius:999px;font-size:15px}
+.cta{width:100%;padding:11px;border-radius:999px;font-size:.9375rem}
 .cta:hover{filter:brightness(1.08)}
 .cta:disabled{opacity:.6;cursor:wait}
 .bad,.bad:focus{border-color:#e5484d;box-shadow:0 0 0 1px rgba(229,72,77,.45),0 0 14px rgba(229,72,77,.2)}
@@ -59,7 +86,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .eye svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .eye .slash{display:none}
 .eye[aria-pressed=true] .slash{display:block}
-.toast{inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:14px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 @media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important}}
 </style>
@@ -83,7 +110,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <button class="nav-item" type="button" data-auth="in" data-view="network" hidden>Network</button>
 <button class="nav-item" type="button" data-auth="in" data-view="settings" hidden>Settings</button>
 <button class="nav-item" type="button" data-auth="in" data-view="support" hidden>Support</button>
-<button class="nav-item" id="logout" type="button" data-auth="in" hidden>Log Out</button>
+<button class="nav-item" type="button" data-auth="in" data-logout hidden>Log Out</button>
 </nav>
 <main>
 <section class="page stack" id="profile" hidden>
@@ -95,6 +122,67 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <p class="note">Your invite link</p>
 <div class="box"><span id="link"></span><button class="btn" data-copy="link" type="button">Copy</button></div>
 <ul class="stack" id="team"></ul>
+</section>
+<section class="page stack" id="settings" hidden>
+<button class="row" type="button" data-go="blank">KYC Verification</button>
+<button class="row" type="button" data-go="blank"><span>Two-Factor Authentication (2FA)<small class="note">Google Authenticator</small></span><span class="meta" id="twofa-status">Disabled</span></button>
+<button class="row" type="button" data-go="security">Security settings</button>
+<button class="row" type="button" data-go="appearance">Appearance</button>
+<button class="row" type="button" data-go="sessions">Active Sessions &amp; Audit Log</button>
+<button class="row" type="button" data-go="blank">Why AI Trading Bot</button>
+<button class="row" type="button" data-go="blank">Frequently Asked Questions</button>
+<button class="row" type="button" data-go="blank">Terms of Use</button>
+<button class="row" type="button" data-go="blank">Privacy Policy</button>
+<button class="row" type="button" data-go="blank">How to Use the AI Trading Bot</button>
+<button class="row out" type="button" data-logout>Log Out</button>
+</section>
+<section class="page stack" id="security" hidden>
+<button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+<form class="card stack" id="wp-form" novalidate>
+<p class="note" id="wp-text">Set up a 6-digit PIN code required for withdrawals</p>
+<div class="stack" id="wp-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="wp-old" data-len="6"></div></div>
+<div class="stack"><span class="note" id="wp-new-label" hidden>New PIN</span><div class="pin" id="wp-new" data-len="6"></div></div>
+<button class="cta" type="submit">Save PIN</button>
+</form>
+<form class="card stack" id="lk-form" novalidate>
+<p class="note" id="lk-text">Set up a PIN code that locks the site</p>
+<div class="split" id="lk-len"><button type="button" data-len="4" aria-pressed="false">4 digits</button><button type="button" data-len="6" aria-pressed="true">6 digits</button></div>
+<div class="stack" id="lk-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="lk-old" data-len="6"></div></div>
+<div class="stack"><span class="note" id="lk-new-label" hidden>New PIN</span><div class="pin" id="lk-new" data-len="6"></div></div>
+<button class="cta" type="submit">Save PIN</button>
+</form>
+<form class="card stack" id="pw-form" novalidate>
+<h2>Change Password</h2>
+<input name="current" type="password" data-rule="password" autocomplete="current-password" placeholder="Current Password" aria-label="Current Password">
+<input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="New Password" aria-label="New Password">
+<button class="link" id="pw-forgot" type="button">Forgot Password</button>
+<button class="cta" type="submit">Save Password</button>
+</form>
+<button class="cta danger" id="delete-open" type="button">Delete Account</button>
+</section>
+<section class="page stack" id="appearance" hidden>
+<button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+<div class="card stack">
+<p class="note">Currency</p>
+<div class="split" id="currency"><button type="button" data-currency="EUR">€</button><button type="button" data-currency="USD">$</button><button type="button" data-currency="GBP">£</button><button type="button" data-currency="JPY">¥</button></div>
+</div>
+<div class="split" id="theme"><button type="button" data-mode="light">Light</button><button type="button" data-mode="dark">Dark</button></div>
+<button class="row" id="lang-open" type="button"><span>Language</span><span class="meta" id="lang-name">English</span></button>
+<div class="card stack">
+<p class="note">Text size</p>
+<div class="size"><button type="button" data-step="-1" aria-label="Smaller text">A−</button><span class="meta" id="size-val">16</span><button type="button" data-step="1" aria-label="Larger text">A+</button></div>
+</div>
+</section>
+<section class="page stack" id="sessions" hidden>
+<button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+<p class="note">Active sessions</p>
+<ul class="stack" id="live"></ul>
+<button class="cta" id="others" type="button">Log out other sessions</button>
+<p class="note">Login history</p>
+<ul class="stack" id="history"></ul>
+</section>
+<section class="page stack" id="blank" hidden>
+<button class="back" type="button" data-go="settings" aria-label="Back">←</button>
 </section>
 </main>
 <dialog id="signup" aria-label="Sign Up">
@@ -136,6 +224,25 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <button class="cta" type="submit">Change Password</button>
 </form>
 </dialog>
+<dialog id="delete" aria-label="Delete Account">
+<form class="panel" id="delete-form" novalidate>
+<p class="note">This permanently deletes your account and cannot be undone. Confirm with your details.</p>
+<input name="email" type="email" data-rule="email" autocomplete="off" placeholder="Email Address" aria-label="Email Address">
+<input name="password" type="password" data-rule="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
+<p class="note">Withdrawal PIN</p>
+<div class="pin" id="del-pin" data-len="6"></div>
+<button class="cta danger" type="submit">Delete Account</button>
+</form>
+</dialog>
+<dialog id="lang" aria-label="Language">
+<form class="panel"></form>
+</dialog>
+<dialog id="lock" aria-label="Locked">
+<form class="panel" id="lock-form" novalidate>
+<p class="note">Enter your PIN to unlock</p>
+<div class="pin" id="lock-pin"></div>
+</form>
+</dialog>
 <div class="toast" id="toast" popover="manual" role="alert"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -146,16 +253,18 @@ const checks = {
   email: (v) => /^[\w.%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(v) ? "" : "Enter a valid email address.",
   password: (v) => v.length < 8 ? "Password must be at least 8 characters." : /[A-Z]/.test(v) && /[a-z]/.test(v) ? "" : "Password needs an uppercase and a lowercase letter.",
   confirm: (v, f) => v === f.password.value ? "" : "Passwords do not match.",
+  current: (v) => /^(?=.*[A-Z])(?=.*[a-z]).{8,}$/.test(v) ? "" : "Enter your current password.",
   invite: (v) => /^\d{10}$/.test(v) ? "" : "Invite code must be 10 digits.",
   code: (v) => /^\d{6}$/.test(v) ? "" : "Enter the 6-digit code."
 };
 let pending = null;
 let toastAt = 0;
-const toast = (text) => {
+const toast = (text, good = false) => {
   if (Date.now() - toastAt < 3000) return;
   toastAt = Date.now();
   const t = $("#toast");
   t.textContent = text;
+  t.classList.toggle("ok", good);
   t.showPopover();
   setTimeout(() => t.hidePopover(), 2600);
 };
@@ -206,9 +315,12 @@ $("#profile .box").append(eye(true, (shown) => {
 }));
 document.addEventListener("input", (e) => {
   const el = e.target;
-  const clean = el.dataset.rule ? el.value.replace(strip[el.dataset.rule], "") : el.value;
+  const box = el.closest(".pin");
+  const clean = box ? el.value.replace(/\D/g, "").slice(-1) : el.dataset.rule ? el.value.replace(strip[el.dataset.rule], "") : el.value;
   if (clean !== el.value) el.value = clean;
   el.classList.remove("bad");
+  if (box && clean && el.nextElementSibling) el.nextElementSibling.focus();
+  if (box && box.id === "lock-pin") unlockWith(pinValue(box));
 });
 const cell = (text, className = "") => Object.assign(document.createElement("span"), { textContent: text, className });
 let userId = null;
@@ -224,9 +336,135 @@ const loadNetwork = async () => {
     return li;
   }));
 };
+const say = { locked: "Too many attempts. Try again later.", bad_pin: "Incorrect PIN.", bad_password: "Incorrect password.", bad_credentials: "Incorrect password or PIN.", bad_email: "Email does not match your account.", no_pin: "Set a withdrawal PIN first.", invalid: "Invalid PIN.", none: "No PIN is set.", error: "Something went wrong. Try again." };
+const call = async (fn, args) => {
+  const { data, error } = await db.rpc(fn, args);
+  return error ? "error" : data;
+};
+const pinValue = (box) => Array.from(box.children, (c) => c.value).join("");
+const buildPin = (box, len) => box.replaceChildren(...Array.from({ length: len }, (_, i) => Object.assign(document.createElement("input"), { type: "password", inputMode: "numeric", maxLength: 1, autocomplete: "off", ariaLabel: "Digit " + (i + 1) })));
+const markPin = (box) => box.querySelectorAll("input").forEach((i) => i.classList.add("bad"));
+const pinOk = (box, len) => {
+  const good = pinValue(box).length === len;
+  if (!good) {
+    markPin(box);
+    toast("Enter the " + len + "-digit PIN.");
+  }
+  return good;
+};
+document.querySelectorAll(".pin").forEach((box) => buildPin(box, Number(box.dataset.len)));
+let security = { withdraw_set: false, lock_set: false, lock_digits: null };
+let unlocked = false;
+let checking = false;
+const refreshSecurity = async () => {
+  const { data } = await db.rpc("security_status");
+  if (data) security = data;
+};
+const lockLength = (n) => {
+  document.querySelectorAll("#lk-len button").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.len) === n)));
+  buildPin($("#lk-new"), n);
+};
+const loadSecurity = async () => {
+  await refreshSecurity();
+  const w = security.withdraw_set;
+  const l = security.lock_set;
+  $("#wp-old-wrap").hidden = !w;
+  $("#wp-new-label").hidden = !w;
+  $("#wp-text").textContent = w ? "Change the PIN code required for withdrawals" : "Set up a 6-digit PIN code required for withdrawals";
+  buildPin($("#wp-old"), 6);
+  buildPin($("#wp-new"), 6);
+  $("#lk-old-wrap").hidden = !l;
+  $("#lk-new-label").hidden = !l;
+  $("#lk-text").textContent = l ? "Change the PIN code that unlocks the site" : "Set up a PIN code that locks the site";
+  buildPin($("#lk-old"), security.lock_digits || 6);
+  lockLength(security.lock_digits || 6);
+};
+const openLock = () => {
+  buildPin($("#lock-pin"), security.lock_digits);
+  $("#lock").showModal();
+};
+const unlockWith = async (pin) => {
+  if (checking || pin.length !== security.lock_digits) return;
+  checking = true;
+  const r = await call("verify_lock_pin", { p_pin: pin });
+  checking = false;
+  if (r === "ok") {
+    unlocked = true;
+    $("#lock").close();
+    return;
+  }
+  buildPin($("#lock-pin"), security.lock_digits);
+  markPin($("#lock-pin"));
+  $("#lock-pin").firstChild.focus();
+  toast(say[r] || say.error);
+};
+const sizes = [12, 14, 16, 18, 20, 22];
+const langs = { en: "English", bg: "Български", ru: "Русский", de: "Deutsch", es: "Español", fr: "Français" };
+const prefs = { currency: "USD", theme: "dark", language: "en", text_size: 16 };
+try {
+  Object.assign(prefs, JSON.parse(localStorage.getItem("prefs")));
+} catch {}
+const applyPrefs = () => {
+  const root = document.documentElement;
+  root.dataset.theme = prefs.theme;
+  root.style.fontSize = prefs.text_size + "px";
+  root.lang = prefs.language;
+};
+const syncAppearance = () => {
+  document.querySelectorAll("[data-currency]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.currency === prefs.currency)));
+  document.querySelectorAll("#theme button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === prefs.theme)));
+  $("#size-val").textContent = prefs.text_size;
+  $("#lang-name").textContent = langs[prefs.language];
+};
+const savePrefs = () => {
+  try {
+    localStorage.setItem("prefs", JSON.stringify(prefs));
+  } catch {}
+};
+const setPref = async (patch) => {
+  Object.assign(prefs, patch);
+  applyPrefs();
+  syncAppearance();
+  savePrefs();
+  if (userId) await db.from("user_settings").upsert({ user_id: userId, ...prefs });
+};
+const loadPrefs = async () => {
+  const { data } = await db.from("user_settings").select("currency,theme,language,text_size").maybeSingle();
+  if (!data) return;
+  Object.assign(prefs, data);
+  applyPrefs();
+  syncAppearance();
+  savePrefs();
+};
+applyPrefs();
+syncAppearance();
+const loadSettings = async () => {
+  const { data } = await db.auth.mfa.listFactors();
+  $("#twofa-status").textContent = data && data.totp && data.totp.length ? "Enabled" : "Disabled";
+};
+const sessionRow = (ip, ua, when, tag) => {
+  const li = document.createElement("li");
+  const info = document.createElement("span");
+  li.className = "box";
+  info.className = "info";
+  info.append(cell(ip || "Unknown IP"), cell(ua || "Unknown device", "meta"), cell(new Date(when).toLocaleString(), "meta"));
+  li.append(info);
+  if (tag) li.append(cell(tag, "meta"));
+  return li;
+};
+const loadSessions = async () => {
+  const [{ data: live }, { data: log }] = await Promise.all([db.rpc("my_sessions"), db.from("login_events").select("ip,user_agent,created_at").order("created_at", { ascending: false }).limit(50)]);
+  $("#live").replaceChildren(...(live || []).map((s) => sessionRow(s.ip, s.user_agent, s.last_active, s.is_current ? "This device" : "")));
+  $("#history").replaceChildren(...(log || []).map((e) => sessionRow(e.ip, e.user_agent, e.created_at, "")));
+};
+const afterLogin = async () => {
+  await Promise.all([refreshSecurity(), loadPrefs()]);
+  if (security.lock_set && security.lock_digits && !unlocked) openLock();
+};
+const loaders = { network: loadNetwork, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions };
 const showView = (name) => {
   document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
-  if (name === "network") loadNetwork();
+  if (loaders[name]) loaders[name]();
 };
 const toggleMenu = (open) => {
   document.body.classList.toggle("menu-open", open);
@@ -239,7 +477,7 @@ $("#forgot").addEventListener("click", () => {
 });
 document.querySelectorAll("dialog").forEach((d) => {
   const f = d.querySelector("form");
-  d.addEventListener("click", (e) => e.target === d && d.close());
+  d.addEventListener("click", (e) => e.target === d && d.id !== "lock" && d.close());
   d.addEventListener("close", () => {
     f.reset();
     f.querySelectorAll(".bad").forEach((el) => el.classList.remove("bad"));
@@ -253,7 +491,52 @@ document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click"
   showView(b.dataset.view);
   toggleMenu(false);
 }));
-$("#logout").addEventListener("click", () => db.auth.signOut());
+document.querySelectorAll("[data-logout]").forEach((b) => b.addEventListener("click", () => db.auth.signOut()));
+document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => showView(b.dataset.go)));
+$("#lock").addEventListener("cancel", (e) => e.preventDefault());
+$("#lock-form").addEventListener("submit", (e) => e.preventDefault());
+$("#pw-forgot").addEventListener("click", () => $("#reset").showModal());
+$("#delete-open").addEventListener("click", () => (security.withdraw_set ? $("#delete").showModal() : toast(say.no_pin)));
+document.querySelectorAll("#lk-len button").forEach((b) => b.addEventListener("click", () => lockLength(Number(b.dataset.len))));
+document.querySelectorAll("[data-currency]").forEach((b) => b.addEventListener("click", () => setPref({ currency: b.dataset.currency })));
+document.querySelectorAll("#theme button").forEach((b) => b.addEventListener("click", () => setPref({ theme: b.dataset.mode })));
+document.querySelectorAll("[data-step]").forEach((b) => b.addEventListener("click", () => {
+  const next = sizes[sizes.indexOf(prefs.text_size) + Number(b.dataset.step)];
+  if (next) setPref({ text_size: next });
+}));
+$("#lang-open").addEventListener("click", () => $("#lang").showModal());
+$("#lang form").append(...Object.entries(langs).map(([code, name]) => {
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "row out", textContent: name });
+  b.addEventListener("click", () => {
+    setPref({ language: code });
+    $("#lang").close();
+  });
+  return b;
+}));
+document.addEventListener("focusin", (e) => {
+  if (e.target.closest && e.target.closest(".pin")) e.target.select();
+});
+$("#others").addEventListener("click", async () => {
+  const { error } = await db.auth.signOut({ scope: "others" });
+  if (error) return toast(say.error);
+  toast("Other sessions were logged out.", true);
+  loadSessions();
+});
+document.addEventListener("keydown", (e) => {
+  const el = e.target;
+  if (e.key === "Backspace" && !el.value && el.closest(".pin") && el.previousElementSibling) el.previousElementSibling.focus();
+});
+document.addEventListener("paste", (e) => {
+  const box = e.target.closest && e.target.closest(".pin");
+  if (!box) return;
+  e.preventDefault();
+  const digits = e.clipboardData.getData("text").match(/\d/g) || [];
+  Array.from(box.children).forEach((c, i) => {
+    if (digits[i]) c.value = digits[i];
+  });
+  (box.children[Math.min(digits.length, box.children.length) - 1] || box.firstChild).focus();
+  if (box.id === "lock-pin") unlockWith(pinValue(box));
+});
 document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
   await navigator.clipboard.writeText($("#" + b.dataset.copy).textContent);
   b.textContent = "Copied";
@@ -264,6 +547,12 @@ db.auth.onAuthStateChange((event, session) => {
   const id = session ? session.user.id : null;
   if (id === userId) return;
   userId = id;
+  if (id) setTimeout(afterLogin, 0);
+  else {
+    unlocked = false;
+    security = { withdraw_set: false, lock_set: false, lock_digits: null };
+    $("#lock").close();
+  }
   document.querySelectorAll("[data-auth]").forEach((el) => (el.hidden = (el.dataset.auth === "in") !== Boolean(id)));
   profileEmail = session ? session.user.email : "";
   renderEmail();
@@ -305,6 +594,46 @@ handle("#newpass-form", async (f, v) => {
   const { error } = await db.auth.updateUser({ password: v.password });
   if (error) return problem(f, error.message, "password");
   advance(f);
+});
+handle("#pw-form", async (f, v) => {
+  const r = await call("check_password", { p_password: v.current });
+  if (r !== "ok") return problem(f, say[r] || say.error, "current");
+  const { error } = await db.auth.updateUser({ password: v.password });
+  if (error) return problem(f, error.message, "password");
+  f.reset();
+  toast("Password updated.", true);
+});
+const savePin = async (rpc, isSet, oldBox, newBox, oldLen, newLen) => {
+  if (isSet && !pinOk(oldBox, oldLen)) return false;
+  if (!pinOk(newBox, newLen)) return false;
+  const r = await call(rpc, { p_new: pinValue(newBox), p_old: isSet ? pinValue(oldBox) : null });
+  if (r !== "ok") {
+    markPin(r === "bad_pin" ? oldBox : newBox);
+    toast(say[r] || say.error);
+    return false;
+  }
+  toast("PIN saved.", true);
+  return true;
+};
+handle("#wp-form", async () => {
+  if (await savePin("set_withdraw_pin", security.withdraw_set, $("#wp-old"), $("#wp-new"), 6, 6)) await loadSecurity();
+});
+handle("#lk-form", async () => {
+  const len = Number($("#lk-len [aria-pressed=true]").dataset.len);
+  if (await savePin("set_lock_pin", security.lock_set, $("#lk-old"), $("#lk-new"), security.lock_digits, len)) {
+    unlocked = true;
+    await loadSecurity();
+  }
+});
+handle("#delete-form", async (f, v) => {
+  if (!pinOk($("#del-pin"), 6)) return;
+  const r = await call("delete_my_account", { p_email: v.email, p_password: v.password, p_pin: pinValue($("#del-pin")) });
+  if (r !== "ok") {
+    if (r === "bad_credentials") markPin($("#del-pin"));
+    return problem(f, say[r] || say.error, r === "bad_email" ? "email" : "password");
+  }
+  advance(f);
+  await db.auth.signOut({ scope: "local" });
 });
 const ref = new URLSearchParams(location.search).get("ref");
 if (ref && /^\d{10}$/.test(ref)) {
