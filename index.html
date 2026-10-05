@@ -46,20 +46,52 @@ main{padding:32px 20px}
 .card{padding:20px;border:1px solid var(--silver);border-radius:16px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:16px;border:1px solid var(--silver);border-radius:14px;background:transparent;text-align:left;transition:background .2s}
 .row:hover{background:rgba(201,165,75,.08)}
-.row::after{content:"›";font-size:1.25rem;color:var(--muted)}
+.row::after{content:"›";font-size:1.75rem;line-height:1;color:var(--muted)}
+.row.out{align-self:center;justify-content:center;width:min(100%,240px)}
 .row.out::after{content:none}
+.group{border:1px solid var(--silver);border-radius:18px;overflow:hidden}
+.group .row{padding:20px 18px;border:0;border-radius:0}
+.group .row + .row{border-top:1px solid var(--silver)}
+.group .row:focus-visible{outline-offset:-3px}
 .row small{display:block}
 .back{align-self:flex-start;width:40px;height:40px;padding:0;background:none;border:0;font-size:1.75rem;line-height:1;color:var(--strong)}
 .split{display:flex;border:1px solid var(--silver);border-radius:999px;overflow:hidden}
 .split button{flex:1;padding:10px;border:0;background:transparent;font-size:.875rem}
 .split button[aria-pressed=true]{background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);color:#1a1405;font-weight:600}
-#theme button[data-mode=light]{background:#fff;color:#111}
-#theme button[data-mode=dark]{background:#000;color:#fff}
-#theme button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--gold-hi)}
+.seg{--i:0;position:relative;isolation:isolate;display:flex;height:60px;padding:5px;border:1px solid var(--silver);border-radius:999px}
+.seg::before{content:"";position:absolute;z-index:-1;top:5px;bottom:5px;left:5px;width:calc((100% - 10px) / var(--n));border-radius:999px;transform:translateX(calc(var(--i) * 100%));transition:transform .45s cubic-bezier(.22,.8,.3,1)}
+.seg button{flex:1;border:0;border-radius:999px;background:none;font-weight:500;transition:color .3s,opacity .3s}
+#currency{--n:4}
+#currency::before{background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b)}
+#currency button{font-size:1.25rem}
+#currency button[aria-pressed=true]{color:#1a1405;font-weight:600}
+#theme{--n:2;background:linear-gradient(90deg,#fff 0,#fff 36%,#000 64%,#000 100%)}
+#theme::before{background:rgba(128,128,128,.32);box-shadow:0 2px 10px rgba(0,0,0,.3)}
+#theme [data-mode=light]{color:#111}
+#theme [data-mode=dark]{color:#fff}
+#theme [aria-pressed=false]{opacity:.5}
 .pin{display:flex;gap:8px;justify-content:center}
 .pin input{flex:1;width:auto;min-width:0;max-width:52px;aspect-ratio:1;padding:0;text-align:center;font-size:1.25rem}
-.size{display:flex;align-items:center;justify-content:space-between}
-.size button{width:52px;height:40px;border:1px solid var(--silver);border-radius:10px;background:transparent;font-weight:600}
+.card.size{display:flex;align-items:center;gap:14px}
+.size input{flex:1;height:32px;padding:0;border:0;background:none;accent-color:#e4ba3f;touch-action:pan-x}
+.size input:focus{box-shadow:none}
+.size input:focus-visible{outline:2px solid var(--gold-hi);outline-offset:4px}
+.aa{font-weight:600;color:var(--muted)}
+.aa.big{font-size:1.75rem;color:var(--strong)}
+.screen{position:fixed;inset:0;z-index:35;width:auto;margin:0;padding:76px max(20px,calc((100vw - 520px) / 2)) 24px;overflow-y:auto;background:var(--bg)}
+.screen .back{position:absolute;left:12px;top:15.5px;width:36px;height:36px}
+#lang-open{margin-top:auto}
+#lang .panel{gap:0;padding:8px 0}
+.opt{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 24px;border:0;border-bottom:1px solid var(--silver);background:none;text-align:left}
+.opt:last-child{border-bottom:0}
+.opt:hover{background:rgba(201,165,75,.08)}
+.opt[aria-checked=true]::after{content:"✓";font-weight:700;color:var(--strong)}
+#confirm{width:min(300px,84vw);height:min(300px,84vw);background:#fff;color:#111;border:1px solid #c9ccd2;border-radius:18px}
+#confirm .panel{height:100%;align-items:center;justify-content:center;text-align:center;padding:24px}
+.ask{font-size:1.0625rem;font-weight:500}
+.pair{display:flex;gap:10px;width:100%}
+.yn{flex:1;padding:11px;border:1px solid #c9ccd2;border-radius:10px;background:#fff;color:#111;font-weight:600}
+.yn:hover{background:#f1f2f4}
 .info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .info .meta{white-space:normal;overflow-wrap:anywhere}
 .cta.danger{background:transparent;border:1px solid #e5484d;color:var(--danger)}
@@ -68,6 +100,7 @@ main{padding:32px 20px}
 #lock .panel{width:min(360px,92vw)}
 #lock .note{text-align:center}
 .toast.ok{background:#1f7a46}
+.theming *{transition:background-color .45s ease,color .45s ease,border-color .45s ease!important}
 input{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;background:transparent;transition:border-color .2s,box-shadow .2s}
 input::placeholder{color:var(--ph)}
 input:focus{outline:0;border-color:var(--silver-hi);box-shadow:var(--ring)}
@@ -87,7 +120,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .eye .slash{display:none}
 .eye[aria-pressed=true] .slash{display:block}
 .toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-@media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}}
+@media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}.screen .back{left:6px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important}}
 </style>
 </head>
@@ -124,11 +157,13 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <ul class="stack" id="team"></ul>
 </section>
 <section class="page stack" id="settings" hidden>
+<div class="group">
 <button class="row" type="button" data-go="blank">KYC Verification</button>
 <button class="row" type="button" data-go="blank"><span>Two-Factor Authentication (2FA)<small class="note">Google Authenticator</small></span><span class="meta" id="twofa-status">Disabled</span></button>
 <button class="row" type="button" data-go="security">Security settings</button>
 <button class="row" type="button" data-go="appearance">Appearance</button>
 <button class="row" type="button" data-go="sessions">Active Sessions &amp; Audit Log</button>
+</div>
 <button class="row" type="button" data-go="blank">Why AI Trading Bot</button>
 <button class="row" type="button" data-go="blank">Frequently Asked Questions</button>
 <button class="row" type="button" data-go="blank">Terms of Use</button>
@@ -160,18 +195,12 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 </form>
 <button class="cta danger" id="delete-open" type="button">Delete Account</button>
 </section>
-<section class="page stack" id="appearance" hidden>
+<section class="page stack screen" id="appearance" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
-<div class="card stack">
-<p class="note">Currency</p>
-<div class="split" id="currency"><button type="button" data-currency="EUR">€</button><button type="button" data-currency="USD">$</button><button type="button" data-currency="GBP">£</button><button type="button" data-currency="JPY">¥</button></div>
-</div>
-<div class="split" id="theme"><button type="button" data-mode="light">Light</button><button type="button" data-mode="dark">Dark</button></div>
+<div class="seg" id="currency"><button type="button" data-currency="EUR">€</button><button type="button" data-currency="USD">$</button><button type="button" data-currency="GBP">£</button><button type="button" data-currency="JPY">¥</button></div>
+<div class="seg" id="theme"><button type="button" data-mode="light">Light</button><button type="button" data-mode="dark">Dark</button></div>
+<div class="card size"><span class="aa">A</span><input id="size" type="range" min="12" max="22" step="2" aria-label="Text size"><span class="aa big">A</span></div>
 <button class="row" id="lang-open" type="button"><span>Language</span><span class="meta" id="lang-name">English</span></button>
-<div class="card stack">
-<p class="note">Text size</p>
-<div class="size"><button type="button" data-step="-1" aria-label="Smaller text">A−</button><span class="meta" id="size-val">16</span><button type="button" data-step="1" aria-label="Larger text">A+</button></div>
-</div>
 </section>
 <section class="page stack" id="sessions" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
@@ -243,6 +272,12 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <div class="pin" id="lock-pin"></div>
 </form>
 </dialog>
+<dialog id="confirm" aria-label="Log Out">
+<form class="panel">
+<p class="ask">Are you sure you want to log out of your account?</p>
+<div class="pair"><button class="yn" id="yes" type="button">Yes</button><button class="yn" id="no" type="button">No</button></div>
+</form>
+</dialog>
 <div class="toast" id="toast" popover="manual" role="alert"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -263,7 +298,7 @@ const toast = (text, good = false) => {
   if (Date.now() - toastAt < 3000) return;
   toastAt = Date.now();
   const t = $("#toast");
-  t.textContent = text;
+  t.textContent = tr(text);
   t.classList.toggle("ok", good);
   t.showPopover();
   setTimeout(() => t.hidePopover(), 2600);
@@ -370,12 +405,12 @@ const loadSecurity = async () => {
   const l = security.lock_set;
   $("#wp-old-wrap").hidden = !w;
   $("#wp-new-label").hidden = !w;
-  $("#wp-text").textContent = w ? "Change the PIN code required for withdrawals" : "Set up a 6-digit PIN code required for withdrawals";
+  $("#wp-text").textContent = tr(w ? "Change the PIN code required for withdrawals" : "Set up a 6-digit PIN code required for withdrawals");
   buildPin($("#wp-old"), 6);
   buildPin($("#wp-new"), 6);
   $("#lk-old-wrap").hidden = !l;
   $("#lk-new-label").hidden = !l;
-  $("#lk-text").textContent = l ? "Change the PIN code that unlocks the site" : "Set up a PIN code that locks the site";
+  $("#lk-text").textContent = tr(l ? "Change the PIN code that unlocks the site" : "Set up a PIN code that locks the site");
   buildPin($("#lk-old"), security.lock_digits || 6);
   lockLength(security.lock_digits || 6);
 };
@@ -398,8 +433,137 @@ const unlockWith = async (pin) => {
   $("#lock-pin").firstChild.focus();
   toast(say[r] || say.error);
 };
-const sizes = [12, 14, 16, 18, 20, 22];
 const langs = { en: "English", bg: "Български", ru: "Русский", de: "Deutsch", es: "Español", fr: "Français" };
+const I18N = [
+  ["Sign Up", "Регистрация", "Регистрация", "Registrieren", "Registrarse", "S'inscrire"],
+  ["Log In", "Вход", "Вход", "Anmelden", "Iniciar sesión", "Se connecter"],
+  ["Home", "Начало", "Главная", "Startseite", "Inicio", "Accueil"],
+  ["Plans", "Планове", "Тарифы", "Tarife", "Planes", "Offres"],
+  ["About Us", "За нас", "О нас", "Über uns", "Sobre nosotros", "À propos"],
+  ["Terms and Conditions", "Общи условия", "Условия использования", "Allgemeine Geschäftsbedingungen", "Términos y condiciones", "Conditions générales"],
+  ["Dashboard", "Табло", "Панель", "Dashboard", "Panel", "Tableau de bord"],
+  ["Profile", "Профил", "Профиль", "Profil", "Perfil", "Profil"],
+  ["Network", "Мрежа", "Сеть", "Netzwerk", "Red", "Réseau"],
+  ["Settings", "Настройки", "Настройки", "Einstellungen", "Ajustes", "Paramètres"],
+  ["Support", "Поддръжка", "Поддержка", "Support", "Soporte", "Assistance"],
+  ["Log Out", "Изход", "Выйти", "Abmelden", "Cerrar sesión", "Se déconnecter"],
+  ["Email Address", "Имейл адрес", "Адрес эл. почты", "E-Mail-Adresse", "Correo electrónico", "Adresse e-mail"],
+  ["Password", "Парола", "Пароль", "Passwort", "Contraseña", "Mot de passe"],
+  ["Confirm Password", "Потвърди паролата", "Подтвердите пароль", "Passwort bestätigen", "Confirmar contraseña", "Confirmer le mot de passe"],
+  ["Invite Code", "Код за покана", "Код приглашения", "Einladungscode", "Código de invitación", "Code d'invitation"],
+  ["Create Account", "Създай акаунт", "Создать аккаунт", "Konto erstellen", "Crear cuenta", "Créer un compte"],
+  ["Forgot Password", "Забравена парола", "Забыли пароль", "Passwort vergessen", "Olvidé mi contraseña", "Mot de passe oublié"],
+  ["Reset Password", "Възстановяване на парола", "Сброс пароля", "Passwort zurücksetzen", "Restablecer contraseña", "Réinitialiser le mot de passe"],
+  ["Enter the email address on your account. We will send a 6-digit code to it.", "Въведете имейл адреса на акаунта си. Ще изпратим 6-цифрен код на него.", "Введите адрес электронной почты вашего аккаунта. Мы отправим на него 6-значный код.", "Geben Sie die E-Mail-Adresse Ihres Kontos ein. Wir senden einen 6-stelligen Code dorthin.", "Introduce el correo electrónico de tu cuenta. Le enviaremos un código de 6 dígitos.", "Saisissez l'adresse e-mail de votre compte. Nous y enverrons un code à 6 chiffres."],
+  ["Send Request", "Изпрати заявка", "Отправить запрос", "Anfrage senden", "Enviar solicitud", "Envoyer la demande"],
+  ["Enter the 6-digit code we sent to your email.", "Въведете 6-цифрения код, изпратен на имейла ви.", "Введите 6-значный код, отправленный на вашу почту.", "Geben Sie den 6-stelligen Code ein, den wir an Ihre E-Mail gesendet haben.", "Introduce el código de 6 dígitos que enviamos a tu correo.", "Saisissez le code à 6 chiffres envoyé à votre adresse e-mail."],
+  ["6-Digit Code", "6-цифрен код", "6-значный код", "6-stelliger Code", "Código de 6 dígitos", "Code à 6 chiffres"],
+  ["Confirm", "Потвърди", "Подтвердить", "Bestätigen", "Confirmar", "Confirmer"],
+  ["New Password", "Нова парола", "Новый пароль", "Neues Passwort", "Nueva contraseña", "Nouveau mot de passe"],
+  ["Change Password", "Промяна на парола", "Изменить пароль", "Passwort ändern", "Cambiar contraseña", "Changer le mot de passe"],
+  ["This permanently deletes your account and cannot be undone. Confirm with your details.", "Това изтрива акаунта ви завинаги и не може да бъде отменено. Потвърдете с вашите данни.", "Это навсегда удалит ваш аккаунт, действие нельзя отменить. Подтвердите своими данными.", "Dadurch wird Ihr Konto dauerhaft gelöscht und kann nicht rückgängig gemacht werden. Bestätigen Sie mit Ihren Daten.", "Esto elimina tu cuenta de forma permanente y no se puede deshacer. Confirma con tus datos.", "Cela supprime définitivement votre compte et ne peut pas être annulé. Confirmez avec vos informations."],
+  ["Withdrawal PIN", "PIN за тегления", "PIN для вывода", "Auszahlungs-PIN", "PIN de retiros", "PIN de retrait"],
+  ["Delete Account", "Изтрий акаунта", "Удалить аккаунт", "Konto löschen", "Eliminar cuenta", "Supprimer le compte"],
+  ["Enter your PIN to unlock", "Въведете PIN за отключване", "Введите PIN для разблокировки", "PIN zum Entsperren eingeben", "Introduce tu PIN para desbloquear", "Saisissez votre PIN pour déverrouiller"],
+  ["Email", "Имейл", "Эл. почта", "E-Mail", "Correo", "E-mail"],
+  ["Your invite code", "Вашият код за покана", "Ваш код приглашения", "Ihr Einladungscode", "Tu código de invitación", "Votre code d'invitation"],
+  ["Your invite link", "Вашият линк за покана", "Ваша ссылка-приглашение", "Ihr Einladungslink", "Tu enlace de invitación", "Votre lien d'invitation"],
+  ["Copy", "Копирай", "Копировать", "Kopieren", "Copiar", "Copier"],
+  ["Copied", "Копирано", "Скопировано", "Kopiert", "Copiado", "Copié"],
+  ["KYC Verification", "KYC верификация", "KYC-верификация", "KYC-Verifizierung", "Verificación KYC", "Vérification KYC"],
+  ["Two-Factor Authentication (2FA)", "Двуфакторна автентикация (2FA)", "Двухфакторная аутентификация (2FA)", "Zwei-Faktor-Authentifizierung (2FA)", "Autenticación de dos factores (2FA)", "Authentification à deux facteurs (2FA)"],
+  ["Google Authenticator", "Google Authenticator", "Google Authenticator", "Google Authenticator", "Google Authenticator", "Google Authenticator"],
+  ["Enabled", "Включена", "Включена", "Aktiviert", "Activada", "Activée"],
+  ["Disabled", "Изключена", "Отключена", "Deaktiviert", "Desactivada", "Désactivée"],
+  ["Security settings", "Настройки за сигурност", "Настройки безопасности", "Sicherheitseinstellungen", "Ajustes de seguridad", "Paramètres de sécurité"],
+  ["Appearance", "Изглед", "Внешний вид", "Darstellung", "Apariencia", "Apparence"],
+  ["Active Sessions & Audit Log", "Активни сесии и дневник на дейността", "Активные сессии и журнал аудита", "Aktive Sitzungen & Prüfprotokoll", "Sesiones activas y registro de auditoría", "Sessions actives et journal d'audit"],
+  ["Why AI Trading Bot", "Защо AI Trading Bot", "Почему AI Trading Bot", "Warum AI Trading Bot", "Por qué AI Trading Bot", "Pourquoi AI Trading Bot"],
+  ["Frequently Asked Questions", "Често задавани въпроси", "Часто задаваемые вопросы", "Häufig gestellte Fragen", "Preguntas frecuentes", "Questions fréquentes"],
+  ["Terms of Use", "Правила за ползване", "Правила использования", "Nutzungsbedingungen", "Términos de uso", "Conditions d'utilisation"],
+  ["Privacy Policy", "Политика за поверителност", "Политика конфиденциальности", "Datenschutzrichtlinie", "Política de privacidad", "Politique de confidentialité"],
+  ["How to Use the AI Trading Bot", "Как да използвате AI Trading Bot", "Как пользоваться AI Trading Bot", "So verwenden Sie den AI Trading Bot", "Cómo usar el AI Trading Bot", "Comment utiliser l'AI Trading Bot"],
+  ["Set up a 6-digit PIN code required for withdrawals", "Задайте 6-цифрен PIN код, необходим за тегления", "Задайте 6-значный PIN-код, необходимый для вывода средств", "Richten Sie einen 6-stelligen PIN-Code für Auszahlungen ein", "Configura un código PIN de 6 dígitos necesario para los retiros", "Définissez un code PIN à 6 chiffres requis pour les retraits"],
+  ["Change the PIN code required for withdrawals", "Променете PIN кода за тегления", "Измените PIN-код для вывода средств", "Ändern Sie den PIN-Code für Auszahlungen", "Cambia el código PIN de los retiros", "Modifiez le code PIN des retraits"],
+  ["Current PIN", "Текущ PIN", "Текущий PIN", "Aktuelle PIN", "PIN actual", "PIN actuel"],
+  ["New PIN", "Нов PIN", "Новый PIN", "Neue PIN", "PIN nuevo", "Nouveau PIN"],
+  ["Save PIN", "Запази PIN", "Сохранить PIN", "PIN speichern", "Guardar PIN", "Enregistrer le PIN"],
+  ["Set up a PIN code that locks the site", "Задайте PIN код, който заключва сайта", "Задайте PIN-код, блокирующий сайт", "Richten Sie einen PIN-Code zum Sperren der Seite ein", "Configura un código PIN que bloquee el sitio", "Définissez un code PIN qui verrouille le site"],
+  ["Change the PIN code that unlocks the site", "Променете PIN кода, който отключва сайта", "Измените PIN-код для разблокировки сайта", "Ändern Sie den PIN-Code zum Entsperren der Seite", "Cambia el código PIN que desbloquea el sitio", "Modifiez le code PIN qui déverrouille le site"],
+  ["4 digits", "4 цифри", "4 цифры", "4 Ziffern", "4 dígitos", "4 chiffres"],
+  ["6 digits", "6 цифри", "6 цифр", "6 Ziffern", "6 dígitos", "6 chiffres"],
+  ["Current Password", "Текуща парола", "Текущий пароль", "Aktuelles Passwort", "Contraseña actual", "Mot de passe actuel"],
+  ["Save Password", "Запази паролата", "Сохранить пароль", "Passwort speichern", "Guardar contraseña", "Enregistrer le mot de passe"],
+  ["Light", "Светъл", "Светлая", "Hell", "Claro", "Clair"],
+  ["Dark", "Тъмен", "Тёмная", "Dunkel", "Oscuro", "Sombre"],
+  ["Language", "Език", "Язык", "Sprache", "Idioma", "Langue"],
+  ["Active sessions", "Активни сесии", "Активные сессии", "Aktive Sitzungen", "Sesiones activas", "Sessions actives"],
+  ["Log out other sessions", "Изход от другите сесии", "Выйти из других сессий", "Andere Sitzungen abmelden", "Cerrar otras sesiones", "Déconnecter les autres sessions"],
+  ["Login history", "История на входовете", "История входов", "Anmeldeverlauf", "Historial de inicios de sesión", "Historique des connexions"],
+  ["This device", "Това устройство", "Это устройство", "Dieses Gerät", "Este dispositivo", "Cet appareil"],
+  ["Unknown IP", "Неизвестен IP", "Неизвестный IP", "Unbekannte IP", "IP desconocida", "IP inconnue"],
+  ["Unknown device", "Неизвестно устройство", "Неизвестное устройство", "Unbekanntes Gerät", "Dispositivo desconocido", "Appareil inconnu"],
+  ["Are you sure you want to log out of your account?", "Сигурни ли сте, че искате да излезете от профила си?", "Вы уверены, что хотите выйти из аккаунта?", "Möchten Sie sich wirklich von Ihrem Konto abmelden?", "¿Seguro que quieres cerrar sesión en tu cuenta?", "Voulez-vous vraiment vous déconnecter de votre compte ?"],
+  ["Yes", "Да", "Да", "Ja", "Sí", "Oui"],
+  ["No", "Не", "Нет", "Nein", "No", "Non"],
+  ["Open menu", "Отвори менюто", "Открыть меню", "Menü öffnen", "Abrir menú", "Ouvrir le menu"],
+  ["Back", "Назад", "Назад", "Zurück", "Atrás", "Retour"],
+  ["Show or hide", "Покажи или скрий", "Показать или скрыть", "Anzeigen oder verbergen", "Mostrar u ocultar", "Afficher ou masquer"],
+  ["Text size", "Размер на текста", "Размер текста", "Textgröße", "Tamaño del texto", "Taille du texte"],
+  ["Enter a valid email address.", "Въведете валиден имейл адрес.", "Введите действительный адрес эл. почты.", "Geben Sie eine gültige E-Mail-Adresse ein.", "Introduce un correo electrónico válido.", "Saisissez une adresse e-mail valide."],
+  ["Password must be at least 8 characters.", "Паролата трябва да е поне 8 символа.", "Пароль должен содержать не менее 8 символов.", "Das Passwort muss mindestens 8 Zeichen lang sein.", "La contraseña debe tener al menos 8 caracteres.", "Le mot de passe doit contenir au moins 8 caractères."],
+  ["Password needs an uppercase and a lowercase letter.", "Паролата трябва да съдържа главна и малка буква.", "Пароль должен содержать заглавную и строчную букву.", "Das Passwort benötigt einen Groß- und einen Kleinbuchstaben.", "La contraseña necesita una mayúscula y una minúscula.", "Le mot de passe doit contenir une majuscule et une minuscule."],
+  ["Passwords do not match.", "Паролите не съвпадат.", "Пароли не совпадают.", "Die Passwörter stimmen nicht überein.", "Las contraseñas no coinciden.", "Les mots de passe ne correspondent pas."],
+  ["Invite code must be 10 digits.", "Кодът за покана трябва да е 10 цифри.", "Код приглашения должен состоять из 10 цифр.", "Der Einladungscode muss aus 10 Ziffern bestehen.", "El código de invitación debe tener 10 dígitos.", "Le code d'invitation doit comporter 10 chiffres."],
+  ["Enter the 6-digit code.", "Въведете 6-цифрения код.", "Введите 6-значный код.", "Geben Sie den 6-stelligen Code ein.", "Introduce el código de 6 dígitos.", "Saisissez le code à 6 chiffres."],
+  ["Enter your current password.", "Въведете текущата си парола.", "Введите текущий пароль.", "Geben Sie Ihr aktuelles Passwort ein.", "Introduce tu contraseña actual.", "Saisissez votre mot de passe actuel."],
+  ["Invalid invite code.", "Невалиден код за покана.", "Недействительный код приглашения.", "Ungültiger Einladungscode.", "Código de invitación no válido.", "Code d'invitation invalide."],
+  ["This email is already registered. Log in instead.", "Този имейл вече е регистриран. Влезте в профила си.", "Этот адрес уже зарегистрирован. Войдите в аккаунт.", "Diese E-Mail ist bereits registriert. Bitte melden Sie sich an.", "Este correo ya está registrado. Inicia sesión.", "Cet e-mail est déjà enregistré. Connectez-vous."],
+  ["Incorrect email or password.", "Грешен имейл или парола.", "Неверный адрес эл. почты или пароль.", "Falsche E-Mail oder falsches Passwort.", "Correo o contraseña incorrectos.", "E-mail ou mot de passe incorrect."],
+  ["Invalid or expired code.", "Невалиден или изтекъл код.", "Неверный или просроченный код.", "Ungültiger oder abgelaufener Code.", "Código no válido o caducado.", "Code invalide ou expiré."],
+  ["Password updated.", "Паролата е обновена.", "Пароль обновлён.", "Passwort aktualisiert.", "Contraseña actualizada.", "Mot de passe mis à jour."],
+  ["PIN saved.", "PIN кодът е запазен.", "PIN-код сохранён.", "PIN gespeichert.", "PIN guardado.", "PIN enregistré."],
+  ["Other sessions were logged out.", "Другите сесии бяха прекратени.", "Другие сессии завершены.", "Andere Sitzungen wurden abgemeldet.", "Se cerraron las otras sesiones.", "Les autres sessions ont été déconnectées."],
+  ["Enter the 6-digit PIN.", "Въведете 6-цифрения PIN.", "Введите 6-значный PIN-код.", "Geben Sie die 6-stellige PIN ein.", "Introduce el PIN de 6 dígitos.", "Saisissez le PIN à 6 chiffres."],
+  ["Enter the 4-digit PIN.", "Въведете 4-цифрения PIN.", "Введите 4-значный PIN-код.", "Geben Sie die 4-stellige PIN ein.", "Introduce el PIN de 4 dígitos.", "Saisissez le PIN à 4 chiffres."],
+  ["Too many attempts. Try again later.", "Твърде много опити. Опитайте по-късно.", "Слишком много попыток. Повторите позже.", "Zu viele Versuche. Bitte versuchen Sie es später erneut.", "Demasiados intentos. Inténtalo más tarde.", "Trop de tentatives. Réessayez plus tard."],
+  ["Incorrect PIN.", "Грешен PIN.", "Неверный PIN-код.", "Falsche PIN.", "PIN incorrecto.", "PIN incorrect."],
+  ["Incorrect password.", "Грешна парола.", "Неверный пароль.", "Falsches Passwort.", "Contraseña incorrecta.", "Mot de passe incorrect."],
+  ["Incorrect password or PIN.", "Грешна парола или PIN.", "Неверный пароль или PIN-код.", "Falsches Passwort oder falsche PIN.", "Contraseña o PIN incorrectos.", "Mot de passe ou PIN incorrect."],
+  ["Email does not match your account.", "Имейлът не съвпада с акаунта ви.", "Адрес не совпадает с вашим аккаунтом.", "Die E-Mail stimmt nicht mit Ihrem Konto überein.", "El correo no coincide con tu cuenta.", "L'e-mail ne correspond pas à votre compte."],
+  ["Set a withdrawal PIN first.", "Първо задайте PIN за тегления.", "Сначала задайте PIN-код для вывода.", "Legen Sie zuerst eine Auszahlungs-PIN fest.", "Primero configura un PIN de retiros.", "Définissez d'abord un PIN de retrait."],
+  ["Invalid PIN.", "Невалиден PIN.", "Недействительный PIN-код.", "Ungültige PIN.", "PIN no válido.", "PIN invalide."],
+  ["No PIN is set.", "Няма зададен PIN.", "PIN-код не задан.", "Es ist keine PIN festgelegt.", "No hay ningún PIN configurado.", "Aucun PIN n'est défini."],
+  ["Something went wrong. Try again.", "Нещо се обърка. Опитайте отново.", "Что-то пошло не так. Попробуйте ещё раз.", "Etwas ist schiefgelaufen. Bitte erneut versuchen.", "Algo salió mal. Inténtalo de nuevo.", "Une erreur s'est produite. Réessayez."]
+];
+const columns = { bg: 1, ru: 2, de: 3, es: 4, fr: 5 };
+const keys = new Set(I18N.map((r) => r[0]));
+const origText = new WeakMap();
+const origAttr = new WeakMap();
+let dict = {};
+const tr = (s) => dict[s] || s;
+const translateDom = () => {
+  const col = columns[prefs.language];
+  dict = col ? Object.fromEntries(I18N.map((r) => [r[0], r[col]])) : {};
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+    const now = n.nodeValue.trim();
+    const en = origText.get(n) || now;
+    if (!keys.has(en)) continue;
+    origText.set(n, en);
+    n.nodeValue = n.nodeValue.replace(now, tr(en));
+  }
+  document.querySelectorAll("[placeholder],[aria-label]").forEach((el) => {
+    const saved = origAttr.get(el) || {};
+    ["placeholder", "aria-label"].forEach((a) => {
+      const en = saved[a] || el.getAttribute(a);
+      if (!keys.has(en)) return;
+      saved[a] = en;
+      el.setAttribute(a, tr(en));
+    });
+    origAttr.set(el, saved);
+  });
+};
 const prefs = { currency: "USD", theme: "dark", language: "en", text_size: 16 };
 try {
   Object.assign(prefs, JSON.parse(localStorage.getItem("prefs")));
@@ -411,50 +575,61 @@ const applyPrefs = () => {
   root.lang = prefs.language;
 };
 const syncAppearance = () => {
+  $("#currency").style.setProperty("--i", ["EUR", "USD", "GBP", "JPY"].indexOf(prefs.currency));
   document.querySelectorAll("[data-currency]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.currency === prefs.currency)));
+  $("#theme").style.setProperty("--i", prefs.theme === "dark" ? 1 : 0);
   document.querySelectorAll("#theme button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === prefs.theme)));
-  $("#size-val").textContent = prefs.text_size;
+  $("#size").value = prefs.text_size;
   $("#lang-name").textContent = langs[prefs.language];
+  document.querySelectorAll("#lang .opt").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.code === prefs.language)));
 };
 const savePrefs = () => {
   try {
     localStorage.setItem("prefs", JSON.stringify(prefs));
   } catch {}
 };
-const setPref = async (patch) => {
+const setPref = async (patch, persist = true) => {
+  const root = document.documentElement;
+  if (patch.theme && patch.theme !== prefs.theme) {
+    root.classList.add("theming");
+    setTimeout(() => root.classList.remove("theming"), 600);
+  }
   Object.assign(prefs, patch);
   applyPrefs();
+  if (patch.language) translateDom();
   syncAppearance();
   savePrefs();
-  if (userId) await db.from("user_settings").upsert({ user_id: userId, ...prefs });
+  if (userId && persist) await db.from("user_settings").upsert({ user_id: userId, ...prefs });
 };
 const loadPrefs = async () => {
   const { data } = await db.from("user_settings").select("currency,theme,language,text_size").maybeSingle();
   if (!data) return;
   Object.assign(prefs, data);
   applyPrefs();
+  translateDom();
   syncAppearance();
   savePrefs();
 };
 applyPrefs();
+translateDom();
 syncAppearance();
 const loadSettings = async () => {
   const { data } = await db.auth.mfa.listFactors();
-  $("#twofa-status").textContent = data && data.totp && data.totp.length ? "Enabled" : "Disabled";
+  $("#twofa-status").textContent = data && data.totp && data.totp.length ? tr("Enabled") : tr("Disabled");
 };
 const sessionRow = (ip, ua, when, tag) => {
   const li = document.createElement("li");
   const info = document.createElement("span");
   li.className = "box";
   info.className = "info";
-  info.append(cell(ip || "Unknown IP"), cell(ua || "Unknown device", "meta"), cell(new Date(when).toLocaleString(), "meta"));
+  info.append(cell(ip || tr("Unknown IP")), cell(ua || tr("Unknown device"), "meta"), cell(new Date(when).toLocaleString(prefs.language), "meta"));
   li.append(info);
   if (tag) li.append(cell(tag, "meta"));
   return li;
 };
 const loadSessions = async () => {
   const [{ data: live }, { data: log }] = await Promise.all([db.rpc("my_sessions"), db.from("login_events").select("ip,user_agent,created_at").order("created_at", { ascending: false }).limit(50)]);
-  $("#live").replaceChildren(...(live || []).map((s) => sessionRow(s.ip, s.user_agent, s.last_active, s.is_current ? "This device" : "")));
+  $("#live").replaceChildren(...(live || []).map((s) => sessionRow(s.ip, s.user_agent, s.last_active, s.is_current ? tr("This device") : "")));
   $("#history").replaceChildren(...(log || []).map((e) => sessionRow(e.ip, e.user_agent, e.created_at, "")));
 };
 const afterLogin = async () => {
@@ -491,7 +666,12 @@ document.querySelectorAll(".nav-item").forEach((b) => b.addEventListener("click"
   showView(b.dataset.view);
   toggleMenu(false);
 }));
-document.querySelectorAll("[data-logout]").forEach((b) => b.addEventListener("click", () => db.auth.signOut()));
+document.querySelectorAll("[data-logout]").forEach((b) => b.addEventListener("click", () => $("#confirm").showModal()));
+$("#yes").addEventListener("click", () => {
+  $("#confirm").close();
+  db.auth.signOut();
+});
+$("#no").addEventListener("click", () => $("#confirm").close());
 document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => showView(b.dataset.go)));
 $("#lock").addEventListener("cancel", (e) => e.preventDefault());
 $("#lock-form").addEventListener("submit", (e) => e.preventDefault());
@@ -500,19 +680,21 @@ $("#delete-open").addEventListener("click", () => (security.withdraw_set ? $("#d
 document.querySelectorAll("#lk-len button").forEach((b) => b.addEventListener("click", () => lockLength(Number(b.dataset.len))));
 document.querySelectorAll("[data-currency]").forEach((b) => b.addEventListener("click", () => setPref({ currency: b.dataset.currency })));
 document.querySelectorAll("#theme button").forEach((b) => b.addEventListener("click", () => setPref({ theme: b.dataset.mode })));
-document.querySelectorAll("[data-step]").forEach((b) => b.addEventListener("click", () => {
-  const next = sizes[sizes.indexOf(prefs.text_size) + Number(b.dataset.step)];
-  if (next) setPref({ text_size: next });
-}));
+$("#size").addEventListener("input", (e) => setPref({ text_size: Number(e.target.value) }, false));
+$("#size").addEventListener("change", (e) => setPref({ text_size: Number(e.target.value) }));
 $("#lang-open").addEventListener("click", () => $("#lang").showModal());
 $("#lang form").append(...Object.entries(langs).map(([code, name]) => {
-  const b = Object.assign(document.createElement("button"), { type: "button", className: "row out", textContent: name });
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "opt", textContent: name });
+  b.dataset.code = code;
+  b.setAttribute("role", "radio");
   b.addEventListener("click", () => {
     setPref({ language: code });
     $("#lang").close();
   });
   return b;
 }));
+$("#lang form").setAttribute("role", "radiogroup");
+syncAppearance();
 document.addEventListener("focusin", (e) => {
   if (e.target.closest && e.target.closest(".pin")) e.target.select();
 });
@@ -539,8 +721,8 @@ document.addEventListener("paste", (e) => {
 });
 document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
   await navigator.clipboard.writeText($("#" + b.dataset.copy).textContent);
-  b.textContent = "Copied";
-  setTimeout(() => (b.textContent = "Copy"), 1500);
+  b.textContent = tr("Copied");
+  setTimeout(() => (b.textContent = tr("Copy")), 1500);
 }));
 db.auth.onAuthStateChange((event, session) => {
   if (event === "PASSWORD_RECOVERY") return;
