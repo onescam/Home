@@ -9,22 +9,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--strong:#fff;--ph:#566079;--bar-bg:rgba(4,6,11,.82);--danger:#ff7b7f;--ring:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16);--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--line:rgba(201,165,75,.28);--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
-:root[data-theme=light]{color-scheme:light;--bg:#fff;--strong:#111;--ph:#98a0b3;--bar-bg:rgba(255,255,255,.88);--danger:#c42b30;--ring:0 0 0 1px rgba(59,66,82,.45),0 0 14px rgba(59,66,82,.12);--text:#1c1a14;--muted:#5d667a;--line:rgba(160,120,20,.35);--silver:rgba(60,70,90,.3);--silver-hi:#3b4252}
+:root{--bg:#000;--strong:#fff;--ph:#566079;--bar-bg:rgba(4,6,11,.82);--danger:#ff7b7f;--ring:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16);--gold:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
+:root[data-theme=light]{color-scheme:light;--bg:#fff;--strong:#111;--ph:#98a0b3;--bar-bg:rgba(255,255,255,.88);--danger:#c42b30;--ring:0 0 0 1px rgba(59,66,82,.45),0 0 14px rgba(59,66,82,.12);--text:#1c1a14;--muted:#5d667a;--silver:rgba(60,70,90,.3);--silver-hi:#3b4252}
 *{box-sizing:border-box;margin:0}
 html{color-scheme:dark}
 [hidden]{display:none!important}
 body{min-height:100dvh;background:var(--bg);color:var(--text);font:400 1rem/1.5 Inter,system-ui,sans-serif}
-button,input{font:inherit;color:inherit}
+button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
-.bar{position:sticky;top:0;z-index:30;height:var(--bar);padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--bar-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:30;height:var(--bar);padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--bar-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--silver)}
 .burger{width:36px;height:36px;margin-left:-8px;padding:0;display:grid;place-content:center;gap:4px;background:none;border:0}
 .burger span{display:block;width:20px;height:2px;background:var(--strong)}
 .actions{display:flex;gap:10px}
-.btn,.cta{border:0;background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);color:#1a1405;font-weight:600;transition:filter .2s}
+.btn,.cta{border:0;background:var(--gold);color:#1a1405;font-weight:600;transition:filter .2s}
 .btn{padding:7px 20px;border-radius:999px;font-size:.875rem}
-.btn:hover{filter:brightness(1.08)}
+.btn:hover,.cta:hover{filter:brightness(1.08)}
 .scrim{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
 .drawer{position:fixed;z-index:50;top:0;bottom:0;left:0;width:min(260px,72vw);padding:20px 14px;display:flex;flex-direction:column;gap:6px;background:var(--bg);border-right:1px solid var(--silver);transform:translateX(-100%);visibility:hidden;transition:transform .35s cubic-bezier(.22,.8,.3,1),visibility 0s .35s}
 .menu-open .scrim{opacity:1;visibility:visible;transition:opacity .3s}
@@ -45,7 +45,7 @@ main{padding:32px 20px}
 .value{flex:1}
 .card{padding:20px;border:1px solid var(--silver);border-radius:16px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:16px;border:1px solid var(--silver);border-radius:14px;background:transparent;text-align:left;transition:background .2s}
-.row:hover{background:rgba(201,165,75,.08)}
+.row:hover,.opt:hover{background:rgba(201,165,75,.08)}
 .row::after{content:"›";font-size:1.75rem;line-height:1;color:var(--muted)}
 .row.out{align-self:center;justify-content:center;width:min(100%,240px)}
 .row.out::after{content:none}
@@ -54,15 +54,14 @@ main{padding:32px 20px}
 .group .row + .row{border-top:1px solid var(--silver)}
 .group .row:focus-visible{outline-offset:-3px}
 .row small{display:block}
-.back{align-self:flex-start;width:40px;height:40px;padding:0;background:none;border:0;font-size:1.75rem;line-height:1;color:var(--strong)}
 .split{display:flex;border:1px solid var(--silver);border-radius:999px;overflow:hidden}
 .split button{flex:1;padding:10px;border:0;background:transparent;font-size:.875rem}
-.split button[aria-pressed=true]{background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);color:#1a1405;font-weight:600}
+.split button[aria-pressed=true]{background:var(--gold);color:#1a1405;font-weight:600}
 .seg{--i:0;position:relative;isolation:isolate;display:flex;height:60px;padding:5px;border:1px solid var(--silver);border-radius:999px}
 .seg::before{content:"";position:absolute;z-index:-1;top:5px;bottom:5px;left:5px;width:calc((100% - 10px) / var(--n));border-radius:999px;transform:translateX(calc(var(--i) * 100%));transition:transform .45s cubic-bezier(.22,.8,.3,1)}
 .seg button{flex:1;border:0;border-radius:999px;background:none;font-weight:500;transition:color .3s,opacity .3s}
 #currency{--n:4}
-#currency::before{background:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b)}
+#currency::before{background:var(--gold)}
 #currency button{font-size:1.25rem}
 #currency button[aria-pressed=true]{color:#1a1405;font-weight:600}
 #theme{--n:2;background:linear-gradient(90deg,#fff 0,#fff 36%,#000 64%,#000 100%)}
@@ -79,19 +78,42 @@ main{padding:32px 20px}
 .aa{font-weight:600;color:var(--muted)}
 .aa.big{font-size:1.75rem;color:var(--strong)}
 .screen{position:fixed;inset:0;z-index:35;width:auto;margin:0;padding:76px max(20px,calc((100vw - 520px) / 2)) 24px;overflow-y:auto;background:var(--bg)}
-.screen .back{position:absolute;left:12px;top:15.5px;width:36px;height:36px}
+.screen .back{position:absolute;left:12px;top:15.5px;width:36px;height:36px;padding:0;background:none;border:0;font-size:1.75rem;line-height:1;color:var(--strong)}
 #lang-open{margin-top:auto}
 #lang .panel{gap:0;padding:8px 0}
 .opt{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 24px;border:0;border-bottom:1px solid var(--silver);background:none;text-align:left}
 .opt:last-child{border-bottom:0}
-.opt:hover{background:rgba(201,165,75,.08)}
 .opt[aria-checked=true]::after{content:"✓";font-weight:700;color:var(--strong)}
-#confirm{width:min(300px,84vw);height:min(300px,84vw);background:#fff;color:#111;border:1px solid #c9ccd2;border-radius:18px}
-#confirm .panel{height:100%;align-items:center;justify-content:center;text-align:center;padding:24px}
-.ask{font-size:1.0625rem;font-weight:500}
-.pair{display:flex;gap:10px;width:100%}
-.yn{flex:1;padding:11px;border:1px solid #c9ccd2;border-radius:10px;background:#fff;color:#111;font-weight:600}
-.yn:hover{background:#f1f2f4}
+#confirm{width:min(270px,78vw);padding:0;border:0;border-radius:14px;background:rgba(248,248,250,.94);color:#000;-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+#confirm::backdrop{background:rgba(0,0,0,.4)}
+#confirm[open]{animation:pop .22s cubic-bezier(.2,.9,.3,1.2)}
+#confirm .panel{gap:0;padding:0;text-align:center}
+.ios-body{padding:20px 16px 18px}
+.ios-title{font-size:1.0625rem;font-weight:600}
+.ios-msg{margin-top:4px;font-size:.8125rem}
+.ios-actions{display:flex;border-top:1px solid rgba(60,60,67,.29)}
+.ios-actions button{flex:1;padding:13px 8px;border:0;background:none;color:#007aff;font-size:1.0625rem}
+.ios-actions button + button{border-left:1px solid rgba(60,60,67,.29);font-weight:600}
+.ios-actions button:active{background:rgba(0,0,0,.08)}
+@keyframes pop{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:none}}
+.chat{position:fixed;inset:var(--bar) 0 var(--kb,0px) 0;z-index:20;display:flex;flex-direction:column;background:var(--bg)}
+.thread{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:16px max(16px,calc((100vw - 640px) / 2))}
+.hint{margin:auto;text-align:center}
+.msg{max-width:80%;display:flex;flex-direction:column;gap:4px;padding:10px 12px;border-radius:18px;overflow-wrap:anywhere;white-space:pre-wrap}
+.msg img{display:block;max-width:100%;max-height:260px;border-radius:12px}
+.msg.mine{align-self:flex-end;border-bottom-right-radius:6px;background:var(--gold);color:#1a1405}
+.msg.theirs{align-self:flex-start;border:1px solid var(--silver);border-bottom-left-radius:6px}
+.time{align-self:flex-end;font-size:.75rem;opacity:.65}
+.preview{display:flex;align-items:center;gap:10px;padding:8px max(16px,calc((100vw - 640px) / 2)) 0}
+.preview img{height:56px;border-radius:10px}
+.preview button{width:28px;height:28px;padding:0;border:1px solid var(--silver);border-radius:50%;background:none;line-height:1}
+.composer{display:flex;align-items:flex-end;gap:8px;padding:10px max(12px,calc((100vw - 640px) / 2));border-top:1px solid var(--silver)}
+.composer textarea{flex:1;max-height:120px;padding:11px 16px;resize:none;border:1px solid var(--silver);border-radius:22px;background:transparent;line-height:1.4}
+.composer textarea:focus{outline:0;border-color:var(--silver-hi);box-shadow:var(--ring)}
+.round{flex:none;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--silver);border-radius:50%;background:none;color:var(--muted)}
+.round.gold{border:0;background:var(--gold);color:#1a1405}
+.round:disabled{opacity:.6;cursor:wait}
+.nav-item.unread::after{content:"";display:inline-block;width:8px;height:8px;margin-left:8px;border-radius:50%;background:#e4ba3f}
 .info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .info .meta{white-space:normal;overflow-wrap:anywhere}
 .cta.danger{background:transparent;border:1px solid #e5484d;color:var(--danger)}
@@ -108,7 +130,6 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .link{align-self:flex-end;padding:0;background:none;border:0;font-size:.875rem;color:var(--muted)}
 .link:hover{color:var(--silver-hi)}
 .cta{width:100%;padding:11px;border-radius:999px;font-size:.9375rem}
-.cta:hover{filter:brightness(1.08)}
 .cta:disabled{opacity:.6;cursor:wait}
 .bad,.bad:focus{border-color:#e5484d;box-shadow:0 0 0 1px rgba(229,72,77,.45),0 0 14px rgba(229,72,77,.2)}
 .field{position:relative}
@@ -116,12 +137,12 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .eye{display:grid;place-items:center;width:32px;height:32px;padding:0;background:none;border:0;color:var(--muted)}
 .field .eye{position:absolute;top:50%;right:8px;transform:translateY(-50%)}
 .eye:hover{color:var(--silver-hi)}
-.eye svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.eye svg,.round svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .eye .slash{display:none}
 .eye[aria-pressed=true] .slash{display:block}
 .toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 @media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}.screen .back{left:6px}}
-@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important;animation-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -171,22 +192,22 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <button class="row" type="button" data-go="blank">How to Use the AI Trading Bot</button>
 <button class="row out" type="button" data-logout>Log Out</button>
 </section>
-<section class="page stack" id="security" hidden>
+<section class="page stack screen" id="security" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
-<form class="card stack" id="wp-form" novalidate>
+<form class="card stack" id="wp-form">
 <p class="note" id="wp-text">Set up a 6-digit PIN code required for withdrawals</p>
 <div class="stack" id="wp-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="wp-old" data-len="6"></div></div>
 <div class="stack"><span class="note" id="wp-new-label" hidden>New PIN</span><div class="pin" id="wp-new" data-len="6"></div></div>
 <button class="cta" type="submit">Save PIN</button>
 </form>
-<form class="card stack" id="lk-form" novalidate>
+<form class="card stack" id="lk-form">
 <p class="note" id="lk-text">Set up a PIN code that locks the site</p>
 <div class="split" id="lk-len"><button type="button" data-len="4" aria-pressed="false">4 digits</button><button type="button" data-len="6" aria-pressed="true">6 digits</button></div>
 <div class="stack" id="lk-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="lk-old" data-len="6"></div></div>
 <div class="stack"><span class="note" id="lk-new-label" hidden>New PIN</span><div class="pin" id="lk-new" data-len="6"></div></div>
 <button class="cta" type="submit">Save PIN</button>
 </form>
-<form class="card stack" id="pw-form" novalidate>
+<form class="card stack" id="pw-form">
 <h2>Change Password</h2>
 <input name="current" type="password" data-rule="password" autocomplete="current-password" placeholder="Current Password" aria-label="Current Password">
 <input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="New Password" aria-label="New Password">
@@ -202,7 +223,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <div class="card size"><span class="aa">A</span><input id="size" type="range" min="12" max="22" step="2" aria-label="Text size"><span class="aa big">A</span></div>
 <button class="row" id="lang-open" type="button"><span>Language</span><span class="meta" id="lang-name">English</span></button>
 </section>
-<section class="page stack" id="sessions" hidden>
+<section class="page stack screen" id="sessions" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
 <p class="note">Active sessions</p>
 <ul class="stack" id="live"></ul>
@@ -210,8 +231,18 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <p class="note">Login history</p>
 <ul class="stack" id="history"></ul>
 </section>
-<section class="page stack" id="blank" hidden>
+<section class="page stack screen" id="blank" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+</section>
+<section class="chat" id="support" hidden>
+<div class="thread" id="thread"><p class="note hint" id="hint">Send us a message. Our team will reply here.</p></div>
+<div class="preview" id="preview" hidden><img alt=""><button id="drop" type="button" aria-label="Remove photo">×</button></div>
+<form class="composer" id="composer">
+<button class="round" id="attach" type="button" aria-label="Attach photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.5l-8.6 8.6a5.5 5.5 0 01-7.8-7.8l9-9a3.7 3.7 0 015.2 5.2l-9 9a1.9 1.9 0 01-2.6-2.6l8.4-8.4"/></svg></button>
+<input id="photo" type="file" accept="image/*" hidden>
+<textarea id="msg" rows="1" maxlength="2000" placeholder="Message" aria-label="Message"></textarea>
+<button class="round gold" id="send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+</form>
 </section>
 </main>
 <dialog id="signup" aria-label="Sign Up">
@@ -240,14 +271,14 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 </form>
 </dialog>
 <dialog id="verify" aria-label="Verification Code">
-<form class="panel" id="verify-form" novalidate>
+<form class="panel" id="verify-form">
 <p class="note">Enter the 6-digit code we sent to your email.</p>
 <input name="code" type="text" inputmode="numeric" maxlength="6" data-rule="digits" autocomplete="one-time-code" placeholder="6-Digit Code" aria-label="6-Digit Code">
 <button class="cta" type="submit">Confirm</button>
 </form>
 </dialog>
 <dialog id="newpass" aria-label="Change Password">
-<form class="panel" id="newpass-form" novalidate>
+<form class="panel" id="newpass-form">
 <input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="New Password" aria-label="New Password">
 <input name="confirm" type="password" data-rule="password" autocomplete="new-password" placeholder="Confirm Password" aria-label="Confirm Password">
 <button class="cta" type="submit">Change Password</button>
@@ -267,15 +298,15 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <form class="panel"></form>
 </dialog>
 <dialog id="lock" aria-label="Locked">
-<form class="panel" id="lock-form" novalidate>
+<form class="panel">
 <p class="note">Enter your PIN to unlock</p>
 <div class="pin" id="lock-pin"></div>
 </form>
 </dialog>
 <dialog id="confirm" aria-label="Log Out">
 <form class="panel">
-<p class="ask">Are you sure you want to log out of your account?</p>
-<div class="pair"><button class="yn" id="yes" type="button">Yes</button><button class="yn" id="no" type="button">No</button></div>
+<div class="ios-body"><p class="ios-title">Log Out</p><p class="ios-msg">Are you sure you want to log out of your account?</p></div>
+<div class="ios-actions"><button id="no" type="button">No</button><button id="yes" type="button">Yes</button></div>
 </form>
 </dialog>
 <div class="toast" id="toast" popover="manual" role="alert"></div>
@@ -294,6 +325,7 @@ const checks = {
 };
 let pending = null;
 let toastAt = 0;
+let toastTimer = 0;
 const toast = (text, good = false) => {
   if (Date.now() - toastAt < 3000) return;
   toastAt = Date.now();
@@ -301,7 +333,8 @@ const toast = (text, good = false) => {
   t.textContent = tr(text);
   t.classList.toggle("ok", good);
   t.showPopover();
-  setTimeout(() => t.hidePopover(), 2600);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.hidePopover(), 2600);
 };
 const validate = (f) => {
   let first = "";
@@ -534,7 +567,16 @@ const I18N = [
   ["Set a withdrawal PIN first.", "Първо задайте PIN за тегления.", "Сначала задайте PIN-код для вывода.", "Legen Sie zuerst eine Auszahlungs-PIN fest.", "Primero configura un PIN de retiros.", "Définissez d'abord un PIN de retrait."],
   ["Invalid PIN.", "Невалиден PIN.", "Недействительный PIN-код.", "Ungültige PIN.", "PIN no válido.", "PIN invalide."],
   ["No PIN is set.", "Няма зададен PIN.", "PIN-код не задан.", "Es ist keine PIN festgelegt.", "No hay ningún PIN configurado.", "Aucun PIN n'est défini."],
-  ["Something went wrong. Try again.", "Нещо се обърка. Опитайте отново.", "Что-то пошло не так. Попробуйте ещё раз.", "Etwas ist schiefgelaufen. Bitte erneut versuchen.", "Algo salió mal. Inténtalo de nuevo.", "Une erreur s'est produite. Réessayez."]
+  ["Something went wrong. Try again.", "Нещо се обърка. Опитайте отново.", "Что-то пошло не так. Попробуйте ещё раз.", "Etwas ist schiefgelaufen. Bitte erneut versuchen.", "Algo salió mal. Inténtalo de nuevo.", "Une erreur s'est produite. Réessayez."],
+  ["Message", "Съобщение", "Сообщение", "Nachricht", "Mensaje", "Message"],
+  ["Attach photo", "Прикачи снимка", "Прикрепить фото", "Foto anhängen", "Adjuntar foto", "Joindre une photo"],
+  ["Send", "Изпрати", "Отправить", "Senden", "Enviar", "Envoyer"],
+  ["Remove photo", "Премахни снимката", "Удалить фото", "Foto entfernen", "Quitar foto", "Retirer la photo"],
+  ["Photo", "Снимка", "Фото", "Foto", "Foto", "Photo"],
+  ["Send us a message. Our team will reply here.", "Изпратете ни съобщение. Екипът ни ще отговори тук.", "Отправьте нам сообщение. Наша команда ответит здесь.", "Senden Sie uns eine Nachricht. Unser Team antwortet hier.", "Envíanos un mensaje. Nuestro equipo responderá aquí.", "Envoyez-nous un message. Notre équipe vous répondra ici."],
+  ["Could not send the message. Try again.", "Съобщението не беше изпратено. Опитайте отново.", "Не удалось отправить сообщение. Попробуйте ещё раз.", "Die Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.", "No se pudo enviar el mensaje. Inténtalo de nuevo.", "Le message n'a pas pu être envoyé. Réessayez."],
+  ["Too many messages. Try again in a minute.", "Твърде много съобщения. Опитайте след минута.", "Слишком много сообщений. Повторите через минуту.", "Zu viele Nachrichten. Bitte versuchen Sie es in einer Minute erneut.", "Demasiados mensajes. Inténtalo en un minuto.", "Trop de messages. Réessayez dans une minute."],
+  ["Choose an image file.", "Изберете файл със снимка.", "Выберите файл изображения.", "Wählen Sie eine Bilddatei aus.", "Elige un archivo de imagen.", "Choisissez un fichier image."]
 ];
 const columns = { bg: 1, ru: 2, de: 3, es: 4, fr: 5 };
 const keys = new Set(I18N.map((r) => r[0]));
@@ -632,11 +674,136 @@ const loadSessions = async () => {
   $("#live").replaceChildren(...(live || []).map((s) => sessionRow(s.ip, s.user_agent, s.last_active, s.is_current ? tr("This device") : "")));
   $("#history").replaceChildren(...(log || []).map((e) => sessionRow(e.ip, e.user_agent, e.created_at, "")));
 };
+const seen = new Set();
+let channel = null;
+let pendingPhoto = null;
+let previewUrl = "";
+const unread = (on) => $(".nav-item[data-view=support]").classList.toggle("unread", on);
+const resetThread = () => {
+  seen.clear();
+  $("#thread").querySelectorAll(".msg").forEach((n) => n.remove());
+  $("#hint").hidden = false;
+};
+const signed = async (paths) => {
+  if (!paths.length) return {};
+  const { data } = await db.storage.from("support").createSignedUrls(paths, 3600);
+  return Object.fromEntries((data || []).map((x) => [x.path, x.signedUrl]));
+};
+const stamp = (t) => {
+  const d = new Date(t);
+  return d.toDateString() === new Date().toDateString()
+    ? d.toLocaleTimeString(prefs.language, { hour: "2-digit", minute: "2-digit" })
+    : d.toLocaleString(prefs.language, { dateStyle: "short", timeStyle: "short" });
+};
+const bubble = (m, urls) => {
+  const el = document.createElement("div");
+  el.className = "msg " + (m.sender === "user" ? "mine" : "theirs");
+  if (urls[m.image_path]) {
+    const a = Object.assign(document.createElement("a"), { href: urls[m.image_path], target: "_blank", rel: "noopener" });
+    a.append(Object.assign(new Image(), { src: urls[m.image_path], alt: tr("Photo"), loading: "lazy" }));
+    el.append(a);
+  }
+  if (m.body) el.append(cell(m.body));
+  el.append(cell(stamp(m.created_at), "time"));
+  return el;
+};
+const show = async (rows) => {
+  const fresh = rows.filter((m) => !seen.has(m.id));
+  fresh.forEach((m) => seen.add(m.id));
+  const urls = await signed(fresh.filter((m) => m.image_path).map((m) => m.image_path));
+  $("#thread").append(...fresh.map((m) => bubble(m, urls)));
+  $("#hint").hidden = seen.size > 0;
+  $("#thread").scrollTop = $("#thread").scrollHeight;
+};
+const loadSupport = async () => {
+  const { data } = await db.from("support_messages").select("id,sender,body,image_path,created_at").order("created_at", { ascending: true }).limit(200);
+  resetThread();
+  await show(data || []);
+  unread(false);
+  await db.rpc("support_mark_read");
+};
+const startSupport = async () => {
+  const { data } = await db.rpc("support_unread");
+  unread(Number(data) > 0);
+  channel = db
+    .channel("support")
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "support_messages", filter: "user_id=eq." + userId }, async (p) => {
+      if ($("#support").hidden) {
+        if (p.new.sender === "admin") unread(true);
+        return;
+      }
+      await show([p.new]);
+      if (p.new.sender === "admin") await db.rpc("support_mark_read");
+    })
+    .subscribe();
+};
+const stopSupport = () => {
+  if (channel) db.removeChannel(channel);
+  channel = null;
+  resetThread();
+  unread(false);
+};
+const shrink = (file) => new Promise((resolve, reject) => {
+  const img = new Image();
+  img.onload = () => {
+    const k = Math.min(1, 1600 / Math.max(img.width, img.height));
+    const c = Object.assign(document.createElement("canvas"), { width: Math.round(img.width * k), height: Math.round(img.height * k) });
+    c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+    URL.revokeObjectURL(img.src);
+    c.toBlob((b) => (b ? resolve(b) : reject(new Error("blob"))), "image/jpeg", 0.85);
+  };
+  img.onerror = () => reject(new Error("image"));
+  img.src = URL.createObjectURL(file);
+});
+const clearPhoto = () => {
+  pendingPhoto = null;
+  $("#photo").value = "";
+  $("#preview").hidden = true;
+  URL.revokeObjectURL(previewUrl);
+};
+const pickPhoto = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    if (!file.type.startsWith("image/")) throw new Error("type");
+    pendingPhoto = await shrink(file);
+  } catch {
+    clearPhoto();
+    return toast("Choose an image file.");
+  }
+  URL.revokeObjectURL(previewUrl);
+  previewUrl = URL.createObjectURL(pendingPhoto);
+  $("#preview img").src = previewUrl;
+  $("#preview").hidden = false;
+};
+const send = async (e) => {
+  e.preventDefault();
+  const body = $("#msg").value.trim();
+  if (!body && !pendingPhoto) return;
+  $("#send").disabled = true;
+  let path = null;
+  if (pendingPhoto) {
+    path = userId + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + ".jpg";
+    const { error } = await db.storage.from("support").upload(path, pendingPhoto, { contentType: "image/jpeg" });
+    if (error) {
+      $("#send").disabled = false;
+      return toast("Could not send the message. Try again.");
+    }
+  }
+  const { data, error } = await db.from("support_messages").insert({ user_id: userId, sender: "user", body: body || null, image_path: path }).select("id,sender,body,image_path,created_at").single();
+  $("#send").disabled = false;
+  if (error) return toast(error.message.includes("rate_limit") ? "Too many messages. Try again in a minute." : "Could not send the message. Try again.");
+  $("#msg").value = "";
+  $("#msg").style.height = "";
+  clearPhoto();
+  show([data]);
+};
 const afterLogin = async () => {
   await Promise.all([refreshSecurity(), loadPrefs()]);
   if (security.lock_set && security.lock_digits && !unlocked) openLock();
+  startSupport();
 };
-const loaders = { network: loadNetwork, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions };
+const loaders = { network: loadNetwork, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
 const showView = (name) => {
   document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
   if (loaders[name]) loaders[name]();
@@ -674,7 +841,25 @@ $("#yes").addEventListener("click", () => {
 $("#no").addEventListener("click", () => $("#confirm").close());
 document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => showView(b.dataset.go)));
 $("#lock").addEventListener("cancel", (e) => e.preventDefault());
-$("#lock-form").addEventListener("submit", (e) => e.preventDefault());
+$("#attach").addEventListener("click", () => $("#photo").click());
+$("#photo").addEventListener("change", pickPhoto);
+$("#drop").addEventListener("click", clearPhoto);
+$("#composer").addEventListener("submit", send);
+$("#msg").addEventListener("input", (e) => {
+  e.target.style.height = "auto";
+  e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+});
+$("#msg").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey && matchMedia("(pointer: fine)").matches) {
+    e.preventDefault();
+    $("#composer").requestSubmit();
+  }
+});
+if (window.visualViewport) {
+  const fit = () => $("#support").style.setProperty("--kb", Math.max(0, innerHeight - visualViewport.height - visualViewport.offsetTop) + "px");
+  visualViewport.addEventListener("resize", fit);
+  visualViewport.addEventListener("scroll", fit);
+}
 $("#pw-forgot").addEventListener("click", () => $("#reset").showModal());
 $("#delete-open").addEventListener("click", () => (security.withdraw_set ? $("#delete").showModal() : toast(say.no_pin)));
 document.querySelectorAll("#lk-len button").forEach((b) => b.addEventListener("click", () => lockLength(Number(b.dataset.len))));
@@ -734,6 +919,7 @@ db.auth.onAuthStateChange((event, session) => {
     unlocked = false;
     security = { withdraw_set: false, lock_set: false, lock_digits: null };
     $("#lock").close();
+    stopSupport();
   }
   document.querySelectorAll("[data-auth]").forEach((el) => (el.hidden = (el.dataset.auth === "in") !== Boolean(id)));
   profileEmail = session ? session.user.email : "";
