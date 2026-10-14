@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--strong:#fff;--ph:#566079;--bar-bg:rgba(4,6,11,.82);--danger:#ff7b7f;--ring:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16);--gold:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);--out:#1b1b20;--in:rgba(255,255,255,.07);--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
-:root[data-theme=light]{color-scheme:light;--out:#111;--in:#f0f1f4;--bg:#fff;--strong:#111;--ph:#98a0b3;--bar-bg:rgba(255,255,255,.88);--danger:#c42b30;--ring:0 0 0 1px rgba(59,66,82,.45),0 0 14px rgba(59,66,82,.12);--text:#1c1a14;--muted:#5d667a;--silver:rgba(60,70,90,.3);--silver-hi:#3b4252}
+:root{--bg:#000;--strong:#fff;--ph:#566079;--bar-bg:rgba(4,6,11,.82);--danger:#ff7b7f;--ring:0 0 0 1px rgba(207,212,221,.35),0 0 16px rgba(207,212,221,.16);--gold:linear-gradient(90deg,#f3d467,#e4ba3f 55%,#cfa02b);--gold-hi:#ecd48a;--text:#ece6d6;--muted:#8a93a8;--silver:rgba(192,198,210,.24);--silver-hi:#cfd4dd;--bar:68px}
+:root[data-theme=light]{color-scheme:light;--bg:#fff;--strong:#111;--ph:#98a0b3;--bar-bg:rgba(255,255,255,.88);--danger:#c42b30;--ring:0 0 0 1px rgba(59,66,82,.45),0 0 14px rgba(59,66,82,.12);--text:#1c1a14;--muted:#5d667a;--silver:rgba(60,70,90,.3);--silver-hi:#3b4252}
 *{box-sizing:border-box;margin:0}
 html{color-scheme:dark}
 [hidden]{display:none!important}
@@ -97,72 +97,23 @@ main{padding:32px 20px}
 .ios-actions button:active{background:rgba(0,0,0,.08)}
 @keyframes pop{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:none}}
 .chat{position:fixed;inset:var(--bar) 0 var(--kb,0px) 0;z-index:20;display:flex;flex-direction:column;background:var(--bg)}
-.chat-head{display:flex;align-items:center;gap:12px;padding:12px max(16px,calc((100vw - 640px) / 2));border-bottom:1px solid var(--silver)}
-.avatar{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--gold);color:#1a1405}
-.who{display:flex;flex-direction:column;line-height:1.3}
-.who small{font-size:.8125rem;color:var(--muted)}
-.thread{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:16px max(16px,calc((100vw - 640px) / 2))}
+.thread{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:16px max(16px,calc((100vw - 640px) / 2))}
 .hint{margin:auto;text-align:center}
-.day{align-self:center;margin:10px 0 4px;padding:4px 12px;border-radius:999px;background:var(--in);font-size:.75rem;color:var(--muted)}
-.msg{max-width:78%;display:flex;flex-direction:column;gap:6px;padding:10px 14px 8px;border-radius:20px;overflow-wrap:anywhere;white-space:pre-wrap}
-.msg.mine{align-self:flex-end;border-bottom-right-radius:6px;background:var(--out);color:#fff}
-.msg.theirs{align-self:flex-start;border-bottom-left-radius:6px;background:var(--in)}
-.shot{position:relative;display:block;margin:-4px -8px 0;padding:0;border:0;border-radius:14px;background:none;overflow:hidden}
-.shot img{display:block;width:100%;max-height:260px;object-fit:cover}
-.more{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.5);color:#fff;font-size:1.75rem;font-weight:600}
-.time{align-self:flex-end;display:flex;align-items:center;gap:4px;font-size:.6875rem;opacity:.75}
-.ticks{width:18px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.ticks.read{color:var(--gold-hi)}
-.preview{display:flex;gap:10px;padding:10px max(16px,calc((100vw - 640px) / 2)) 0;overflow-x:auto}
-.thumb{position:relative;flex:none}
-.thumb img{display:block;width:56px;height:56px;border-radius:12px;object-fit:cover}
-.thumb button{position:absolute;top:-6px;right:-6px;width:22px;height:22px;padding:0;border:0;border-radius:50%;background:#111;color:#fff;font-size:.9rem;line-height:1}
-.composer{display:flex;align-items:flex-end;gap:8px;padding:10px max(12px,calc((100vw - 640px) / 2)) 12px;border-top:1px solid var(--silver)}
-.composer textarea{flex:1;max-height:120px;padding:11px 16px;resize:none;border:1px solid var(--silver);border-radius:22px;background:var(--in);line-height:1.4}
+.msg{max-width:80%;display:flex;flex-direction:column;gap:4px;padding:10px 12px;border-radius:18px;overflow-wrap:anywhere;white-space:pre-wrap}
+.msg img{display:block;max-width:100%;max-height:260px;border-radius:12px}
+.msg.mine{align-self:flex-end;border-bottom-right-radius:6px;background:var(--gold);color:#1a1405}
+.msg.theirs{align-self:flex-start;border:1px solid var(--silver);border-bottom-left-radius:6px}
+.time{align-self:flex-end;font-size:.75rem;opacity:.65}
+.preview{display:flex;align-items:center;gap:10px;padding:8px max(16px,calc((100vw - 640px) / 2)) 0}
+.preview img{height:56px;border-radius:10px}
+.preview button{width:28px;height:28px;padding:0;border:1px solid var(--silver);border-radius:50%;background:none;line-height:1}
+.composer{display:flex;align-items:flex-end;gap:8px;padding:10px max(12px,calc((100vw - 640px) / 2));border-top:1px solid var(--silver)}
+.composer textarea{flex:1;max-height:120px;padding:11px 16px;resize:none;border:1px solid var(--silver);border-radius:22px;background:transparent;line-height:1.4}
 .composer textarea:focus{outline:0;border-color:var(--silver-hi);box-shadow:var(--ring)}
 .round{flex:none;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--silver);border-radius:50%;background:none;color:var(--muted)}
 .round.gold{border:0;background:var(--gold);color:#1a1405}
 .round:disabled{opacity:.6;cursor:wait}
 .nav-item.unread::after{content:"";display:inline-block;width:8px;height:8px;margin-left:8px;border-radius:50%;background:#e4ba3f}
-#viewer{width:100vw;height:100dvh;max-width:none;max-height:none;padding:0;border:0;border-radius:0;background:#000;overflow:hidden}
-#viewer::backdrop{background:#000}
-.vform{position:absolute;inset:0}
-.vstage{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;touch-action:none}
-#vimg{max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
-.vbtn{position:absolute;display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:1.5rem;line-height:1;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.vclose{top:16px;right:16px}
-.vprev{top:50%;left:12px;transform:translateY(-50%)}
-.vnext{top:50%;right:12px;transform:translateY(-50%)}
-.vcount{position:absolute;top:26px;left:50%;transform:translateX(-50%);color:#fff;font-size:.875rem}
-.kyc{--bg:#fff;--text:#0b0b0f;--strong:#0b0b0f;--muted:#6b7280;--ph:#9aa1ad;--silver:rgba(15,23,42,.14);--silver-hi:#0b0b0f;--ring:0 0 0 3px rgba(11,11,15,.1);color:var(--text)}
-.kyc .cta{background:#0b0b0f;color:#fff}
-.progress{height:4px;border-radius:4px;background:rgba(15,23,42,.1);overflow:hidden}
-.progress i{display:block;width:20%;height:100%;background:var(--gold);transition:width .35s ease}
-.step{display:flex;flex-direction:column;gap:14px}
-.step h2{font-size:1.625rem;font-weight:700;color:var(--strong)}
-.dob{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:10px}
-.cam{position:relative;display:grid;place-items:center;width:min(280px,76vw);aspect-ratio:3/4;margin:4px auto;border:4px solid #0b0b0f;border-radius:50%;background:#e9ebef;overflow:hidden;text-align:center}
-.cam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
-.cam p{position:relative;padding:0 28px}
-.shots{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.shots img{width:64px;height:64px;border:2px solid var(--silver);border-radius:50%;object-fit:cover}
-.shutter{align-self:center;width:72px;height:72px;padding:6px;border:4px solid #0b0b0f;border-radius:50%;background:#fff}
-.shutter::after{content:"";display:block;width:100%;height:100%;border-radius:50%;background:#0b0b0f}
-.link2{align-self:center;padding:8px 14px;border:0;background:none;font-weight:600;text-decoration:underline}
-.slots{display:flex;flex-direction:column;gap:14px}
-.slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:150px;padding:16px;border:1.5px dashed var(--silver);border-radius:16px;color:var(--muted);text-align:center;cursor:pointer}
-.slot img{max-width:100%;max-height:200px;border-radius:12px}
-.review{display:flex;flex-direction:column;border:1px solid var(--silver);border-radius:16px}
-.line{display:flex;justify-content:space-between;gap:12px;padding:14px 16px}
-.line + .line{border-top:1px solid var(--silver)}
-.state{align-items:center;padding-top:40px;text-align:center}
-.state-ico{display:grid;place-items:center;width:88px;height:88px;border-radius:50%;background:rgba(15,23,42,.06)}
-.state-ico svg{width:56px;height:56px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.state[data-state=pending] .state-ico{color:#b7791f}
-.state[data-state=approved] .state-ico{color:#15803d}
-.state[data-state=rejected] .state-ico{color:#b91c1c}
-.reason{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:14px;text-align:left}
-.dock{margin-top:auto;padding-top:8px}
 .info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .info .meta{white-space:normal;overflow-wrap:anywhere}
 .cta.danger{background:transparent;border:1px solid #e5484d;color:var(--danger)}
@@ -186,7 +137,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .eye{display:grid;place-items:center;width:32px;height:32px;padding:0;background:none;border:0;color:var(--muted)}
 .field .eye{position:absolute;top:50%;right:8px;transform:translateY(-50%)}
 .eye:hover{color:var(--silver-hi)}
-.eye svg,.round svg,.avatar svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.eye svg,.round svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .eye .slash{display:none}
 .eye[aria-pressed=true] .slash{display:block}
 .toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
@@ -228,7 +179,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 </section>
 <section class="page stack" id="settings" hidden>
 <div class="group">
-<button class="row" type="button" data-go="kyc"><span>KYC Verification</span><span class="meta" id="kyc-status">Not verified</span></button>
+<button class="row" type="button" data-go="blank">KYC Verification</button>
 <button class="row" type="button" data-go="blank"><span>Two-Factor Authentication (2FA)<small class="note">Google Authenticator</small></span><span class="meta" id="twofa-status">Disabled</span></button>
 <button class="row" type="button" data-go="security">Security settings</button>
 <button class="row" type="button" data-go="appearance">Appearance</button>
@@ -283,64 +234,14 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <section class="page stack screen" id="blank" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
 </section>
-<section class="page stack screen kyc" id="kyc" hidden>
-<button class="back" id="kyc-back" type="button" aria-label="Back">←</button>
-<div class="progress" id="kyc-progress" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><i></i></div>
-<div class="step" data-step="1">
-<h2>Personal details</h2>
-<p class="note">Enter your details exactly as they appear on your document.</p>
-<input id="k-first" data-rule="name" autocomplete="given-name" maxlength="60" placeholder="First name" aria-label="First name">
-<input id="k-middle" data-rule="name" autocomplete="additional-name" maxlength="60" placeholder="Middle name (optional)" aria-label="Middle name (optional)">
-<input id="k-last" data-rule="name" autocomplete="family-name" maxlength="60" placeholder="Last name" aria-label="Last name">
-<p class="note">Date of birth</p>
-<div class="dob">
-<input id="k-day" data-rule="digits" inputmode="numeric" maxlength="2" autocomplete="bday-day" placeholder="Day" aria-label="Day">
-<input id="k-month" data-rule="digits" inputmode="numeric" maxlength="2" autocomplete="bday-month" placeholder="Month" aria-label="Month">
-<input id="k-year" data-rule="digits" inputmode="numeric" maxlength="4" autocomplete="bday-year" placeholder="Year" aria-label="Year">
-</div>
-</div>
-<div class="step" data-step="2" hidden>
-<h2>Face check</h2>
-<p class="note" id="k-prompt">Look straight at the camera</p>
-<div class="cam"><video id="k-video" autoplay playsinline muted></video><p class="note" id="k-nocam" hidden>Camera access is needed for the face check. Tap the button to take a selfie instead.</p></div>
-<div class="shots" id="k-shots"></div>
-<button class="shutter" id="k-snap" type="button" aria-label="Take photo"></button>
-<button class="link2" id="k-retake" type="button" hidden>Retake</button>
-<input id="k-file" type="file" accept="image/*" capture="user" hidden>
-</div>
-<div class="step" data-step="3" hidden>
-<h2>Choose a document</h2>
-<p class="note">Select the document you want to verify with.</p>
-<div class="group" id="k-docs"></div>
-</div>
-<div class="step" data-step="4" hidden>
-<h2>Upload your document</h2>
-<p class="note">Make sure all corners are visible and the text is readable.</p>
-<div class="slots" id="k-slots"></div>
-</div>
-<div class="step" data-step="5" hidden>
-<h2>Review and submit</h2>
-<div class="review" id="k-review"></div>
-<div class="shots" id="k-thumbs"></div>
-</div>
-<div class="step state" data-step="6" id="k-state" hidden>
-<span class="state-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path id="k-glyph" d=""/></svg></span>
-<h2 id="k-state-title"></h2>
-<p class="note" id="k-state-text"></p>
-<div class="reason" id="k-reason" hidden><p class="note">Reason</p><p id="k-reason-text"></p></div>
-<button class="cta" id="k-retry" type="button" hidden>Try again</button>
-</div>
-<div class="dock"><button class="cta" id="k-next" type="button">Continue</button></div>
-</section>
 <section class="chat" id="support" hidden>
-<div class="chat-head"><span class="avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0116 0v2M4 14h2.5v5H5a1 1 0 01-1-1v-4zM20 14h-2.5v5H19a1 1 0 001-1v-4zM18 19a3 3 0 01-3 3h-2"/></svg></span><div class="who"><strong>Support</strong><small>We usually reply within a few hours</small></div></div>
 <div class="thread" id="thread"><p class="note hint" id="hint">Send us a message. Our team will reply here.</p></div>
-<div class="preview" id="preview" hidden></div>
+<div class="preview" id="preview" hidden><img alt=""><button id="drop" type="button" aria-label="Remove photo">×</button></div>
 <form class="composer" id="composer">
 <button class="round" id="attach" type="button" aria-label="Attach photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.5l-8.6 8.6a5.5 5.5 0 01-7.8-7.8l9-9a3.7 3.7 0 015.2 5.2l-9 9a1.9 1.9 0 01-2.6-2.6l8.4-8.4"/></svg></button>
-<input id="photo" type="file" accept="image/*" multiple hidden>
+<input id="photo" type="file" accept="image/*" hidden>
 <textarea id="msg" rows="1" maxlength="2000" placeholder="Message" aria-label="Message"></textarea>
-<button class="round gold" id="send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+<button class="round gold" id="send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 </form>
 </section>
 </main>
@@ -402,15 +303,6 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <div class="pin" id="lock-pin"></div>
 </form>
 </dialog>
-<dialog id="viewer" aria-label="Photo">
-<form class="vform">
-<div class="vstage" id="vstage"><img id="vimg" alt="Photo" draggable="false"></div>
-<button class="vbtn vclose" id="vclose" type="button" aria-label="Close">×</button>
-<button class="vbtn vprev" id="vprev" type="button" aria-label="Previous">‹</button>
-<button class="vbtn vnext" id="vnext" type="button" aria-label="Next">›</button>
-<span class="vcount" id="vcount"></span>
-</form>
-</dialog>
 <dialog id="confirm" aria-label="Log Out">
 <form class="panel">
 <div class="ios-body"><p class="ios-title">Log Out</p><p class="ios-msg">Are you sure you want to log out of your account?</p></div>
@@ -422,7 +314,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <script>
 const db = window.supabase.createClient("https://cskguqtpvvclcphuarkr.supabase.co", "sb_publishable_I2_oFR8ZlJWvNqI17m5aEg_Mlq2gzYp");
 const $ = (s) => document.querySelector(s);
-const strip = { email: /[^A-Za-z0-9@._%+-]/g, password: /[^\x21-\x7E]/g, digits: /\D/g, name: /[^\p{L} '’-]/gu };
+const strip = { email: /[^A-Za-z0-9@._%+-]/g, password: /[^\x21-\x7E]/g, digits: /\D/g };
 const checks = {
   email: (v) => /^[\w.%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(v) ? "" : "Enter a valid email address.",
   password: (v) => v.length < 8 ? "Password must be at least 8 characters." : /[A-Z]/.test(v) && /[a-z]/.test(v) ? "" : "Password needs an uppercase and a lowercase letter.",
@@ -684,63 +576,7 @@ const I18N = [
   ["Send us a message. Our team will reply here.", "Изпратете ни съобщение. Екипът ни ще отговори тук.", "Отправьте нам сообщение. Наша команда ответит здесь.", "Senden Sie uns eine Nachricht. Unser Team antwortet hier.", "Envíanos un mensaje. Nuestro equipo responderá aquí.", "Envoyez-nous un message. Notre équipe vous répondra ici."],
   ["Could not send the message. Try again.", "Съобщението не беше изпратено. Опитайте отново.", "Не удалось отправить сообщение. Попробуйте ещё раз.", "Die Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.", "No se pudo enviar el mensaje. Inténtalo de nuevo.", "Le message n'a pas pu être envoyé. Réessayez."],
   ["Too many messages. Try again in a minute.", "Твърде много съобщения. Опитайте след минута.", "Слишком много сообщений. Повторите через минуту.", "Zu viele Nachrichten. Bitte versuchen Sie es in einer Minute erneut.", "Demasiados mensajes. Inténtalo en un minuto.", "Trop de messages. Réessayez dans une minute."],
-  ["Choose an image file.", "Изберете файл със снимка.", "Выберите файл изображения.", "Wählen Sie eine Bilddatei aus.", "Elige un archivo de imagen.", "Choisissez un fichier image."],
-  ["We usually reply within a few hours", "Обикновено отговаряме в рамките на няколко часа", "Обычно отвечаем в течение нескольких часов", "Wir antworten in der Regel innerhalb weniger Stunden", "Normalmente respondemos en pocas horas", "Nous répondons généralement en quelques heures"],
-  ["Today", "Днес", "Сегодня", "Heute", "Hoy", "Aujourd'hui"],
-  ["Yesterday", "Вчера", "Вчера", "Gestern", "Ayer", "Hier"],
-  ["You can send up to 5 photos at once.", "Можете да изпратите до 5 снимки наведнъж.", "Можно отправить до 5 фото за раз.", "Sie können bis zu 5 Fotos auf einmal senden.", "Puedes enviar hasta 5 fotos a la vez.", "Vous pouvez envoyer jusqu'à 5 photos à la fois."],
-  ["Personal details", "Лични данни", "Личные данные", "Persönliche Daten", "Datos personales", "Informations personnelles"],
-  ["Enter your details exactly as they appear on your document.", "Въведете данните си точно както са в документа ви.", "Введите данные точно так, как они указаны в документе.", "Geben Sie Ihre Daten genau so ein, wie sie in Ihrem Dokument stehen.", "Introduce tus datos exactamente como aparecen en tu documento.", "Saisissez vos informations exactement comme sur votre document."],
-  ["First name", "Име", "Имя", "Vorname", "Nombre", "Prénom"],
-  ["Middle name (optional)", "Презиме (по желание)", "Отчество (необязательно)", "Zweiter Vorname (optional)", "Segundo nombre (opcional)", "Deuxième prénom (facultatif)"],
-  ["Last name", "Фамилия", "Фамилия", "Nachname", "Apellido", "Nom de famille"],
-  ["Date of birth", "Дата на раждане", "Дата рождения", "Geburtsdatum", "Fecha de nacimiento", "Date de naissance"],
-  ["Day", "Ден", "День", "Tag", "Día", "Jour"],
-  ["Month", "Месец", "Месяц", "Monat", "Mes", "Mois"],
-  ["Year", "Година", "Год", "Jahr", "Año", "Année"],
-  ["Continue", "Продължи", "Продолжить", "Weiter", "Continuar", "Continuer"],
-  ["Face check", "Проверка на лицето", "Проверка лица", "Gesichtsprüfung", "Verificación facial", "Vérification du visage"],
-  ["Look straight at the camera", "Гледайте право в камерата", "Смотрите прямо в камеру", "Schauen Sie direkt in die Kamera", "Mira directamente a la cámara", "Regardez droit vers la caméra"],
-  ["Turn your head slightly to the left", "Обърнете леко главата наляво", "Слегка поверните голову налево", "Drehen Sie den Kopf leicht nach links", "Gira la cabeza ligeramente a la izquierda", "Tournez légèrement la tête vers la gauche"],
-  ["Turn your head slightly to the right", "Обърнете леко главата надясно", "Слегка поверните голову направо", "Drehen Sie den Kopf leicht nach rechts", "Gira la cabeza ligeramente a la derecha", "Tournez légèrement la tête vers la droite"],
-  ["Camera access is needed for the face check. Tap the button to take a selfie instead.", "За проверката на лицето е нужен достъп до камерата. Натиснете бутона, за да направите селфи.", "Для проверки лица нужен доступ к камере. Нажмите кнопку, чтобы сделать селфи.", "Für die Gesichtsprüfung wird Kamerazugriff benötigt. Tippen Sie auf die Schaltfläche, um stattdessen ein Selfie aufzunehmen.", "Se necesita acceso a la cámara para la verificación facial. Toca el botón para hacerte un selfie.", "L'accès à la caméra est nécessaire pour la vérification du visage. Appuyez sur le bouton pour prendre un selfie."],
-  ["Retake", "Направи отново", "Переснять", "Erneut aufnehmen", "Repetir", "Reprendre"],
-  ["Choose a document", "Изберете документ", "Выберите документ", "Dokument auswählen", "Elige un documento", "Choisissez un document"],
-  ["Select the document you want to verify with.", "Изберете документа, с който искате да се верифицирате.", "Выберите документ для верификации.", "Wählen Sie das Dokument für die Verifizierung.", "Selecciona el documento con el que quieres verificarte.", "Sélectionnez le document pour la vérification."],
-  ["ID card", "Лична карта", "Удостоверение личности", "Personalausweis", "Documento de identidad", "Carte d'identité"],
-  ["Passport", "Паспорт", "Паспорт", "Reisepass", "Pasaporte", "Passeport"],
-  ["Driver's license", "Шофьорска книжка", "Водительские права", "Führerschein", "Permiso de conducir", "Permis de conduire"],
-  ["Residence permit", "Разрешение за пребиваване", "Вид на жительство", "Aufenthaltstitel", "Permiso de residencia", "Titre de séjour"],
-  ["Birth certificate", "Акт за раждане", "Свидетельство о рождении", "Geburtsurkunde", "Acta de nacimiento", "Acte de naissance"],
-  ["Proof of address", "Документ за адрес", "Подтверждение адреса", "Adressnachweis", "Comprobante de domicilio", "Justificatif de domicile"],
-  ["Other document", "Друг документ", "Другой документ", "Anderes Dokument", "Otro documento", "Autre document"],
-  ["Upload your document", "Качете документа си", "Загрузите документ", "Dokument hochladen", "Sube tu documento", "Téléversez votre document"],
-  ["Make sure all corners are visible and the text is readable.", "Уверете се, че всички ъгли се виждат и текстът се чете.", "Убедитесь, что все углы видны, а текст читаем.", "Achten Sie darauf, dass alle Ecken sichtbar und der Text lesbar ist.", "Asegúrate de que se vean todas las esquinas y el texto sea legible.", "Assurez-vous que tous les coins sont visibles et que le texte est lisible."],
-  ["Front side", "Предна страна", "Лицевая сторона", "Vorderseite", "Anverso", "Recto"],
-  ["Back side", "Задна страна", "Оборотная сторона", "Rückseite", "Reverso", "Verso"],
-  ["Document photo", "Снимка на документа", "Фото документа", "Dokumentfoto", "Foto del documento", "Photo du document"],
-  ["Upload photo", "Качи снимка", "Загрузить фото", "Foto hochladen", "Subir foto", "Téléverser une photo"],
-  ["Review and submit", "Преглед и изпращане", "Проверка и отправка", "Prüfen und senden", "Revisar y enviar", "Vérifier et envoyer"],
-  ["Full name", "Пълно име", "Полное имя", "Vollständiger Name", "Nombre completo", "Nom complet"],
-  ["Document", "Документ", "Документ", "Dokument", "Documento", "Document"],
-  ["Submit for review", "Изпрати за преглед", "Отправить на проверку", "Zur Prüfung senden", "Enviar para revisión", "Envoyer pour vérification"],
-  ["Under review", "В процес на преглед", "На проверке", "In Prüfung", "En revisión", "En cours de vérification"],
-  ["We are reviewing your documents. Check back here for the result.", "Преглеждаме документите ви. Върнете се тук за резултата.", "Мы проверяем ваши документы. Результат появится здесь.", "Wir prüfen Ihre Dokumente. Das Ergebnis sehen Sie hier.", "Estamos revisando tus documentos. Vuelve aquí para ver el resultado.", "Nous examinons vos documents. Revenez ici pour le résultat."],
-  ["Verified", "Верифициран", "Подтверждён", "Verifiziert", "Verificado", "Vérifié"],
-  ["Your identity has been verified.", "Самоличността ви е потвърдена.", "Ваша личность подтверждена.", "Ihre Identität wurde bestätigt.", "Tu identidad ha sido verificada.", "Votre identité a été vérifiée."],
-  ["Verification failed", "Верификацията не е успешна", "Верификация не пройдена", "Verifizierung fehlgeschlagen", "Verificación fallida", "Échec de la vérification"],
-  ["Reason", "Причина", "Причина", "Grund", "Motivo", "Motif"],
-  ["Try again", "Опитайте отново", "Попробовать снова", "Erneut versuchen", "Intentar de nuevo", "Réessayer"],
-  ["Not verified", "Не е верифициран", "Не подтверждён", "Nicht verifiziert", "No verificado", "Non vérifié"],
-  ["In review", "В преглед", "На проверке", "In Prüfung", "En revisión", "En vérification"],
-  ["Rejected", "Отхвърлена", "Отклонена", "Abgelehnt", "Rechazada", "Refusée"],
-  ["Enter your first name.", "Въведете името си.", "Введите ваше имя.", "Geben Sie Ihren Vornamen ein.", "Introduce tu nombre.", "Saisissez votre prénom."],
-  ["Enter your last name.", "Въведете фамилията си.", "Введите вашу фамилию.", "Geben Sie Ihren Nachnamen ein.", "Introduce tu apellido.", "Saisissez votre nom de famille."],
-  ["Enter a valid date of birth.", "Въведете валидна дата на раждане.", "Введите корректную дату рождения.", "Geben Sie ein gültiges Geburtsdatum ein.", "Introduce una fecha de nacimiento válida.", "Saisissez une date de naissance valide."],
-  ["You must be at least 18 years old.", "Трябва да сте навършили 18 години.", "Вам должно быть не менее 18 лет.", "Sie müssen mindestens 18 Jahre alt sein.", "Debes tener al menos 18 años.", "Vous devez avoir au moins 18 ans."],
-  ["Take both photos to continue.", "Направете и двете снимки, за да продължите.", "Сделайте оба фото, чтобы продолжить.", "Nehmen Sie beide Fotos auf, um fortzufahren.", "Haz ambas fotos para continuar.", "Prenez les deux photos pour continuer."],
-  ["Add all document photos to continue.", "Добавете всички снимки на документа, за да продължите.", "Добавьте все фото документа, чтобы продолжить.", "Fügen Sie alle Dokumentfotos hinzu, um fortzufahren.", "Añade todas las fotos del documento para continuar.", "Ajoutez toutes les photos du document pour continuer."],
-  ["Could not submit. Try again.", "Неуспешно изпращане. Опитайте отново.", "Не удалось отправить. Попробуйте ещё раз.", "Senden fehlgeschlagen. Bitte erneut versuchen.", "No se pudo enviar. Inténtalo de nuevo.", "Échec de l'envoi. Réessayez."]
+  ["Choose an image file.", "Изберете файл със снимка.", "Выберите файл изображения.", "Wählen Sie eine Bilddatei aus.", "Elige un archivo de imagen.", "Choisissez un fichier image."]
 ];
 const columns = { bg: 1, ru: 2, de: 3, es: 4, fr: 5 };
 const keys = new Set(I18N.map((r) => r[0]));
@@ -820,9 +656,8 @@ applyPrefs();
 translateDom();
 syncAppearance();
 const loadSettings = async () => {
-  const [{ data }, { data: k }] = await Promise.all([db.auth.mfa.listFactors(), db.from("kyc_requests").select("status").order("created_at", { ascending: false }).limit(1).maybeSingle()]);
+  const { data } = await db.auth.mfa.listFactors();
   $("#twofa-status").textContent = data && data.totp && data.totp.length ? tr("Enabled") : tr("Disabled");
-  $("#kyc-status").textContent = tr(kycLabel[k ? k.status : "none"]);
 };
 const sessionRow = (ip, ua, when, tag) => {
   const li = document.createElement("li");
@@ -841,13 +676,12 @@ const loadSessions = async () => {
 };
 const seen = new Set();
 let channel = null;
-let queued = [];
-let lastDay = "";
+let pendingPhoto = null;
+let previewUrl = "";
 const unread = (on) => $(".nav-item[data-view=support]").classList.toggle("unread", on);
 const resetThread = () => {
   seen.clear();
-  lastDay = "";
-  $("#thread").querySelectorAll(".msg,.day").forEach((n) => n.remove());
+  $("#thread").querySelectorAll(".msg").forEach((n) => n.remove());
   $("#hint").hidden = false;
 };
 const signed = async (paths) => {
@@ -855,63 +689,34 @@ const signed = async (paths) => {
   const { data } = await db.storage.from("support").createSignedUrls(paths, 3600);
   return Object.fromEntries((data || []).map((x) => [x.path, x.signedUrl]));
 };
-const dayName = (d) => {
-  const n = new Date();
-  if (d.toDateString() === n.toDateString()) return tr("Today");
-  n.setDate(n.getDate() - 1);
-  return d.toDateString() === n.toDateString() ? tr("Yesterday") : d.toLocaleDateString(prefs.language, { day: "numeric", month: "long" });
-};
-const ticks = (read) => {
-  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  s.setAttribute("viewBox", "0 0 18 12");
-  s.setAttribute("class", read ? "ticks read" : "ticks");
-  s.setAttribute("role", "img");
-  s.setAttribute("aria-label", read ? "Seen" : "Sent");
-  s.innerHTML = read ? '<path d="M1 6.5l3 3 7-7.5M6 6.5l3 3 7-7.5"/>' : '<path d="M3.5 6.5l3 3 7-7.5"/>';
-  return s;
+const stamp = (t) => {
+  const d = new Date(t);
+  return d.toDateString() === new Date().toDateString()
+    ? d.toLocaleTimeString(prefs.language, { hour: "2-digit", minute: "2-digit" })
+    : d.toLocaleString(prefs.language, { dateStyle: "short", timeStyle: "short" });
 };
 const bubble = (m, urls) => {
   const el = document.createElement("div");
-  const photos = (m.image_paths || []).map((p) => urls[p]).filter(Boolean);
   el.className = "msg " + (m.sender === "user" ? "mine" : "theirs");
-  el.dataset.id = m.id;
-  if (photos.length) {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "shot";
-    b.setAttribute("aria-label", tr("Photo"));
-    b.append(Object.assign(new Image(), { src: photos[0], alt: tr("Photo") }));
-    if (photos.length > 1) b.append(cell("+" + (photos.length - 1), "more"));
-    b.addEventListener("click", () => openViewer(photos, 0));
-    el.append(b);
+  if (urls[m.image_path]) {
+    const a = Object.assign(document.createElement("a"), { href: urls[m.image_path], target: "_blank", rel: "noopener" });
+    a.append(Object.assign(new Image(), { src: urls[m.image_path], alt: tr("Photo"), loading: "lazy" }));
+    el.append(a);
   }
   if (m.body) el.append(cell(m.body));
-  const t = cell("", "time");
-  t.append(cell(new Date(m.created_at).toLocaleTimeString(prefs.language, { hour: "2-digit", minute: "2-digit" })));
-  if (m.sender === "user") t.append(ticks(Boolean(m.read_at)));
-  el.append(t);
+  el.append(cell(stamp(m.created_at), "time"));
   return el;
 };
 const show = async (rows) => {
   const fresh = rows.filter((m) => !seen.has(m.id));
   fresh.forEach((m) => seen.add(m.id));
-  const urls = await signed(fresh.flatMap((m) => m.image_paths || []));
-  const nodes = [];
-  fresh.forEach((m) => {
-    const d = new Date(m.created_at);
-    if (d.toDateString() !== lastDay) {
-      lastDay = d.toDateString();
-      nodes.push(cell(dayName(d), "day"));
-    }
-    nodes.push(bubble(m, urls));
-  });
-  $("#thread").append(...nodes);
+  const urls = await signed(fresh.filter((m) => m.image_path).map((m) => m.image_path));
+  $("#thread").append(...fresh.map((m) => bubble(m, urls)));
   $("#hint").hidden = seen.size > 0;
   $("#thread").scrollTop = $("#thread").scrollHeight;
 };
-const COLUMNS = "id,sender,body,image_paths,created_at,read_at";
 const loadSupport = async () => {
-  const { data } = await db.from("support_messages").select(COLUMNS).order("created_at", { ascending: true }).limit(200);
+  const { data } = await db.from("support_messages").select("id,sender,body,image_path,created_at").order("created_at", { ascending: true }).limit(200);
   resetThread();
   await show(data || []);
   unread(false);
@@ -920,20 +725,15 @@ const loadSupport = async () => {
 const startSupport = async () => {
   const { data } = await db.rpc("support_unread");
   unread(Number(data) > 0);
-  const filter = "user_id=eq." + userId;
   channel = db
     .channel("support")
-    .on("postgres_changes", { event: "INSERT", schema: "public", table: "support_messages", filter }, async (p) => {
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "support_messages", filter: "user_id=eq." + userId }, async (p) => {
       if ($("#support").hidden) {
         if (p.new.sender === "admin") unread(true);
         return;
       }
       await show([p.new]);
       if (p.new.sender === "admin") await db.rpc("support_mark_read");
-    })
-    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "support_messages", filter }, (p) => {
-      const old = $('.msg[data-id="' + p.new.id + '"] .ticks');
-      if (old && p.new.read_at) old.replaceWith(ticks(true));
     })
     .subscribe();
 };
@@ -943,11 +743,10 @@ const stopSupport = () => {
   resetThread();
   unread(false);
 };
-const MAX_PHOTOS = 5;
-const shrink = (file, limit = 1600) => new Promise((resolve, reject) => {
+const shrink = (file) => new Promise((resolve, reject) => {
   const img = new Image();
   img.onload = () => {
-    const k = Math.min(1, limit / Math.max(img.width, img.height));
+    const k = Math.min(1, 1600 / Math.max(img.width, img.height));
     const c = Object.assign(document.createElement("canvas"), { width: Math.round(img.width * k), height: Math.round(img.height * k) });
     c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
     URL.revokeObjectURL(img.src);
@@ -956,305 +755,57 @@ const shrink = (file, limit = 1600) => new Promise((resolve, reject) => {
   img.onerror = () => reject(new Error("image"));
   img.src = URL.createObjectURL(file);
 });
-const renderPreview = () => {
-  $("#preview").hidden = queued.length === 0;
-  $("#preview").replaceChildren(...queued.map((p, i) => {
-    const box = document.createElement("div");
-    const x = Object.assign(document.createElement("button"), { type: "button", textContent: "×" });
-    box.className = "thumb";
-    x.setAttribute("aria-label", tr("Remove photo"));
-    x.addEventListener("click", () => {
-      URL.revokeObjectURL(p.url);
-      queued.splice(i, 1);
-      renderPreview();
-    });
-    box.append(Object.assign(new Image(), { src: p.url, alt: "" }), x);
-    return box;
-  }));
+const clearPhoto = () => {
+  pendingPhoto = null;
+  $("#photo").value = "";
+  $("#preview").hidden = true;
+  URL.revokeObjectURL(previewUrl);
 };
-const clearPhotos = () => {
-  queued.forEach((p) => URL.revokeObjectURL(p.url));
-  queued = [];
-  renderPreview();
-};
-const pickPhotos = async (e) => {
-  const files = Array.from(e.target.files);
-  e.target.value = "";
-  if (!files.length) return;
-  if (files.some((f) => !f.type.startsWith("image/"))) return toast("Choose an image file.");
-  if (queued.length + files.length > MAX_PHOTOS) return toast("You can send up to 5 photos at once.");
+const pickPhoto = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
   try {
-    const blobs = await Promise.all(files.map((f) => shrink(f)));
-    queued.push(...blobs.map((blob) => ({ blob, url: URL.createObjectURL(blob) })));
+    if (!file.type.startsWith("image/")) throw new Error("type");
+    pendingPhoto = await shrink(file);
   } catch {
+    clearPhoto();
     return toast("Choose an image file.");
   }
-  renderPreview();
+  URL.revokeObjectURL(previewUrl);
+  previewUrl = URL.createObjectURL(pendingPhoto);
+  $("#preview img").src = previewUrl;
+  $("#preview").hidden = false;
 };
 const send = async (e) => {
   e.preventDefault();
   const body = $("#msg").value.trim();
-  if (!body && !queued.length) return;
+  if (!body && !pendingPhoto) return;
   $("#send").disabled = true;
-  const stem = userId + "/" + Date.now() + "-";
-  const paths = queued.map((_, i) => stem + i + "-" + Math.random().toString(36).slice(2, 8) + ".jpg");
-  const ups = await Promise.all(queued.map((p, i) => db.storage.from("support").upload(paths[i], p.blob, { contentType: "image/jpeg" })));
-  if (ups.some((u) => u.error)) {
-    $("#send").disabled = false;
-    return toast("Could not send the message. Try again.");
+  let path = null;
+  if (pendingPhoto) {
+    path = userId + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + ".jpg";
+    const { error } = await db.storage.from("support").upload(path, pendingPhoto, { contentType: "image/jpeg" });
+    if (error) {
+      $("#send").disabled = false;
+      return toast("Could not send the message. Try again.");
+    }
   }
-  const { data, error } = await db.from("support_messages").insert({ user_id: userId, sender: "user", body: body || null, image_paths: paths.length ? paths : null }).select(COLUMNS).single();
+  const { data, error } = await db.from("support_messages").insert({ user_id: userId, sender: "user", body: body || null, image_path: path }).select("id,sender,body,image_path,created_at").single();
   $("#send").disabled = false;
   if (error) return toast(error.message.includes("rate_limit") ? "Too many messages. Try again in a minute." : "Could not send the message. Try again.");
   $("#msg").value = "";
   $("#msg").style.height = "";
-  clearPhotos();
+  clearPhoto();
   show([data]);
-};
-const vw = { list: [], i: 0, s: 1, x: 0, y: 0, pts: new Map(), pinch: 0, start: 0, tap: 0 };
-const vpaint = () => ($("#vimg").style.transform = "translate(" + vw.x + "px," + vw.y + "px) scale(" + vw.s + ")");
-const vzoom = (s) => {
-  vw.s = Math.min(5, Math.max(1, s));
-  if (vw.s === 1) vw.x = vw.y = 0;
-  vpaint();
-};
-const vgo = (i) => {
-  vw.i = (i + vw.list.length) % vw.list.length;
-  vw.x = vw.y = 0;
-  vw.s = 1;
-  $("#vimg").src = vw.list[vw.i];
-  $("#vcount").textContent = vw.list.length > 1 ? vw.i + 1 + "/" + vw.list.length : "";
-  $("#vprev").hidden = $("#vnext").hidden = vw.list.length < 2;
-  vpaint();
-};
-const openViewer = (urls, i = 0) => {
-  vw.list = urls;
-  vgo(i);
-  $("#viewer").showModal();
-};
-const vgap = () => {
-  const [a, b] = [...vw.pts.values()];
-  return Math.hypot(a.x - b.x, a.y - b.y);
-};
-const kycLabel = { none: "Not verified", pending: "In review", approved: "Verified", rejected: "Rejected" };
-const docTypes = [["id_card", "ID card"], ["passport", "Passport"], ["drivers_license", "Driver's license"], ["residence_permit", "Residence permit"], ["birth_certificate", "Birth certificate"], ["proof_of_address", "Proof of address"], ["other", "Other document"]];
-const twoSided = ["id_card", "drivers_license", "residence_permit"];
-const kyc = { step: 1, stream: null, faces: [], turn: "left", docType: "", docs: [] };
-const need = () => (twoSided.includes(kyc.docType) ? 2 : 1);
-const camOff = () => {
-  if (kyc.stream) kyc.stream.getTracks().forEach((t) => t.stop());
-  kyc.stream = null;
-  $("#k-video").srcObject = null;
-};
-const camOn = async () => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
-    if (kyc.step !== 2) return stream.getTracks().forEach((t) => t.stop());
-    kyc.stream = stream;
-    $("#k-video").srcObject = stream;
-    $("#k-nocam").hidden = true;
-  } catch {
-    $("#k-nocam").hidden = false;
-  }
-};
-const renderFaces = () => {
-  const n = kyc.faces.length;
-  $("#k-prompt").hidden = n === 2;
-  $("#k-prompt").textContent = tr(n === 0 ? "Look straight at the camera" : kyc.turn === "left" ? "Turn your head slightly to the left" : "Turn your head slightly to the right");
-  $("#k-shots").replaceChildren(...kyc.faces.map((f) => Object.assign(new Image(), { src: f.url, alt: "" })));
-  $("#k-snap").hidden = n === 2;
-  $("#k-retake").hidden = n === 0;
-};
-const addFace = (blob) => {
-  kyc.faces.push({ blob, url: URL.createObjectURL(blob) });
-  renderFaces();
-};
-const snapFace = () => {
-  const v = $("#k-video");
-  if (!kyc.stream || !v.videoWidth) return $("#k-file").click();
-  const k = Math.min(1, 1280 / Math.max(v.videoWidth, v.videoHeight));
-  const c = Object.assign(document.createElement("canvas"), { width: Math.round(v.videoWidth * k), height: Math.round(v.videoHeight * k) });
-  c.getContext("2d").drawImage(v, 0, 0, c.width, c.height);
-  c.toBlob((b) => b && addFace(b), "image/jpeg", 0.9);
-};
-const pickFace = async (e) => {
-  const f = e.target.files[0];
-  e.target.value = "";
-  if (!f) return;
-  try {
-    addFace(await shrink(f, 1280));
-  } catch {
-    toast("Choose an image file.");
-  }
-};
-const retakeFaces = () => {
-  kyc.faces.forEach((f) => URL.revokeObjectURL(f.url));
-  kyc.faces = [];
-  renderFaces();
-};
-const renderDocs = () => {
-  $("#k-docs").replaceChildren(...docTypes.map(([code, label]) => {
-    const b = Object.assign(document.createElement("button"), { type: "button", className: "row", textContent: tr(label) });
-    b.addEventListener("click", () => {
-      kyc.docType = code;
-      kyc.docs.forEach((d) => d && URL.revokeObjectURL(d.url));
-      kyc.docs = [];
-      kycShow(4);
-    });
-    return b;
-  }));
-};
-const renderSlots = () => {
-  const labels = twoSided.includes(kyc.docType) ? ["Front side", "Back side"] : ["Document photo"];
-  $("#k-slots").replaceChildren(...labels.map((label, i) => {
-    const slot = document.createElement("label");
-    const input = Object.assign(document.createElement("input"), { type: "file", accept: "image/*", hidden: true });
-    const doc = kyc.docs[i];
-    slot.className = "slot";
-    if (doc) slot.append(Object.assign(new Image(), { src: doc.url, alt: "" }));
-    slot.append(cell(tr(doc ? "Retake" : label)));
-    if (!doc) slot.append(cell(tr("Upload photo")));
-    input.addEventListener("change", async () => {
-      const f = input.files[0];
-      if (!f) return;
-      try {
-        const blob = await shrink(f, 2000);
-        if (kyc.docs[i]) URL.revokeObjectURL(kyc.docs[i].url);
-        kyc.docs[i] = { blob, url: URL.createObjectURL(blob) };
-        renderSlots();
-      } catch {
-        toast("Choose an image file.");
-      }
-    });
-    slot.append(input);
-    return slot;
-  }));
-};
-const renderReview = () => {
-  const v = (id) => $(id).value.trim();
-  const name = [v("#k-first"), v("#k-middle"), v("#k-last")].filter(Boolean).join(" ");
-  const born = [v("#k-day").padStart(2, "0"), v("#k-month").padStart(2, "0"), v("#k-year")].join(".");
-  const type = docTypes.find((d) => d[0] === kyc.docType)[1];
-  $("#k-review").replaceChildren(...[["Full name", name], ["Date of birth", born], ["Document", tr(type)]].map(([k, val]) => {
-    const line = cell("", "line");
-    line.append(cell(tr(k), "note"), cell(val));
-    return line;
-  }));
-  $("#k-thumbs").replaceChildren(...[...kyc.faces, ...kyc.docs].map((p) => Object.assign(new Image(), { src: p.url, alt: "" })));
-};
-const kycShow = (n) => {
-  kyc.step = n;
-  document.querySelectorAll("#kyc .step").forEach((p) => (p.hidden = Number(p.dataset.step) !== n));
-  $("#kyc-progress").hidden = n > 5;
-  $("#kyc-progress").setAttribute("aria-valuenow", Math.min(n, 5));
-  $("#kyc-progress i").style.width = Math.min(n, 5) * 20 + "%";
-  $("#k-next").hidden = n === 3 || n === 6;
-  $("#k-next").disabled = false;
-  $("#k-next").textContent = tr(n === 5 ? "Submit for review" : "Continue");
-  if (n === 2) {
-    renderFaces();
-    camOn();
-  } else camOff();
-  if (n === 3) renderDocs();
-  if (n === 4) renderSlots();
-  if (n === 5) renderReview();
-};
-const kycReset = () => {
-  [...kyc.faces, ...kyc.docs].forEach((p) => p && URL.revokeObjectURL(p.url));
-  Object.assign(kyc, { faces: [], turn: Math.random() < 0.5 ? "left" : "right", docType: "", docs: [] });
-  document.querySelectorAll("#kyc .step input").forEach((i) => {
-    i.value = "";
-    i.classList.remove("bad");
-  });
-};
-const kycDetails = () => {
-  const [first, last, day, month, year] = ["#k-first", "#k-last", "#k-day", "#k-month", "#k-year"].map((id) => $(id).value.trim());
-  const flag = (...ids) => ids.forEach((id) => $(id).classList.add("bad"));
-  const nameOk = (v) => /^[\p{L}][\p{L} '’-]*$/u.test(v);
-  if (!nameOk(first)) {
-    flag("#k-first");
-    toast("Enter your first name.");
-    return false;
-  }
-  if (!nameOk(last)) {
-    flag("#k-last");
-    toast("Enter your last name.");
-    return false;
-  }
-  const d = Number(day);
-  const m = Number(month);
-  const y = Number(year);
-  const born = new Date(y, m - 1, d);
-  if (year.length !== 4 || y < 1900 || born.getFullYear() !== y || born.getMonth() !== m - 1 || born.getDate() !== d || born > new Date()) {
-    flag("#k-day", "#k-month", "#k-year");
-    toast("Enter a valid date of birth.");
-    return false;
-  }
-  if (new Date(y + 18, m - 1, d) > new Date()) {
-    flag("#k-day", "#k-month", "#k-year");
-    toast("You must be at least 18 years old.");
-    return false;
-  }
-  return true;
-};
-const statusView = (status, reason) => {
-  const text = { pending: ["Under review", "We are reviewing your documents. Check back here for the result."], approved: ["Verified", "Your identity has been verified."], rejected: ["Verification failed", ""] }[status];
-  $("#k-state").dataset.state = status;
-  $("#k-glyph").setAttribute("d", { pending: "M12 7v5l3 2", approved: "M7.5 12.5l3 3 6-7", rejected: "M8.5 8.5l7 7M15.5 8.5l-7 7" }[status]);
-  $("#k-state-title").textContent = tr(text[0]);
-  $("#k-state-text").textContent = tr(text[1]);
-  $("#k-state-text").hidden = !text[1];
-  $("#k-reason").hidden = status !== "rejected" || !reason;
-  $("#k-reason-text").textContent = reason || "";
-  $("#k-retry").hidden = status !== "rejected";
-  kycShow(6);
-};
-const loadKyc = async () => {
-  const { data } = await db.from("kyc_requests").select("status,reason").order("created_at", { ascending: false }).limit(1).maybeSingle();
-  if (data) return statusView(data.status, data.reason);
-  kycReset();
-  kycShow(1);
-};
-const submitKyc = async () => {
-  $("#k-next").disabled = true;
-  const stem = userId + "/" + Date.now() + "-";
-  const parts = [...kyc.faces.map((p, i) => ["f" + i, p.blob]), ...kyc.docs.map((p, i) => ["d" + i, p.blob])];
-  const paths = parts.map(([k]) => stem + k + "-" + Math.random().toString(36).slice(2, 8) + ".jpg");
-  const ups = await Promise.all(parts.map(([, b], i) => db.storage.from("kyc").upload(paths[i], b, { contentType: "image/jpeg" })));
-  const fail = (m) => {
-    $("#k-next").disabled = false;
-    toast(m);
-  };
-  if (ups.some((u) => u.error)) return fail("Could not submit. Try again.");
-  const v = (id) => $(id).value.trim();
-  const { error } = await db.from("kyc_requests").insert({
-    first_name: v("#k-first"),
-    middle_name: v("#k-middle") || null,
-    last_name: v("#k-last"),
-    birth_date: v("#k-year") + "-" + v("#k-month").padStart(2, "0") + "-" + v("#k-day").padStart(2, "0"),
-    doc_type: kyc.docType,
-    face_paths: paths.slice(0, kyc.faces.length),
-    doc_paths: paths.slice(kyc.faces.length)
-  });
-  if (error) return fail(error.message.includes("underage") ? "You must be at least 18 years old." : "Could not submit. Try again.");
-  kycReset();
-  statusView("pending");
-};
-const kycNext = async () => {
-  if (kyc.step === 1 && kycDetails()) return kycShow(2);
-  if (kyc.step === 2) return kyc.faces.length < 2 ? toast("Take both photos to continue.") : kycShow(3);
-  if (kyc.step === 4) return Array.from({ length: need() }).every((_, i) => kyc.docs[i]) ? kycShow(5) : toast("Add all document photos to continue.");
-  if (kyc.step === 5) await submitKyc();
 };
 const afterLogin = async () => {
   await Promise.all([refreshSecurity(), loadPrefs()]);
   if (security.lock_set && security.lock_digits && !unlocked) openLock();
   startSupport();
 };
-const loaders = { network: loadNetwork, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport, kyc: loadKyc };
+const loaders = { network: loadNetwork, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
 const showView = (name) => {
   document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
-  if (name !== "kyc") camOff();
   if (loaders[name]) loaders[name]();
 };
 const toggleMenu = (open) => {
@@ -1291,7 +842,8 @@ $("#no").addEventListener("click", () => $("#confirm").close());
 document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => showView(b.dataset.go)));
 $("#lock").addEventListener("cancel", (e) => e.preventDefault());
 $("#attach").addEventListener("click", () => $("#photo").click());
-$("#photo").addEventListener("change", pickPhotos);
+$("#photo").addEventListener("change", pickPhoto);
+$("#drop").addEventListener("click", clearPhoto);
 $("#composer").addEventListener("submit", send);
 $("#msg").addEventListener("input", (e) => {
   e.target.style.height = "auto";
@@ -1308,61 +860,6 @@ if (window.visualViewport) {
   visualViewport.addEventListener("resize", fit);
   visualViewport.addEventListener("scroll", fit);
 }
-$("#k-next").addEventListener("click", kycNext);
-$("#kyc-back").addEventListener("click", () => (kyc.step > 1 && kyc.step < 6 ? kycShow(kyc.step - 1) : showView("settings")));
-$("#k-snap").addEventListener("click", snapFace);
-$("#k-file").addEventListener("change", pickFace);
-$("#k-retake").addEventListener("click", retakeFaces);
-$("#k-retry").addEventListener("click", () => {
-  kycReset();
-  kycShow(1);
-});
-const stage = $("#vstage");
-stage.addEventListener("pointerdown", (e) => {
-  try {
-    stage.setPointerCapture(e.pointerId);
-  } catch {}
-  vw.pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
-  vw.start = e.clientX;
-  if (vw.pts.size === 2) vw.pinch = vgap();
-});
-stage.addEventListener("pointermove", (e) => {
-  const p = vw.pts.get(e.pointerId);
-  if (!p) return;
-  vw.pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
-  if (vw.pts.size === 2) {
-    const g = vgap();
-    vzoom((vw.s * g) / vw.pinch);
-    vw.pinch = g;
-  } else if (vw.s > 1) {
-    vw.x += e.clientX - p.x;
-    vw.y += e.clientY - p.y;
-    vpaint();
-  }
-});
-stage.addEventListener("pointerup", (e) => {
-  const dx = e.clientX - vw.start;
-  const single = vw.pts.size === 1;
-  vw.pts.delete(e.pointerId);
-  if (!single) return;
-  if (vw.s === 1 && Math.abs(dx) > 60) return vgo(vw.i + (dx < 0 ? 1 : -1));
-  if (Math.abs(dx) < 8) {
-    const twice = Date.now() - vw.tap < 300;
-    if (twice) vzoom(vw.s > 1 ? 1 : 2.5);
-    vw.tap = twice ? 0 : Date.now();
-  }
-});
-stage.addEventListener("pointercancel", (e) => vw.pts.delete(e.pointerId));
-stage.addEventListener("wheel", (e) => {
-  e.preventDefault();
-  vzoom(vw.s * (e.deltaY < 0 ? 1.2 : 1 / 1.2));
-}, { passive: false });
-$("#vclose").addEventListener("click", () => $("#viewer").close());
-$("#vprev").addEventListener("click", () => vgo(vw.i - 1));
-$("#vnext").addEventListener("click", () => vgo(vw.i + 1));
-document.addEventListener("keydown", (e) => {
-  if ($("#viewer").open && (e.key === "ArrowLeft" || e.key === "ArrowRight")) vgo(vw.i + (e.key === "ArrowRight" ? 1 : -1));
-});
 $("#pw-forgot").addEventListener("click", () => $("#reset").showModal());
 $("#delete-open").addEventListener("click", () => (security.withdraw_set ? $("#delete").showModal() : toast(say.no_pin)));
 document.querySelectorAll("#lk-len button").forEach((b) => b.addEventListener("click", () => lockLength(Number(b.dataset.len))));
