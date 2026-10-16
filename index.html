@@ -141,6 +141,69 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .eye .slash{display:none}
 .eye[aria-pressed=true] .slash{display:block}
 .toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#market{position:fixed;inset:var(--bar) 0 0;z-index:20;overflow-y:auto;overscroll-behavior:contain;background:var(--bg);color:var(--text);line-height:normal;-webkit-font-smoothing:antialiased;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;--w:255,255,255;--text:#f4f6f8;--line:rgba(var(--w),.07);--surface:#121212;--up:#0ecb81;--down:#f6465d;--up-soft:rgba(14,203,129,.14);--down-soft:rgba(246,70,93,.14);--hi:#d5dae2;--hi-soft:rgba(213,218,226,.16);--gutter:clamp(16px,4vw,32px);--max:1280px}
+:root[data-theme=light] #market{--w:0,0,0;--text:#1c1a14;--surface:#f3f4f6;--up:#0a9f64;--down:#d6334a;--up-soft:rgba(10,159,100,.12);--down-soft:rgba(214,51,74,.12);--hi:#3b4252;--hi-soft:rgba(59,66,82,.14)}
+#market .topbar{position:sticky;top:0;z-index:5;padding:12px var(--gutter) 8px;background:var(--bg)}
+#search{display:block;width:100%;height:48px;padding:0 16px 0 44px;border:1px solid var(--line);border-radius:14px;outline:none;appearance:none;background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a94a3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:16px center;color:var(--text);font:inherit;font-size:max(16px,1rem);-webkit-user-select:text;user-select:text;transition:border-color .15s,box-shadow .15s}
+#search:focus{border-color:rgba(var(--w),.28);box-shadow:0 0 0 3px rgba(var(--w),.06)}
+#market .board{max-width:var(--max);margin:0 auto;padding:8px var(--gutter) 32px}
+#market .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:20px;background:var(--bg)}
+#market table{width:100%;border-collapse:collapse}
+#market td{padding:14px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap}
+#market td:first-child{padding-left:24px}
+#market td:last-child{padding-right:24px}
+#market tr:first-child td{border-top:0}
+#market .name{width:100%;max-width:0;overflow:hidden}
+#market .num{text-align:right}
+#market td svg{display:block;margin-left:auto}
+#market tbody tr[data-id]{cursor:pointer;outline:none;transition:background .15s}
+@media(hover:hover){#market tbody tr[data-id]:hover{background:var(--surface)}}
+#market button,#market tbody tr{-webkit-tap-highlight-color:transparent}
+#market .coin{display:flex;align-items:center;gap:12px;min-width:0}
+#market .coin img,#market .coin i{flex:none;width:32px;height:32px;border-radius:50%;pointer-events:none}
+#market .coin div{min-width:0}
+#market .coin b{display:block;overflow:hidden;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+#market .coin span{color:var(--muted);font-size:.8125rem;text-transform:uppercase}
+#market .bone{display:block;height:14px;border-radius:7px;background:linear-gradient(90deg,rgba(var(--w),.07) 25%,rgba(var(--w),.15) 50%,rgba(var(--w),.07) 75%) 0 0/200% 100%;animation:shimmer 1.4s linear infinite}
+#market .skeleton .num .bone{width:72px;margin-left:auto}
+#market .skeleton .coin b{width:96px}
+#market .skeleton .coin span{width:40px;height:10px;margin-top:6px}
+#market .pill{display:inline-block;min-width:72px;padding:5px 10px;border-radius:8px;font-size:.8125rem;font-weight:600;text-align:center}
+#market .pill.up{background:var(--up-soft)}
+#market .pill.down{background:var(--down-soft)}
+#market .up{color:var(--up)}
+#market .down{color:var(--down)}
+#market .status{padding:24px;color:var(--muted);text-align:center}
+#detail{width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:0;overflow:auto;overscroll-behavior:contain;border:0;border-radius:0;background:var(--bg);color:var(--text);animation:rise .28s cubic-bezier(.2,.8,.2,1)}
+#detail::backdrop{background:rgba(0,0,0,.1)}
+#detail .sheet{max-width:880px;margin:0 auto;padding:clamp(20px,4vw,32px)}
+#detail .head{display:flex;align-items:center;gap:16px}
+#detail .head .coin img{width:48px;height:48px}
+#detail .head .coin b{font-size:1.25rem}
+#detail .back{display:grid;flex:none;place-items:center;width:36px;height:36px;margin-left:-9px;border:0;outline:none;background:none;color:var(--text);cursor:pointer}
+#detail .price{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:24px 0 20px}
+#detail .price strong{font-size:clamp(1.875rem,6vw,2.75rem);letter-spacing:-.03em}
+#detail .tools{display:flex;gap:10px;margin-bottom:28px}
+#detail .ranges{display:flex;flex:1;gap:2px;padding:4px;border-radius:12px;background:rgba(var(--w),.05)}
+#detail .mode{display:grid;flex:none;place-items:center;width:44px;border:0;border-radius:12px;background:rgba(var(--w),.05);color:var(--muted);cursor:pointer;transition:color .15s,background .15s}
+#detail .ranges button{flex:1;padding:9px 0;border:0;border-radius:9px;background:none;color:var(--muted);font:inherit;font-size:.8125rem;font-weight:600;cursor:pointer;transition:color .15s,background .15s}
+@media(hover:hover){#detail .ranges button:hover,#detail .mode:hover{color:var(--text)}}
+#detail .ranges button.on,#detail .mode:active{background:var(--hi-soft);color:var(--hi)}
+#detail .chart{position:relative;height:clamp(220px,40vw,340px);margin:16px 0}
+#detail canvas{display:block;width:100%;height:100%;touch-action:none}
+#detail .tip{position:absolute;top:0;left:0;padding-right:8px;background:var(--bg);color:var(--muted);font-size:.8125rem;pointer-events:none}
+#detail .tip b{margin-right:8px;color:var(--text)}
+#detail .tip span{margin-right:12px}
+#detail .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#detail .stats div{min-width:0;padding:16px 18px;border:1px solid rgba(var(--w),.12);border-radius:14px}
+#detail dt{color:var(--muted);font-size:.8125rem}
+#detail dd{margin-top:6px;font-size:.9375rem;font-weight:600}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+@keyframes shimmer{to{background-position:-200% 0}}
+@media(max-width:1179px){#market .lg{display:none}}
+@media(max-width:859px){#market .md{display:none}#market td:nth-child(3){padding-right:24px}}
+@media(max-width:600px){#market td{padding:14px 8px}#market td:first-child{padding-left:16px}#market td:nth-child(3){padding-right:16px}#market .coin{gap:10px}#market .coin img,#market .coin i{width:28px;height:28px}#market .pill{min-width:64px;padding:4px 8px}#detail .stats{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){#market .bone{animation:none}}
 @media(max-width:480px){.bar{padding:0 14px}.btn{padding:7px 16px}.screen .back{left:6px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;transition-delay:0s!important;animation-duration:.01ms!important}}
 </style>
@@ -162,6 +225,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <button class="nav-item" type="button" data-auth="in" data-view="dashboard" hidden>Dashboard</button>
 <button class="nav-item" type="button" data-auth="in" data-view="profile" hidden>Profile</button>
 <button class="nav-item" type="button" data-auth="in" data-view="network" hidden>Network</button>
+<button class="nav-item" type="button" data-auth="in" data-view="market" hidden>Market</button>
 <button class="nav-item" type="button" data-auth="in" data-view="settings" hidden>Settings</button>
 <button class="nav-item" type="button" data-auth="in" data-view="support" hidden>Support</button>
 <button class="nav-item" type="button" data-auth="in" data-logout hidden>Log Out</button>
@@ -176,6 +240,14 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <p class="note">Your invite link</p>
 <div class="box"><span id="link"></span><button class="btn" data-copy="link" type="button">Copy</button></div>
 <ul class="stack" id="team"></ul>
+</section>
+<section id="market" hidden>
+<header class="topbar"><input id="search" type="search" aria-label="Search coins" autocomplete="off"></header>
+<div class="board">
+<div class="table-wrap"><table><tbody id="rows"></tbody></table></div>
+<p class="status" id="status"></p>
+</div>
+<dialog id="detail" aria-label="Coin details"></dialog>
 </section>
 <section class="page stack" id="settings" hidden>
 <div class="group">
@@ -477,6 +549,20 @@ const I18N = [
   ["Dashboard", "Табло", "Панель", "Dashboard", "Panel", "Tableau de bord"],
   ["Profile", "Профил", "Профиль", "Profil", "Perfil", "Profil"],
   ["Network", "Мрежа", "Сеть", "Netzwerk", "Red", "Réseau"],
+  ["Market", "Пазар", "Рынок", "Markt", "Mercado", "Marché"],
+  ["Search coins", "Търсене на монети", "Поиск монет", "Coins suchen", "Buscar monedas", "Rechercher des cryptos"],
+  ["Coin details", "Детайли за монетата", "Сведения о монете", "Coin-Details", "Detalles de la moneda", "Détails de la crypto"],
+  ["Market cap", "Пазарна капитализация", "Рыночная капитализация", "Marktkapitalisierung", "Capitalización de mercado", "Capitalisation boursière"],
+  ["24h volume", "Обем за 24 ч", "Объём за 24 ч", "24-Std.-Volumen", "Volumen en 24 h", "Volume sur 24 h"],
+  ["24h high", "Максимум за 24 ч", "Максимум за 24 ч", "24-Std.-Hoch", "Máximo en 24 h", "Plus haut sur 24 h"],
+  ["24h low", "Минимум за 24 ч", "Минимум за 24 ч", "24-Std.-Tief", "Mínimo en 24 h", "Plus bas sur 24 h"],
+  ["All-time high", "Исторически максимум", "Исторический максимум", "Allzeithoch", "Máximo histórico", "Plus haut historique"],
+  ["Circulating supply", "Циркулиращо предлагане", "Циркулирующее предложение", "Umlaufmenge", "Suministro circulante", "Offre en circulation"],
+  ["Switch to line chart", "Превключи към линейна графика", "Переключить на линейный график", "Zum Liniendiagramm wechseln", "Cambiar a gráfico de líneas", "Passer au graphique linéaire"],
+  ["Switch to candlestick chart", "Превключи към японски свещи", "Переключить на японские свечи", "Zum Kerzendiagramm wechseln", "Cambiar a gráfico de velas", "Passer au graphique en chandeliers"],
+  ["No coins match your search.", "Няма монети, отговарящи на търсенето.", "Нет монет, соответствующих поиску.", "Keine Coins entsprechen Ihrer Suche.", "Ninguna moneda coincide con tu búsqueda.", "Aucune crypto ne correspond à votre recherche."],
+  ["Unable to load market data. Please try again shortly.", "Пазарните данни не могат да бъдат заредени. Опитайте отново след малко.", "Не удалось загрузить рыночные данные. Повторите попытку чуть позже.", "Marktdaten konnten nicht geladen werden. Bitte versuchen Sie es in Kürze erneut.", "No se pudieron cargar los datos del mercado. Inténtalo de nuevo en unos instantes.", "Impossible de charger les données du marché. Réessayez dans un instant."],
+  ["Chart is unavailable right now. Please try again shortly.", "Графиката не е достъпна в момента. Опитайте отново след малко.", "График сейчас недоступен. Повторите попытку чуть позже.", "Das Diagramm ist derzeit nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.", "El gráfico no está disponible ahora. Inténtalo de nuevo en unos instantes.", "Le graphique est indisponible pour le moment. Réessayez dans un instant."],
   ["Settings", "Настройки", "Настройки", "Einstellungen", "Ajustes", "Paramètres"],
   ["Support", "Поддръжка", "Поддержка", "Support", "Soporte", "Assistance"],
   ["Log Out", "Изход", "Выйти", "Abmelden", "Cerrar sesión", "Se déconnecter"],
@@ -803,8 +889,303 @@ const afterLogin = async () => {
   if (security.lock_set && security.lock_digits && !unlocked) openLock();
   startSupport();
 };
-const loaders = { network: loadNetwork, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
+const loadMarket = (() => {
+  const API = 'https://api.coingecko.com/api/v3';
+  const quote = 'usd';
+  const RANGES = [['1', '24H'], ['7', '7D'], ['30', '30D'], ['365', '1Y']];
+
+  const svg = path => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+
+  const ICONS = {
+    back: svg('<path d="M19 12H5m7-7-7 7 7 7"/>'),
+    line: svg('<path d="m3 17 6-6 4 4 8-8"/>'),
+    candles: svg('<path d="M8 3v3m0 12v3M16 2v4m0 10v6"/><rect x="6" y="6" width="4" height="12"/><rect x="14" y="6" width="4" height="10"/>')
+  };
+
+  const section = $("#market");
+  const rows = $("#rows");
+  const notice = $("#status");
+  const search = $("#search");
+  const detail = $("#detail");
+
+  const view = { id: '', days: RANGES[0][0], candles: false };
+
+  let coins = [];
+  let chart = [];
+  let ticket = 0;
+
+  const css = name => getComputedStyle(detail).getPropertyValue(name).trim();
+  const dir = value => (value >= 0 ? 'up' : 'down');
+  const pct = value => `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+  const num = value => (value == null ? '—' : new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 2 }).format(value));
+
+  const money = (value, compact = false) => (value == null ? '—' : new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: quote.toUpperCase(),
+    notation: compact ? 'compact' : 'standard',
+    maximumFractionDigits: compact || value >= 1 ? 2 : 6
+  }).format(value));
+
+  const coinCell = coin => `
+    <div class="coin">
+      <img src="${coin.image}" alt="" draggable="false" loading="lazy">
+      <div><b>${coin.name}</b><span>${coin.symbol}</span></div>
+    </div>`;
+
+  const modeButton = () => {
+    const label = tr(view.candles ? 'Switch to line chart' : 'Switch to candlestick chart');
+    return `<button class="mode" aria-label="${label}" title="${label}">${view.candles ? ICONS.line : ICONS.candles}</button>`;
+  };
+
+  const spark = prices => {
+    const points = prices.filter((_, index) => index % 4 === 0);
+    const min = Math.min(...points);
+    const span = Math.max(...points) - min || 1;
+    const path = points
+      .map((value, index) => `${((index / (points.length - 1)) * 120).toFixed(1)},${(34 - ((value - min) / span) * 32).toFixed(1)}`)
+      .join(' ');
+    return `<svg class="${dir(points.at(-1) - points[0])}" width="120" height="36" viewBox="0 0 120 36" preserveAspectRatio="none"><polyline points="${path}" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  };
+
+  const SKELETON = Array.from({ length: 12 }, () => `
+    <tr class="skeleton">
+      <td class="name"><div class="coin"><i class="bone"></i><div><b class="bone"></b><span class="bone"></span></div></div></td>
+      <td class="num"><span class="bone"></span></td>
+      <td class="num"><span class="bone"></span></td>
+      <td class="num lg"><span class="bone"></span></td>
+      <td class="num md"><span class="bone"></span></td>
+      <td class="num md"><span class="bone"></span></td>
+    </tr>`).join('');
+
+  const render = () => {
+    if (!coins.length) return;
+    const query = search.value.trim().toLowerCase();
+    const list = coins.filter(coin => coin.name.toLowerCase().includes(query) || coin.symbol.includes(query));
+    rows.innerHTML = list.map(coin => `
+      <tr data-id="${coin.id}" tabindex="0">
+        <td class="name">${coinCell(coin)}</td>
+        <td class="num">${money(coin.current_price)}</td>
+        <td class="num"><span class="pill ${dir(coin.price_change_percentage_24h)}">${pct(coin.price_change_percentage_24h)}</span></td>
+        <td class="num lg">${money(coin.total_volume, true)}</td>
+        <td class="num md">${money(coin.market_cap, true)}</td>
+        <td class="num md">${spark(coin.sparkline_in_7d?.price ?? [])}</td>
+      </tr>`).join('');
+    notice.textContent = list.length ? '' : tr('No coins match your search.');
+  };
+
+  const load = async () => {
+    try {
+      const response = await fetch(`${API}/coins/markets?vs_currency=${quote}&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h`);
+      if (!response.ok) throw new Error(response.status);
+      const data = await response.json();
+      coins = data.map(coin => ({ ...coin, price_change_percentage_24h: coin.price_change_percentage_24h ?? 0 }));
+      render();
+    } catch {
+      if (!coins.length) rows.innerHTML = '';
+      notice.textContent = tr('Unable to load market data. Please try again shortly.');
+    }
+  };
+
+  const pointText = index => {
+    const point = chart[index];
+    const format = view.days === '365' ? { dateStyle: 'medium' } : { dateStyle: 'medium', timeStyle: 'short' };
+    const time = new Date(point[0]).toLocaleString(prefs.language, format);
+    if (!view.candles) return `<b>${money(point[1])}</b>${time}`;
+    const [, open, high, low, close] = point;
+    return `<b>${money(close)}</b>${time}<br><span>O ${money(open)}</span><span>H ${money(high)}</span><span>L ${money(low)}</span>`;
+  };
+
+  const indexAt = fraction => {
+    const index = view.candles ? Math.floor(fraction * chart.length) : Math.round(fraction * (chart.length - 1));
+    return Math.min(chart.length - 1, Math.max(0, index));
+  };
+
+  const drawChart = hover => {
+    const canvas = detail.querySelector('canvas');
+    const tip = detail.querySelector('.tip');
+    const ratio = window.devicePixelRatio || 1;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(ratio, ratio);
+
+    const count = chart.length;
+    const upper = chart.map(point => (view.candles ? point[2] : point[1]));
+    const lower = chart.map(point => (view.candles ? point[3] : point[1]));
+    const min = Math.min(...lower);
+    const span = Math.max(...upper) - min || 1;
+    const x = index => (view.candles ? ((index + 0.5) / count) * width : (index / (count - 1)) * width);
+    const y = value => height - 16 - ((value - min) / span) * (height - 32);
+    const up = css('--up');
+    const down = css('--down');
+    const color = upper.at(-1) >= upper[0] ? up : down;
+
+    ctx.strokeStyle = css('--line');
+    ctx.lineWidth = 1;
+    for (let step = 0; step < 4; step += 1) {
+      const gridY = 16 + (step * (height - 32)) / 3;
+      ctx.beginPath();
+      ctx.moveTo(0, gridY);
+      ctx.lineTo(width, gridY);
+      ctx.stroke();
+    }
+
+    if (view.candles) {
+      const bodyWidth = Math.max(1, (width / count) * 0.6);
+      chart.forEach(([, open, high, low, close], index) => {
+        ctx.fillStyle = close >= open ? up : down;
+        ctx.fillRect(x(index) - 0.5, y(high), 1, y(low) - y(high));
+        ctx.fillRect(x(index) - bodyWidth / 2, y(Math.max(open, close)), bodyWidth, Math.max(1, Math.abs(y(open) - y(close))));
+      });
+    } else {
+      const fill = ctx.createLinearGradient(0, 0, 0, height);
+      fill.addColorStop(0, `${color}44`);
+      fill.addColorStop(1, `${color}00`);
+      ctx.beginPath();
+      upper.forEach((value, index) => (index ? ctx.lineTo(x(index), y(value)) : ctx.moveTo(x(index), y(value))));
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.lineTo(width, height);
+      ctx.lineTo(0, height);
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+
+    if (hover === undefined) {
+      tip.textContent = '';
+      return;
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(x(hover), 0);
+    ctx.lineTo(x(hover), height);
+    ctx.strokeStyle = css('--muted');
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    if (!view.candles) {
+      ctx.beginPath();
+      ctx.arc(x(hover), y(upper[hover]), 5, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.strokeStyle = css('--bg');
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    tip.innerHTML = pointText(hover);
+  };
+
+  const loadChart = async () => {
+    const tip = detail.querySelector('.tip');
+    const request = ++ticket;
+    chart = [];
+    tip.textContent = '';
+    try {
+      const path = view.candles ? 'ohlc' : 'market_chart';
+      const response = await fetch(`${API}/coins/${view.id}/${path}?vs_currency=${quote}&days=${view.days}`);
+      if (!response.ok) throw new Error(response.status);
+      const data = await response.json();
+      if (request !== ticket) return;
+      chart = view.candles ? data : data.prices;
+      drawChart();
+    } catch {
+      if (request !== ticket) return;
+      chart = [];
+      tip.textContent = tr('Chart is unavailable right now. Please try again shortly.');
+    }
+  };
+
+  const stats = coin => {
+    const symbol = coin.symbol.toUpperCase();
+    return [
+      ['Market cap', money(coin.market_cap, true)],
+      ['24h volume', money(coin.total_volume, true)],
+      ['24h high', money(coin.high_24h)],
+      ['24h low', money(coin.low_24h)],
+      ['All-time high', money(coin.ath)],
+      ['Circulating supply', `${num(coin.circulating_supply)} ${symbol}`]
+    ];
+  };
+
+  const openDetail = id => {
+    const coin = coins.find(item => item.id === id);
+    view.id = id;
+    view.days = RANGES[0][0];
+    chart = [];
+    detail.innerHTML = `
+      <div class="sheet">
+        <div class="head"><button class="back" aria-label="${tr('Back')}">${ICONS.back}</button>${coinCell(coin)}</div>
+        <div class="price">
+          <strong>${money(coin.current_price)}</strong>
+          <span class="pill ${dir(coin.price_change_percentage_24h)}">${pct(coin.price_change_percentage_24h)}</span>
+        </div>
+        <div class="chart"><canvas></canvas><p class="tip"></p></div>
+        <div class="tools">
+          <div class="ranges">${RANGES.map(([days, label], index) => `<button data-days="${days}"${index ? '' : ' class="on"'}>${label}</button>`).join('')}</div>
+          ${modeButton()}
+        </div>
+        <dl class="stats">${stats(coin).map(([label, value]) => `<div><dt>${tr(label)}</dt><dd>${value}</dd></div>`).join('')}</dl>
+      </div>`;
+    detail.showModal();
+    loadChart();
+  };
+
+  const pick = event => {
+    const row = event.target.closest('tr[data-id]');
+    if (row) openDetail(row.dataset.id);
+  };
+
+  rows.addEventListener('click', pick);
+  rows.addEventListener('keydown', event => event.key === 'Enter' && pick(event));
+  search.addEventListener('input', render);
+
+  detail.addEventListener('click', event => {
+    if (event.target.closest('.back')) {
+      detail.close();
+      return;
+    }
+    const range = event.target.closest('[data-days]');
+    if (range) {
+      if (range.dataset.days === view.days) return;
+      detail.querySelectorAll('[data-days]').forEach(item => item.classList.toggle('on', item === range));
+      view.days = range.dataset.days;
+      loadChart();
+      return;
+    }
+    const mode = event.target.closest('.mode');
+    if (mode) {
+      view.candles = !view.candles;
+      mode.outerHTML = modeButton();
+      loadChart();
+    }
+  });
+
+  const scrub = event => {
+    if (event.target.tagName !== 'CANVAS' || !chart.length) return;
+    const box = event.target.getBoundingClientRect();
+    drawChart(indexAt((event.clientX - box.left) / box.width));
+  };
+
+  detail.addEventListener('pointerdown', scrub);
+  detail.addEventListener('pointermove', scrub);
+
+  detail.addEventListener('pointerout', event => {
+    if (event.target.tagName === 'CANVAS' && chart.length) drawChart();
+  });
+
+  setInterval(() => document.hidden || section.hidden || load(), 60000);
+
+  return () => {
+    if (!coins.length) rows.innerHTML = SKELETON;
+    load();
+  };
+})();
+const loaders = { network: loadNetwork, market: loadMarket, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
 const showView = (name) => {
+  $("#detail").close();
   document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
   if (loaders[name]) loaders[name]();
 };
@@ -817,7 +1198,7 @@ $("#forgot").addEventListener("click", () => {
   $("#login").close();
   $("#reset").showModal();
 });
-document.querySelectorAll("dialog").forEach((d) => {
+document.querySelectorAll("dialog:not(#detail)").forEach((d) => {
   const f = d.querySelector("form");
   d.addEventListener("click", (e) => e.target === d && d.id !== "lock" && d.close());
   d.addEventListener("close", () => {
