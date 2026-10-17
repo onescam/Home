@@ -64,11 +64,17 @@ main{padding:32px 20px}
 #currency::before{background:var(--gold)}
 #currency button{font-size:1.25rem}
 #currency button[aria-pressed=true]{color:#1a1405;font-weight:600}
-#theme{--n:2;background:linear-gradient(90deg,#fff 0,#fff 36%,#000 64%,#000 100%)}
-#theme::before{background:rgba(128,128,128,.32);box-shadow:0 2px 10px rgba(0,0,0,.3)}
-#theme [data-mode=light]{color:#111}
-#theme [data-mode=dark]{color:#fff}
-#theme [aria-pressed=false]{opacity:.5}
+.tile{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border:1px solid var(--silver);border-radius:14px;cursor:pointer}
+.sw{position:relative;flex:none;width:56px;height:32px}
+.sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:999px;-webkit-appearance:none;appearance:none;background:var(--silver);cursor:pointer;transition:background-color .3s}
+.sw input:checked{background:#2f5fd0}
+.sw input:focus{box-shadow:none}
+.sw input:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.knob{position:absolute;top:3px;left:3px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff;color:#111;box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .3s cubic-bezier(.22,.8,.3,1);pointer-events:none}
+.sw input:checked + .knob{transform:translateX(24px)}
+.knob svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.knob .sun,.sw input:checked + .knob .moon{display:none}
+.sw input:checked + .knob .sun{display:block}
 .pin{display:flex;gap:8px;justify-content:center}
 .pin input{flex:1;width:auto;min-width:0;max-width:52px;aspect-ratio:1;padding:0;text-align:center;font-size:1.25rem}
 .card.size{display:flex;align-items:center;gap:14px}
@@ -79,7 +85,6 @@ main{padding:32px 20px}
 .aa.big{font-size:1.75rem;color:var(--strong)}
 .screen{position:fixed;inset:0;z-index:35;width:auto;margin:0;padding:76px max(20px,calc((100vw - 520px) / 2)) 24px;overflow-y:auto;background:var(--bg)}
 .screen .back{position:absolute;left:12px;top:15.5px;width:36px;height:36px;padding:0;background:none;border:0;font-size:1.75rem;line-height:1;color:var(--strong)}
-#lang-open{margin-top:auto}
 #lang .panel{gap:0;padding:8px 0}
 .opt{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 24px;border:0;border-bottom:1px solid var(--silver);background:none;text-align:left}
 .opt:last-child{border-bottom:0}
@@ -131,6 +136,8 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .link:hover{color:var(--silver-hi)}
 .cta{width:100%;padding:11px;border-radius:999px;font-size:.9375rem}
 .cta:disabled{opacity:.6;cursor:wait}
+.cta.steel{background:linear-gradient(90deg,#3a6be6,#2a4fc0);color:#fff}
+.cta.steel:disabled{filter:none;opacity:.4;cursor:not-allowed}
 .bad,.bad:focus{border-color:#e5484d;box-shadow:0 0 0 1px rgba(229,72,77,.45),0 0 14px rgba(229,72,77,.2)}
 .field{position:relative}
 .field input{padding-right:48px}
@@ -141,6 +148,14 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .eye .slash{display:none}
 .eye[aria-pressed=true] .slash{display:block}
 .toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.row[aria-expanded]::after{transition:transform .2s}
+.row[aria-expanded=true]::after{transform:rotate(90deg)}
+.round.danger{color:var(--danger)}
+.theming .knob{transition:transform .3s cubic-bezier(.22,.8,.3,1)!important}
+#translator{position:fixed;top:0;left:-9999px;width:1px;height:1px;overflow:hidden}
+.goog-te-banner-frame,.goog-te-balloon-frame,#goog-gt-tt,body>.skiptranslate,.VIpgJd-ZVi9od-ORHb-OEVmcd,.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,.VIpgJd-yAWNEb-L7lbkb{display:none!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
+body{top:0!important}
 #market{position:fixed;inset:var(--bar) 0 0;z-index:20;overflow-y:auto;overscroll-behavior:contain;background:var(--bg);color:var(--text);line-height:normal;-webkit-font-smoothing:antialiased;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;--w:255,255,255;--text:#f4f6f8;--line:rgba(var(--w),.07);--surface:#121212;--up:#0ecb81;--down:#f6465d;--up-soft:rgba(14,203,129,.14);--down-soft:rgba(246,70,93,.14);--hi:#d5dae2;--hi-soft:rgba(213,218,226,.16);--gutter:clamp(16px,4vw,32px);--max:1280px}
 :root[data-theme=light] #market{--w:0,0,0;--text:#1c1a14;--surface:#f3f4f6;--up:#0a9f64;--down:#d6334a;--up-soft:rgba(10,159,100,.12);--down-soft:rgba(214,51,74,.12);--hi:#3b4252;--hi-soft:rgba(59,66,82,.14)}
 #market .topbar{position:sticky;top:0;z-index:5;padding:12px var(--gutter) 8px;background:var(--bg)}
@@ -232,13 +247,13 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 </nav>
 <main>
 <section class="page stack" id="profile" hidden>
-<div class="box"><span class="note">Email</span><span class="value" id="profile-email"></span></div>
+<div class="box"><span class="note">Email</span><span class="value" id="profile-email" translate="no"></span></div>
 </section>
 <section class="page stack" id="network" hidden>
 <p class="note">Your invite code</p>
-<div class="box"><span class="code" id="code"></span><button class="btn" data-copy="code" type="button">Copy</button></div>
+<div class="box"><span class="code" id="code" translate="no"></span><button class="btn" data-copy="code" type="button">Copy</button></div>
 <p class="note">Your invite link</p>
-<div class="box"><span id="link"></span><button class="btn" data-copy="link" type="button">Copy</button></div>
+<div class="box"><span id="link" translate="no"></span><button class="btn" data-copy="link" type="button">Copy</button></div>
 <ul class="stack" id="team"></ul>
 </section>
 <section id="market" hidden>
@@ -252,10 +267,9 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 <section class="page stack" id="settings" hidden>
 <div class="group">
 <button class="row" type="button" data-go="blank">KYC Verification</button>
-<button class="row" type="button" data-go="blank"><span>Two-Factor Authentication (2FA)<small class="note">Google Authenticator</small></span><span class="meta" id="twofa-status">Disabled</span></button>
 <button class="row" type="button" data-go="security">Security settings</button>
 <button class="row" type="button" data-go="appearance">Appearance</button>
-<button class="row" type="button" data-go="sessions">Active Sessions &amp; Audit Log</button>
+<button class="row" type="button" data-go="sessions">Access &amp; Security Management</button>
 </div>
 <button class="row" type="button" data-go="blank">Why AI Trading Bot</button>
 <button class="row" type="button" data-go="blank">Frequently Asked Questions</button>
@@ -266,41 +280,43 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 </section>
 <section class="page stack screen" id="security" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+<form class="card stack" id="pw-form">
+<h2>Change Password</h2>
+<input name="current" type="password" data-rule="password" autocomplete="current-password" placeholder="Current Password" aria-label="Current Password">
+<input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="New Password" aria-label="New Password">
+<button class="link" id="pw-forgot" type="button">Forgot Password</button>
+<button class="cta steel" type="submit" disabled>Save Password</button>
+</form>
 <form class="card stack" id="wp-form">
 <p class="note" id="wp-text">Set up a 6-digit PIN code required for withdrawals</p>
 <div class="stack" id="wp-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="wp-old" data-len="6"></div></div>
 <div class="stack"><span class="note" id="wp-new-label" hidden>New PIN</span><div class="pin" id="wp-new" data-len="6"></div></div>
-<button class="cta" type="submit">Save PIN</button>
+<button class="cta steel" type="submit" disabled>Save PIN</button>
 </form>
 <form class="card stack" id="lk-form">
 <p class="note" id="lk-text">Set up a PIN code that locks the site</p>
 <div class="split" id="lk-len"><button type="button" data-len="4" aria-pressed="false">4 digits</button><button type="button" data-len="6" aria-pressed="true">6 digits</button></div>
 <div class="stack" id="lk-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="lk-old" data-len="6"></div></div>
 <div class="stack"><span class="note" id="lk-new-label" hidden>New PIN</span><div class="pin" id="lk-new" data-len="6"></div></div>
-<button class="cta" type="submit">Save PIN</button>
-</form>
-<form class="card stack" id="pw-form">
-<h2>Change Password</h2>
-<input name="current" type="password" data-rule="password" autocomplete="current-password" placeholder="Current Password" aria-label="Current Password">
-<input name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="New Password" aria-label="New Password">
-<button class="link" id="pw-forgot" type="button">Forgot Password</button>
-<button class="cta" type="submit">Save Password</button>
+<button class="cta steel" type="submit" disabled>Save PIN</button>
 </form>
 <button class="cta danger" id="delete-open" type="button">Delete Account</button>
 </section>
 <section class="page stack screen" id="appearance" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+<label class="tile"><span>Color</span><span class="sw"><input id="theme" type="checkbox" role="switch"><i class="knob"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></i></span></label>
 <div class="seg" id="currency"><button type="button" data-currency="EUR">€</button><button type="button" data-currency="USD">$</button><button type="button" data-currency="GBP">£</button><button type="button" data-currency="JPY">¥</button></div>
-<div class="seg" id="theme"><button type="button" data-mode="light">Light</button><button type="button" data-mode="dark">Dark</button></div>
+<label class="tile"><span>One-Click Balance Mask</span><span class="sw"><input type="checkbox" role="switch"><i class="knob"></i></span></label>
+<button class="row" id="lang-open" type="button"><span>Language</span><span class="meta" id="lang-name" translate="no">English</span></button>
 <div class="card size"><span class="aa">A</span><input id="size" type="range" min="12" max="22" step="2" aria-label="Text size"><span class="aa big">A</span></div>
-<button class="row" id="lang-open" type="button"><span>Language</span><span class="meta" id="lang-name">English</span></button>
+<p class="card">This is a sample text. It shows how big the text will be at the selected size.</p>
 </section>
 <section class="page stack screen" id="sessions" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
-<p class="note">Active sessions</p>
-<ul class="stack" id="live"></ul>
-<button class="cta" id="others" type="button">Log out other sessions</button>
-<p class="note">Login history</p>
+<button class="row" type="button" data-change="password_changed_at" aria-expanded="false"><span>Last password change<small class="note" hidden></small></span></button>
+<button class="row" type="button" data-change="withdraw_changed_at" data-set="withdraw_set" aria-expanded="false"><span>Last withdrawal PIN change<small class="note" hidden></small></span></button>
+<button class="row" type="button" data-change="lock_changed_at" data-set="lock_set" aria-expanded="false"><span>Last site lock PIN change<small class="note" hidden></small></span></button>
+<p class="note">These are all your login histories.</p>
 <ul class="stack" id="history"></ul>
 </section>
 <section class="page stack screen" id="blank" hidden>
@@ -382,6 +398,7 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 </form>
 </dialog>
 <div class="toast" id="toast" popover="manual" role="alert"></div>
+<div id="translator" translate="no"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const db = window.supabase.createClient("https://cskguqtpvvclcphuarkr.supabase.co", "sb_publishable_I2_oFR8ZlJWvNqI17m5aEg_Mlq2gzYp");
@@ -402,7 +419,7 @@ const toast = (text, good = false) => {
   if (Date.now() - toastAt < 3000) return;
   toastAt = Date.now();
   const t = $("#toast");
-  t.textContent = tr(text);
+  t.textContent = text;
   t.classList.toggle("ok", good);
   t.showPopover();
   clearTimeout(toastTimer);
@@ -431,6 +448,7 @@ const eye = (pressed, onToggle) => {
   const b = Object.assign(document.createElement("button"), { type: "button", className: "eye", innerHTML: eyeIcon });
   b.setAttribute("aria-label", "Show or hide");
   b.setAttribute("aria-pressed", pressed);
+  b.addEventListener("mousedown", (e) => e.preventDefault());
   b.addEventListener("click", () => {
     const on = b.getAttribute("aria-pressed") !== "true";
     b.setAttribute("aria-pressed", on);
@@ -461,6 +479,7 @@ document.addEventListener("input", (e) => {
   el.classList.remove("bad");
   if (box && clean && el.nextElementSibling) el.nextElementSibling.focus();
   if (box && box.id === "lock-pin") unlockWith(pinValue(box));
+  syncSave();
 });
 const cell = (text, className = "") => Object.assign(document.createElement("span"), { textContent: text, className });
 let userId = null;
@@ -482,7 +501,15 @@ const call = async (fn, args) => {
   return error ? "error" : data;
 };
 const pinValue = (box) => Array.from(box.children, (c) => c.value).join("");
-const buildPin = (box, len) => box.replaceChildren(...Array.from({ length: len }, (_, i) => Object.assign(document.createElement("input"), { type: "password", inputMode: "numeric", maxLength: 1, autocomplete: "off", ariaLabel: "Digit " + (i + 1) })));
+const busy = new WeakSet();
+const syncSave = () => ["#pw-form", "#wp-form", "#lk-form"].forEach((id) => {
+  const f = $(id);
+  f.querySelector(".cta").disabled = busy.has(f) || !Array.from(f.querySelectorAll("input")).some((i) => i.value);
+});
+const buildPin = (box, len) => {
+  box.replaceChildren(...Array.from({ length: len }, (_, i) => Object.assign(document.createElement("input"), { type: "password", inputMode: "numeric", maxLength: 1, autocomplete: "off", ariaLabel: "Digit " + (i + 1) })));
+  syncSave();
+};
 const markPin = (box) => box.querySelectorAll("input").forEach((i) => i.classList.add("bad"));
 const pinOk = (box, len) => {
   const good = pinValue(box).length === len;
@@ -510,12 +537,12 @@ const loadSecurity = async () => {
   const l = security.lock_set;
   $("#wp-old-wrap").hidden = !w;
   $("#wp-new-label").hidden = !w;
-  $("#wp-text").textContent = tr(w ? "Change the PIN code required for withdrawals" : "Set up a 6-digit PIN code required for withdrawals");
+  $("#wp-text").textContent = w ? "Change the PIN code required for withdrawals" : "Set up a 6-digit PIN code required for withdrawals";
   buildPin($("#wp-old"), 6);
   buildPin($("#wp-new"), 6);
   $("#lk-old-wrap").hidden = !l;
   $("#lk-new-label").hidden = !l;
-  $("#lk-text").textContent = tr(l ? "Change the PIN code that unlocks the site" : "Set up a PIN code that locks the site");
+  $("#lk-text").textContent = l ? "Change the PIN code that unlocks the site" : "Set up a PIN code that locks the site";
   buildPin($("#lk-old"), security.lock_digits || 6);
   lockLength(security.lock_digits || 6);
 };
@@ -539,158 +566,28 @@ const unlockWith = async (pin) => {
   toast(say[r] || say.error);
 };
 const langs = { en: "English", bg: "Български", ru: "Русский", de: "Deutsch", es: "Español", fr: "Français" };
-const I18N = [
-  ["Sign Up", "Регистрация", "Регистрация", "Registrieren", "Registrarse", "S'inscrire"],
-  ["Log In", "Вход", "Вход", "Anmelden", "Iniciar sesión", "Se connecter"],
-  ["Home", "Начало", "Главная", "Startseite", "Inicio", "Accueil"],
-  ["Plans", "Планове", "Тарифы", "Tarife", "Planes", "Offres"],
-  ["About Us", "За нас", "О нас", "Über uns", "Sobre nosotros", "À propos"],
-  ["Terms and Conditions", "Общи условия", "Условия использования", "Allgemeine Geschäftsbedingungen", "Términos y condiciones", "Conditions générales"],
-  ["Dashboard", "Табло", "Панель", "Dashboard", "Panel", "Tableau de bord"],
-  ["Profile", "Профил", "Профиль", "Profil", "Perfil", "Profil"],
-  ["Network", "Мрежа", "Сеть", "Netzwerk", "Red", "Réseau"],
-  ["Market", "Пазар", "Рынок", "Markt", "Mercado", "Marché"],
-  ["Search coins", "Търсене на монети", "Поиск монет", "Coins suchen", "Buscar monedas", "Rechercher des cryptos"],
-  ["Coin details", "Детайли за монетата", "Сведения о монете", "Coin-Details", "Detalles de la moneda", "Détails de la crypto"],
-  ["Market cap", "Пазарна капитализация", "Рыночная капитализация", "Marktkapitalisierung", "Capitalización de mercado", "Capitalisation boursière"],
-  ["24h volume", "Обем за 24 ч", "Объём за 24 ч", "24-Std.-Volumen", "Volumen en 24 h", "Volume sur 24 h"],
-  ["24h high", "Максимум за 24 ч", "Максимум за 24 ч", "24-Std.-Hoch", "Máximo en 24 h", "Plus haut sur 24 h"],
-  ["24h low", "Минимум за 24 ч", "Минимум за 24 ч", "24-Std.-Tief", "Mínimo en 24 h", "Plus bas sur 24 h"],
-  ["All-time high", "Исторически максимум", "Исторический максимум", "Allzeithoch", "Máximo histórico", "Plus haut historique"],
-  ["Circulating supply", "Циркулиращо предлагане", "Циркулирующее предложение", "Umlaufmenge", "Suministro circulante", "Offre en circulation"],
-  ["Switch to line chart", "Превключи към линейна графика", "Переключить на линейный график", "Zum Liniendiagramm wechseln", "Cambiar a gráfico de líneas", "Passer au graphique linéaire"],
-  ["Switch to candlestick chart", "Превключи към японски свещи", "Переключить на японские свечи", "Zum Kerzendiagramm wechseln", "Cambiar a gráfico de velas", "Passer au graphique en chandeliers"],
-  ["No coins match your search.", "Няма монети, отговарящи на търсенето.", "Нет монет, соответствующих поиску.", "Keine Coins entsprechen Ihrer Suche.", "Ninguna moneda coincide con tu búsqueda.", "Aucune crypto ne correspond à votre recherche."],
-  ["Unable to load market data. Please try again shortly.", "Пазарните данни не могат да бъдат заредени. Опитайте отново след малко.", "Не удалось загрузить рыночные данные. Повторите попытку чуть позже.", "Marktdaten konnten nicht geladen werden. Bitte versuchen Sie es in Kürze erneut.", "No se pudieron cargar los datos del mercado. Inténtalo de nuevo en unos instantes.", "Impossible de charger les données du marché. Réessayez dans un instant."],
-  ["Chart is unavailable right now. Please try again shortly.", "Графиката не е достъпна в момента. Опитайте отново след малко.", "График сейчас недоступен. Повторите попытку чуть позже.", "Das Diagramm ist derzeit nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.", "El gráfico no está disponible ahora. Inténtalo de nuevo en unos instantes.", "Le graphique est indisponible pour le moment. Réessayez dans un instant."],
-  ["Settings", "Настройки", "Настройки", "Einstellungen", "Ajustes", "Paramètres"],
-  ["Support", "Поддръжка", "Поддержка", "Support", "Soporte", "Assistance"],
-  ["Log Out", "Изход", "Выйти", "Abmelden", "Cerrar sesión", "Se déconnecter"],
-  ["Email Address", "Имейл адрес", "Адрес эл. почты", "E-Mail-Adresse", "Correo electrónico", "Adresse e-mail"],
-  ["Password", "Парола", "Пароль", "Passwort", "Contraseña", "Mot de passe"],
-  ["Confirm Password", "Потвърди паролата", "Подтвердите пароль", "Passwort bestätigen", "Confirmar contraseña", "Confirmer le mot de passe"],
-  ["Invite Code", "Код за покана", "Код приглашения", "Einladungscode", "Código de invitación", "Code d'invitation"],
-  ["Create Account", "Създай акаунт", "Создать аккаунт", "Konto erstellen", "Crear cuenta", "Créer un compte"],
-  ["Forgot Password", "Забравена парола", "Забыли пароль", "Passwort vergessen", "Olvidé mi contraseña", "Mot de passe oublié"],
-  ["Reset Password", "Възстановяване на парола", "Сброс пароля", "Passwort zurücksetzen", "Restablecer contraseña", "Réinitialiser le mot de passe"],
-  ["Enter the email address on your account. We will send a 6-digit code to it.", "Въведете имейл адреса на акаунта си. Ще изпратим 6-цифрен код на него.", "Введите адрес электронной почты вашего аккаунта. Мы отправим на него 6-значный код.", "Geben Sie die E-Mail-Adresse Ihres Kontos ein. Wir senden einen 6-stelligen Code dorthin.", "Introduce el correo electrónico de tu cuenta. Le enviaremos un código de 6 dígitos.", "Saisissez l'adresse e-mail de votre compte. Nous y enverrons un code à 6 chiffres."],
-  ["Send Request", "Изпрати заявка", "Отправить запрос", "Anfrage senden", "Enviar solicitud", "Envoyer la demande"],
-  ["Enter the 6-digit code we sent to your email.", "Въведете 6-цифрения код, изпратен на имейла ви.", "Введите 6-значный код, отправленный на вашу почту.", "Geben Sie den 6-stelligen Code ein, den wir an Ihre E-Mail gesendet haben.", "Introduce el código de 6 dígitos que enviamos a tu correo.", "Saisissez le code à 6 chiffres envoyé à votre adresse e-mail."],
-  ["6-Digit Code", "6-цифрен код", "6-значный код", "6-stelliger Code", "Código de 6 dígitos", "Code à 6 chiffres"],
-  ["Confirm", "Потвърди", "Подтвердить", "Bestätigen", "Confirmar", "Confirmer"],
-  ["New Password", "Нова парола", "Новый пароль", "Neues Passwort", "Nueva contraseña", "Nouveau mot de passe"],
-  ["Change Password", "Промяна на парола", "Изменить пароль", "Passwort ändern", "Cambiar contraseña", "Changer le mot de passe"],
-  ["This permanently deletes your account and cannot be undone. Confirm with your details.", "Това изтрива акаунта ви завинаги и не може да бъде отменено. Потвърдете с вашите данни.", "Это навсегда удалит ваш аккаунт, действие нельзя отменить. Подтвердите своими данными.", "Dadurch wird Ihr Konto dauerhaft gelöscht und kann nicht rückgängig gemacht werden. Bestätigen Sie mit Ihren Daten.", "Esto elimina tu cuenta de forma permanente y no se puede deshacer. Confirma con tus datos.", "Cela supprime définitivement votre compte et ne peut pas être annulé. Confirmez avec vos informations."],
-  ["Withdrawal PIN", "PIN за тегления", "PIN для вывода", "Auszahlungs-PIN", "PIN de retiros", "PIN de retrait"],
-  ["Delete Account", "Изтрий акаунта", "Удалить аккаунт", "Konto löschen", "Eliminar cuenta", "Supprimer le compte"],
-  ["Enter your PIN to unlock", "Въведете PIN за отключване", "Введите PIN для разблокировки", "PIN zum Entsperren eingeben", "Introduce tu PIN para desbloquear", "Saisissez votre PIN pour déverrouiller"],
-  ["Email", "Имейл", "Эл. почта", "E-Mail", "Correo", "E-mail"],
-  ["Your invite code", "Вашият код за покана", "Ваш код приглашения", "Ihr Einladungscode", "Tu código de invitación", "Votre code d'invitation"],
-  ["Your invite link", "Вашият линк за покана", "Ваша ссылка-приглашение", "Ihr Einladungslink", "Tu enlace de invitación", "Votre lien d'invitation"],
-  ["Copy", "Копирай", "Копировать", "Kopieren", "Copiar", "Copier"],
-  ["Copied", "Копирано", "Скопировано", "Kopiert", "Copiado", "Copié"],
-  ["KYC Verification", "KYC верификация", "KYC-верификация", "KYC-Verifizierung", "Verificación KYC", "Vérification KYC"],
-  ["Two-Factor Authentication (2FA)", "Двуфакторна автентикация (2FA)", "Двухфакторная аутентификация (2FA)", "Zwei-Faktor-Authentifizierung (2FA)", "Autenticación de dos factores (2FA)", "Authentification à deux facteurs (2FA)"],
-  ["Google Authenticator", "Google Authenticator", "Google Authenticator", "Google Authenticator", "Google Authenticator", "Google Authenticator"],
-  ["Enabled", "Включена", "Включена", "Aktiviert", "Activada", "Activée"],
-  ["Disabled", "Изключена", "Отключена", "Deaktiviert", "Desactivada", "Désactivée"],
-  ["Security settings", "Настройки за сигурност", "Настройки безопасности", "Sicherheitseinstellungen", "Ajustes de seguridad", "Paramètres de sécurité"],
-  ["Appearance", "Изглед", "Внешний вид", "Darstellung", "Apariencia", "Apparence"],
-  ["Active Sessions & Audit Log", "Активни сесии и дневник на дейността", "Активные сессии и журнал аудита", "Aktive Sitzungen & Prüfprotokoll", "Sesiones activas y registro de auditoría", "Sessions actives et journal d'audit"],
-  ["Why AI Trading Bot", "Защо AI Trading Bot", "Почему AI Trading Bot", "Warum AI Trading Bot", "Por qué AI Trading Bot", "Pourquoi AI Trading Bot"],
-  ["Frequently Asked Questions", "Често задавани въпроси", "Часто задаваемые вопросы", "Häufig gestellte Fragen", "Preguntas frecuentes", "Questions fréquentes"],
-  ["Terms of Use", "Правила за ползване", "Правила использования", "Nutzungsbedingungen", "Términos de uso", "Conditions d'utilisation"],
-  ["Privacy Policy", "Политика за поверителност", "Политика конфиденциальности", "Datenschutzrichtlinie", "Política de privacidad", "Politique de confidentialité"],
-  ["How to Use the AI Trading Bot", "Как да използвате AI Trading Bot", "Как пользоваться AI Trading Bot", "So verwenden Sie den AI Trading Bot", "Cómo usar el AI Trading Bot", "Comment utiliser l'AI Trading Bot"],
-  ["Set up a 6-digit PIN code required for withdrawals", "Задайте 6-цифрен PIN код, необходим за тегления", "Задайте 6-значный PIN-код, необходимый для вывода средств", "Richten Sie einen 6-stelligen PIN-Code für Auszahlungen ein", "Configura un código PIN de 6 dígitos necesario para los retiros", "Définissez un code PIN à 6 chiffres requis pour les retraits"],
-  ["Change the PIN code required for withdrawals", "Променете PIN кода за тегления", "Измените PIN-код для вывода средств", "Ändern Sie den PIN-Code für Auszahlungen", "Cambia el código PIN de los retiros", "Modifiez le code PIN des retraits"],
-  ["Current PIN", "Текущ PIN", "Текущий PIN", "Aktuelle PIN", "PIN actual", "PIN actuel"],
-  ["New PIN", "Нов PIN", "Новый PIN", "Neue PIN", "PIN nuevo", "Nouveau PIN"],
-  ["Save PIN", "Запази PIN", "Сохранить PIN", "PIN speichern", "Guardar PIN", "Enregistrer le PIN"],
-  ["Set up a PIN code that locks the site", "Задайте PIN код, който заключва сайта", "Задайте PIN-код, блокирующий сайт", "Richten Sie einen PIN-Code zum Sperren der Seite ein", "Configura un código PIN que bloquee el sitio", "Définissez un code PIN qui verrouille le site"],
-  ["Change the PIN code that unlocks the site", "Променете PIN кода, който отключва сайта", "Измените PIN-код для разблокировки сайта", "Ändern Sie den PIN-Code zum Entsperren der Seite", "Cambia el código PIN que desbloquea el sitio", "Modifiez le code PIN qui déverrouille le site"],
-  ["4 digits", "4 цифри", "4 цифры", "4 Ziffern", "4 dígitos", "4 chiffres"],
-  ["6 digits", "6 цифри", "6 цифр", "6 Ziffern", "6 dígitos", "6 chiffres"],
-  ["Current Password", "Текуща парола", "Текущий пароль", "Aktuelles Passwort", "Contraseña actual", "Mot de passe actuel"],
-  ["Save Password", "Запази паролата", "Сохранить пароль", "Passwort speichern", "Guardar contraseña", "Enregistrer le mot de passe"],
-  ["Light", "Светъл", "Светлая", "Hell", "Claro", "Clair"],
-  ["Dark", "Тъмен", "Тёмная", "Dunkel", "Oscuro", "Sombre"],
-  ["Language", "Език", "Язык", "Sprache", "Idioma", "Langue"],
-  ["Active sessions", "Активни сесии", "Активные сессии", "Aktive Sitzungen", "Sesiones activas", "Sessions actives"],
-  ["Log out other sessions", "Изход от другите сесии", "Выйти из других сессий", "Andere Sitzungen abmelden", "Cerrar otras sesiones", "Déconnecter les autres sessions"],
-  ["Login history", "История на входовете", "История входов", "Anmeldeverlauf", "Historial de inicios de sesión", "Historique des connexions"],
-  ["This device", "Това устройство", "Это устройство", "Dieses Gerät", "Este dispositivo", "Cet appareil"],
-  ["Unknown IP", "Неизвестен IP", "Неизвестный IP", "Unbekannte IP", "IP desconocida", "IP inconnue"],
-  ["Unknown device", "Неизвестно устройство", "Неизвестное устройство", "Unbekanntes Gerät", "Dispositivo desconocido", "Appareil inconnu"],
-  ["Are you sure you want to log out of your account?", "Сигурни ли сте, че искате да излезете от профила си?", "Вы уверены, что хотите выйти из аккаунта?", "Möchten Sie sich wirklich von Ihrem Konto abmelden?", "¿Seguro que quieres cerrar sesión en tu cuenta?", "Voulez-vous vraiment vous déconnecter de votre compte ?"],
-  ["Yes", "Да", "Да", "Ja", "Sí", "Oui"],
-  ["No", "Не", "Нет", "Nein", "No", "Non"],
-  ["Open menu", "Отвори менюто", "Открыть меню", "Menü öffnen", "Abrir menú", "Ouvrir le menu"],
-  ["Back", "Назад", "Назад", "Zurück", "Atrás", "Retour"],
-  ["Show or hide", "Покажи или скрий", "Показать или скрыть", "Anzeigen oder verbergen", "Mostrar u ocultar", "Afficher ou masquer"],
-  ["Text size", "Размер на текста", "Размер текста", "Textgröße", "Tamaño del texto", "Taille du texte"],
-  ["Enter a valid email address.", "Въведете валиден имейл адрес.", "Введите действительный адрес эл. почты.", "Geben Sie eine gültige E-Mail-Adresse ein.", "Introduce un correo electrónico válido.", "Saisissez une adresse e-mail valide."],
-  ["Password must be at least 8 characters.", "Паролата трябва да е поне 8 символа.", "Пароль должен содержать не менее 8 символов.", "Das Passwort muss mindestens 8 Zeichen lang sein.", "La contraseña debe tener al menos 8 caracteres.", "Le mot de passe doit contenir au moins 8 caractères."],
-  ["Password needs an uppercase and a lowercase letter.", "Паролата трябва да съдържа главна и малка буква.", "Пароль должен содержать заглавную и строчную букву.", "Das Passwort benötigt einen Groß- und einen Kleinbuchstaben.", "La contraseña necesita una mayúscula y una minúscula.", "Le mot de passe doit contenir une majuscule et une minuscule."],
-  ["Passwords do not match.", "Паролите не съвпадат.", "Пароли не совпадают.", "Die Passwörter stimmen nicht überein.", "Las contraseñas no coinciden.", "Les mots de passe ne correspondent pas."],
-  ["Invite code must be 10 digits.", "Кодът за покана трябва да е 10 цифри.", "Код приглашения должен состоять из 10 цифр.", "Der Einladungscode muss aus 10 Ziffern bestehen.", "El código de invitación debe tener 10 dígitos.", "Le code d'invitation doit comporter 10 chiffres."],
-  ["Enter the 6-digit code.", "Въведете 6-цифрения код.", "Введите 6-значный код.", "Geben Sie den 6-stelligen Code ein.", "Introduce el código de 6 dígitos.", "Saisissez le code à 6 chiffres."],
-  ["Enter your current password.", "Въведете текущата си парола.", "Введите текущий пароль.", "Geben Sie Ihr aktuelles Passwort ein.", "Introduce tu contraseña actual.", "Saisissez votre mot de passe actuel."],
-  ["Invalid invite code.", "Невалиден код за покана.", "Недействительный код приглашения.", "Ungültiger Einladungscode.", "Código de invitación no válido.", "Code d'invitation invalide."],
-  ["This email is already registered. Log in instead.", "Този имейл вече е регистриран. Влезте в профила си.", "Этот адрес уже зарегистрирован. Войдите в аккаунт.", "Diese E-Mail ist bereits registriert. Bitte melden Sie sich an.", "Este correo ya está registrado. Inicia sesión.", "Cet e-mail est déjà enregistré. Connectez-vous."],
-  ["Incorrect email or password.", "Грешен имейл или парола.", "Неверный адрес эл. почты или пароль.", "Falsche E-Mail oder falsches Passwort.", "Correo o contraseña incorrectos.", "E-mail ou mot de passe incorrect."],
-  ["Invalid or expired code.", "Невалиден или изтекъл код.", "Неверный или просроченный код.", "Ungültiger oder abgelaufener Code.", "Código no válido o caducado.", "Code invalide ou expiré."],
-  ["Password updated.", "Паролата е обновена.", "Пароль обновлён.", "Passwort aktualisiert.", "Contraseña actualizada.", "Mot de passe mis à jour."],
-  ["PIN saved.", "PIN кодът е запазен.", "PIN-код сохранён.", "PIN gespeichert.", "PIN guardado.", "PIN enregistré."],
-  ["Other sessions were logged out.", "Другите сесии бяха прекратени.", "Другие сессии завершены.", "Andere Sitzungen wurden abgemeldet.", "Se cerraron las otras sesiones.", "Les autres sessions ont été déconnectées."],
-  ["Enter the 6-digit PIN.", "Въведете 6-цифрения PIN.", "Введите 6-значный PIN-код.", "Geben Sie die 6-stellige PIN ein.", "Introduce el PIN de 6 dígitos.", "Saisissez le PIN à 6 chiffres."],
-  ["Enter the 4-digit PIN.", "Въведете 4-цифрения PIN.", "Введите 4-значный PIN-код.", "Geben Sie die 4-stellige PIN ein.", "Introduce el PIN de 4 dígitos.", "Saisissez le PIN à 4 chiffres."],
-  ["Too many attempts. Try again later.", "Твърде много опити. Опитайте по-късно.", "Слишком много попыток. Повторите позже.", "Zu viele Versuche. Bitte versuchen Sie es später erneut.", "Demasiados intentos. Inténtalo más tarde.", "Trop de tentatives. Réessayez plus tard."],
-  ["Incorrect PIN.", "Грешен PIN.", "Неверный PIN-код.", "Falsche PIN.", "PIN incorrecto.", "PIN incorrect."],
-  ["Incorrect password.", "Грешна парола.", "Неверный пароль.", "Falsches Passwort.", "Contraseña incorrecta.", "Mot de passe incorrect."],
-  ["Incorrect password or PIN.", "Грешна парола или PIN.", "Неверный пароль или PIN-код.", "Falsches Passwort oder falsche PIN.", "Contraseña o PIN incorrectos.", "Mot de passe ou PIN incorrect."],
-  ["Email does not match your account.", "Имейлът не съвпада с акаунта ви.", "Адрес не совпадает с вашим аккаунтом.", "Die E-Mail stimmt nicht mit Ihrem Konto überein.", "El correo no coincide con tu cuenta.", "L'e-mail ne correspond pas à votre compte."],
-  ["Set a withdrawal PIN first.", "Първо задайте PIN за тегления.", "Сначала задайте PIN-код для вывода.", "Legen Sie zuerst eine Auszahlungs-PIN fest.", "Primero configura un PIN de retiros.", "Définissez d'abord un PIN de retrait."],
-  ["Invalid PIN.", "Невалиден PIN.", "Недействительный PIN-код.", "Ungültige PIN.", "PIN no válido.", "PIN invalide."],
-  ["No PIN is set.", "Няма зададен PIN.", "PIN-код не задан.", "Es ist keine PIN festgelegt.", "No hay ningún PIN configurado.", "Aucun PIN n'est défini."],
-  ["Something went wrong. Try again.", "Нещо се обърка. Опитайте отново.", "Что-то пошло не так. Попробуйте ещё раз.", "Etwas ist schiefgelaufen. Bitte erneut versuchen.", "Algo salió mal. Inténtalo de nuevo.", "Une erreur s'est produite. Réessayez."],
-  ["Message", "Съобщение", "Сообщение", "Nachricht", "Mensaje", "Message"],
-  ["Attach photo", "Прикачи снимка", "Прикрепить фото", "Foto anhängen", "Adjuntar foto", "Joindre une photo"],
-  ["Send", "Изпрати", "Отправить", "Senden", "Enviar", "Envoyer"],
-  ["Remove photo", "Премахни снимката", "Удалить фото", "Foto entfernen", "Quitar foto", "Retirer la photo"],
-  ["Photo", "Снимка", "Фото", "Foto", "Foto", "Photo"],
-  ["Send us a message. Our team will reply here.", "Изпратете ни съобщение. Екипът ни ще отговори тук.", "Отправьте нам сообщение. Наша команда ответит здесь.", "Senden Sie uns eine Nachricht. Unser Team antwortet hier.", "Envíanos un mensaje. Nuestro equipo responderá aquí.", "Envoyez-nous un message. Notre équipe vous répondra ici."],
-  ["Could not send the message. Try again.", "Съобщението не беше изпратено. Опитайте отново.", "Не удалось отправить сообщение. Попробуйте ещё раз.", "Die Nachricht konnte nicht gesendet werden. Bitte erneut versuchen.", "No se pudo enviar el mensaje. Inténtalo de nuevo.", "Le message n'a pas pu être envoyé. Réessayez."],
-  ["Too many messages. Try again in a minute.", "Твърде много съобщения. Опитайте след минута.", "Слишком много сообщений. Повторите через минуту.", "Zu viele Nachrichten. Bitte versuchen Sie es in einer Minute erneut.", "Demasiados mensajes. Inténtalo en un minuto.", "Trop de messages. Réessayez dans une minute."],
-  ["Choose an image file.", "Изберете файл със снимка.", "Выберите файл изображения.", "Wählen Sie eine Bilddatei aus.", "Elige un archivo de imagen.", "Choisissez un fichier image."]
-];
-const columns = { bg: 1, ru: 2, de: 3, es: 4, fr: 5 };
-const keys = new Set(I18N.map((r) => r[0]));
-const origText = new WeakMap();
-const origAttr = new WeakMap();
-let dict = {};
-const tr = (s) => dict[s] || s;
-const translateDom = () => {
-  const col = columns[prefs.language];
-  dict = col ? Object.fromEntries(I18N.map((r) => [r[0], r[col]])) : {};
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
-    const now = n.nodeValue.trim();
-    const en = origText.get(n) || now;
-    if (!keys.has(en)) continue;
-    origText.set(n, en);
-    n.nodeValue = n.nodeValue.replace(now, tr(en));
-  }
-  document.querySelectorAll("[placeholder],[aria-label]").forEach((el) => {
-    const saved = origAttr.get(el) || {};
-    ["placeholder", "aria-label"].forEach((a) => {
-      const en = saved[a] || el.getAttribute(a);
-      if (!keys.has(en)) return;
-      saved[a] = en;
-      el.setAttribute(a, tr(en));
+let translator = null;
+const pick = (code, tries = 40) => {
+  const combo = $("select.goog-te-combo");
+  if (!combo) return tries && setTimeout(() => pick(code, tries - 1), 250);
+  combo.value = code;
+  combo.dispatchEvent(new Event("change", { bubbles: true }));
+  combo.dispatchEvent(new Event("change", { bubbles: true }));
+};
+const translate = (code) => {
+  if (code === "en" && !translator) return;
+  if (!translator) {
+    translator = new Promise((resolve) => {
+      window.translatorReady = () => {
+        new google.translate.TranslateElement({ pageLanguage: "en", includedLanguages: Object.keys(langs).join(","), autoDisplay: false }, "translator");
+        resolve();
+      };
+      const script = Object.assign(document.createElement("script"), { src: "https://translate.google.com/translate_a/element.js?cb=translatorReady" });
+      script.onerror = () => (translator = null);
+      document.head.append(script);
     });
-    origAttr.set(el, saved);
-  });
+  }
+  translator.then(() => pick(code));
 };
 const prefs = { currency: "USD", theme: "dark", language: "en", text_size: 16 };
 try {
@@ -700,13 +597,11 @@ const applyPrefs = () => {
   const root = document.documentElement;
   root.dataset.theme = prefs.theme;
   root.style.fontSize = prefs.text_size + "px";
-  root.lang = prefs.language;
 };
 const syncAppearance = () => {
   $("#currency").style.setProperty("--i", ["EUR", "USD", "GBP", "JPY"].indexOf(prefs.currency));
   document.querySelectorAll("[data-currency]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.currency === prefs.currency)));
-  $("#theme").style.setProperty("--i", prefs.theme === "dark" ? 1 : 0);
-  document.querySelectorAll("#theme button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === prefs.theme)));
+  $("#theme").checked = prefs.theme === "light";
   $("#size").value = prefs.text_size;
   $("#lang-name").textContent = langs[prefs.language];
   document.querySelectorAll("#lang .opt").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.code === prefs.language)));
@@ -724,7 +619,7 @@ const setPref = async (patch, persist = true) => {
   }
   Object.assign(prefs, patch);
   applyPrefs();
-  if (patch.language) translateDom();
+  if (patch.language) translate(prefs.language);
   syncAppearance();
   savePrefs();
   if (userId && persist) await db.from("user_settings").upsert({ user_id: userId, ...prefs });
@@ -734,31 +629,106 @@ const loadPrefs = async () => {
   if (!data) return;
   Object.assign(prefs, data);
   applyPrefs();
-  translateDom();
+  translate(prefs.language);
   syncAppearance();
   savePrefs();
 };
 applyPrefs();
-translateDom();
+translate(prefs.language);
 syncAppearance();
-const loadSettings = async () => {
-  const { data } = await db.auth.mfa.listFactors();
-  $("#twofa-status").textContent = data && data.totp && data.totp.length ? tr("Enabled") : tr("Disabled");
+const parseUA = (ua = "") => {
+  const ver = (re) => ((ua.match(re) || [])[1] || "").replace(/_/g, ".");
+  const name = (a, b) => [a, b].filter(Boolean).join(" ");
+  if (/iPhone/.test(ua)) return { model: "iPhone", os: name("iOS", ver(/OS (\d+(?:_\d+)*)/)) };
+  if (/iPad/.test(ua)) return { model: "iPad", os: name("iPadOS", ver(/OS (\d+(?:_\d+)*)/)) };
+  if (/Android/.test(ua)) {
+    const model = (ua.match(/Android [\d.]+; ([^;)]+?)(?: Build|[;)])/) || [])[1] || "";
+    const real = model.length > 1 && !/^(Mobile|Tablet)$/i.test(model);
+    return { model: real ? model : "Android phone", os: real ? name("Android", ver(/Android ([\d.]+)/)) : "Android" };
+  }
+  if (/Windows/.test(ua)) return { model: "Windows PC", os: "Windows" };
+  if (/CrOS/.test(ua)) return { model: "Chromebook", os: "ChromeOS" };
+  if (/Macintosh|Mac OS X/.test(ua)) return { model: "Mac", os: "macOS" };
+  if (/Linux|X11/.test(ua)) return { model: "Linux PC", os: "Linux" };
+  return { model: "", os: "" };
 };
-const sessionRow = (ip, ua, when, tag) => {
+const deviceInfo = async () => {
+  const base = parseUA(navigator.userAgent);
+  const hints = navigator.userAgentData;
+  if (!hints) return base;
+  try {
+    const h = await hints.getHighEntropyValues(["model", "platformVersion"]);
+    const major = parseInt(h.platformVersion, 10);
+    if (hints.platform === "Android" && major) return { model: h.model || base.model, os: "Android " + major };
+    if (hints.platform === "Windows" && !Number.isNaN(major)) return { model: "Windows PC", os: major >= 13 ? "Windows 11" : "Windows 10" };
+    if (hints.platform === "macOS" && major) return { model: "Mac", os: "macOS " + h.platformVersion.split(".").slice(0, 2).join(".") };
+  } catch {}
+  return base;
+};
+const registerDevice = async () => {
+  const d = await deviceInfo();
+  await db.rpc("register_device", { p_model: d.model, p_os: d.os });
+};
+const places = new Map();
+const lookup = async (ip) => {
+  for (const url of [`https://ipwho.is/${ip}?fields=success,city,country`, `https://get.geojs.io/v1/ip/geo/${ip}.json`]) {
+    try {
+      const r = await (await fetch(url)).json();
+      const text = r.success === false ? "" : [r.city, r.country].filter(Boolean).join(", ");
+      if (text) return text;
+    } catch {}
+  }
+  return "";
+};
+const where = (ip) => {
+  if (!ip) return Promise.resolve("");
+  if (!places.has(ip)) places.set(ip, lookup(ip));
+  return places.get(ip);
+};
+const when = (iso) => new Date(iso).toLocaleString(prefs.language, { dateStyle: "long", timeStyle: "short" });
+const renderChange = (b) => {
+  const key = b.dataset.change;
+  const isSet = !b.dataset.set || security[b.dataset.set];
+  b.querySelector("small").textContent = security[key] ? when(security[key]) : isSet ? "Unknown" : "Not set yet";
+};
+const trashIcon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>`;
+const trashButton = (id) => {
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "round danger", innerHTML: trashIcon });
+  b.setAttribute("aria-label", "Delete session");
+  b.addEventListener("click", async () => {
+    b.disabled = true;
+    const r = await call("revoke_session", { p_id: id });
+    if (r !== "ok") {
+      b.disabled = false;
+      return toast(say.error);
+    }
+    toast("Session deleted.", true);
+    loadSessions();
+  });
+  return b;
+};
+const historyRow = (e, active) => {
   const li = document.createElement("li");
   const info = document.createElement("span");
+  const place = cell("Locating…");
+  const d = e.device_model || e.device_os ? { model: e.device_model, os: e.device_os } : parseUA(e.user_agent);
   li.className = "box";
   info.className = "info";
-  info.append(cell(ip || tr("Unknown IP")), cell(ua || tr("Unknown device"), "meta"), cell(new Date(when).toLocaleString(prefs.language), "meta"));
+  info.append(place, cell([d.model, d.os].filter(Boolean).join(" · ") || "Unknown device", "meta"), cell(new Date(e.created_at).toLocaleString(prefs.language), "meta"));
   li.append(info);
-  if (tag) li.append(cell(tag, "meta"));
+  where(e.ip).then((text) => (place.textContent = text || "Unknown location"));
+  if (active.has(e.session_id)) li.append(active.get(e.session_id) ? cell("This device", "meta") : trashButton(e.session_id));
   return li;
 };
 const loadSessions = async () => {
-  const [{ data: live }, { data: log }] = await Promise.all([db.rpc("my_sessions"), db.from("login_events").select("ip,user_agent,created_at").order("created_at", { ascending: false }).limit(50)]);
-  $("#live").replaceChildren(...(live || []).map((s) => sessionRow(s.ip, s.user_agent, s.last_active, s.is_current ? tr("This device") : "")));
-  $("#history").replaceChildren(...(log || []).map((e) => sessionRow(e.ip, e.user_agent, e.created_at, "")));
+  const [, { data: live }, { data: log }] = await Promise.all([
+    refreshSecurity(),
+    db.rpc("my_sessions"),
+    db.from("login_events").select("session_id,ip,user_agent,device_model,device_os,created_at").order("created_at", { ascending: false }).limit(50)
+  ]);
+  document.querySelectorAll("[data-change]").forEach(renderChange);
+  const active = new Map((live || []).map((x) => [x.id, x.is_current]));
+  $("#history").replaceChildren(...(log || []).map((e) => historyRow(e, active)));
 };
 const seen = new Set();
 let channel = null;
@@ -786,7 +756,7 @@ const bubble = (m, urls) => {
   el.className = "msg " + (m.sender === "user" ? "mine" : "theirs");
   if (urls[m.image_path]) {
     const a = Object.assign(document.createElement("a"), { href: urls[m.image_path], target: "_blank", rel: "noopener" });
-    a.append(Object.assign(new Image(), { src: urls[m.image_path], alt: tr("Photo"), loading: "lazy" }));
+    a.append(Object.assign(new Image(), { src: urls[m.image_path], alt: "Photo", loading: "lazy" }));
     el.append(a);
   }
   if (m.body) el.append(cell(m.body));
@@ -885,6 +855,7 @@ const send = async (e) => {
   show([data]);
 };
 const afterLogin = async () => {
+  registerDevice();
   await Promise.all([refreshSecurity(), loadPrefs()]);
   if (security.lock_set && security.lock_digits && !unlocked) openLock();
   startSupport();
@@ -927,13 +898,13 @@ const loadMarket = (() => {
   }).format(value));
 
   const coinCell = coin => `
-    <div class="coin">
+    <div class="coin" translate="no">
       <img src="${coin.image}" alt="" draggable="false" loading="lazy">
       <div><b>${coin.name}</b><span>${coin.symbol}</span></div>
     </div>`;
 
   const modeButton = () => {
-    const label = tr(view.candles ? 'Switch to line chart' : 'Switch to candlestick chart');
+    const label = view.candles ? 'Switch to line chart' : 'Switch to candlestick chart';
     return `<button class="mode" aria-label="${label}" title="${label}">${view.candles ? ICONS.line : ICONS.candles}</button>`;
   };
 
@@ -970,7 +941,7 @@ const loadMarket = (() => {
         <td class="num md">${money(coin.market_cap, true)}</td>
         <td class="num md">${spark(coin.sparkline_in_7d?.price ?? [])}</td>
       </tr>`).join('');
-    notice.textContent = list.length ? '' : tr('No coins match your search.');
+    notice.textContent = list.length ? '' : 'No coins match your search.';
   };
 
   const load = async () => {
@@ -982,7 +953,7 @@ const loadMarket = (() => {
       render();
     } catch {
       if (!coins.length) rows.innerHTML = '';
-      notice.textContent = tr('Unable to load market data. Please try again shortly.');
+      notice.textContent = 'Unable to load market data. Please try again shortly.';
     }
   };
 
@@ -1094,7 +1065,7 @@ const loadMarket = (() => {
     } catch {
       if (request !== ticket) return;
       chart = [];
-      tip.textContent = tr('Chart is unavailable right now. Please try again shortly.');
+      tip.textContent = 'Chart is unavailable right now. Please try again shortly.';
     }
   };
 
@@ -1117,7 +1088,7 @@ const loadMarket = (() => {
     chart = [];
     detail.innerHTML = `
       <div class="sheet">
-        <div class="head"><button class="back" aria-label="${tr('Back')}">${ICONS.back}</button>${coinCell(coin)}</div>
+        <div class="head"><button class="back" aria-label="Back">${ICONS.back}</button>${coinCell(coin)}</div>
         <div class="price">
           <strong>${money(coin.current_price)}</strong>
           <span class="pill ${dir(coin.price_change_percentage_24h)}">${pct(coin.price_change_percentage_24h)}</span>
@@ -1127,7 +1098,7 @@ const loadMarket = (() => {
           <div class="ranges">${RANGES.map(([days, label], index) => `<button data-days="${days}"${index ? '' : ' class="on"'}>${label}</button>`).join('')}</div>
           ${modeButton()}
         </div>
-        <dl class="stats">${stats(coin).map(([label, value]) => `<div><dt>${tr(label)}</dt><dd>${value}</dd></div>`).join('')}</dl>
+        <dl class="stats">${stats(coin).map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl>
       </div>`;
     detail.showModal();
     loadChart();
@@ -1183,7 +1154,7 @@ const loadMarket = (() => {
     load();
   };
 })();
-const loaders = { network: loadNetwork, market: loadMarket, settings: loadSettings, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
+const loaders = { network: loadNetwork, market: loadMarket, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
 const showView = (name) => {
   $("#detail").close();
   document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
@@ -1245,12 +1216,12 @@ $("#pw-forgot").addEventListener("click", () => $("#reset").showModal());
 $("#delete-open").addEventListener("click", () => (security.withdraw_set ? $("#delete").showModal() : toast(say.no_pin)));
 document.querySelectorAll("#lk-len button").forEach((b) => b.addEventListener("click", () => lockLength(Number(b.dataset.len))));
 document.querySelectorAll("[data-currency]").forEach((b) => b.addEventListener("click", () => setPref({ currency: b.dataset.currency })));
-document.querySelectorAll("#theme button").forEach((b) => b.addEventListener("click", () => setPref({ theme: b.dataset.mode })));
+$("#theme").addEventListener("change", (e) => setPref({ theme: e.target.checked ? "light" : "dark" }));
 $("#size").addEventListener("input", (e) => setPref({ text_size: Number(e.target.value) }, false));
 $("#size").addEventListener("change", (e) => setPref({ text_size: Number(e.target.value) }));
 $("#lang-open").addEventListener("click", () => $("#lang").showModal());
 $("#lang form").append(...Object.entries(langs).map(([code, name]) => {
-  const b = Object.assign(document.createElement("button"), { type: "button", className: "opt", textContent: name });
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "opt", textContent: name, translate: false });
   b.dataset.code = code;
   b.setAttribute("role", "radio");
   b.addEventListener("click", () => {
@@ -1264,12 +1235,12 @@ syncAppearance();
 document.addEventListener("focusin", (e) => {
   if (e.target.closest && e.target.closest(".pin")) e.target.select();
 });
-$("#others").addEventListener("click", async () => {
-  const { error } = await db.auth.signOut({ scope: "others" });
-  if (error) return toast(say.error);
-  toast("Other sessions were logged out.", true);
-  loadSessions();
-});
+document.querySelectorAll("[data-change]").forEach((b) => b.addEventListener("click", () => {
+  const open = b.getAttribute("aria-expanded") !== "true";
+  renderChange(b);
+  b.querySelector("small").hidden = !open;
+  b.setAttribute("aria-expanded", String(open));
+}));
 document.addEventListener("keydown", (e) => {
   const el = e.target;
   if (e.key === "Backspace" && !el.value && el.closest(".pin") && el.previousElementSibling) el.previousElementSibling.focus();
@@ -1284,11 +1255,12 @@ document.addEventListener("paste", (e) => {
   });
   (box.children[Math.min(digits.length, box.children.length) - 1] || box.firstChild).focus();
   if (box.id === "lock-pin") unlockWith(pinValue(box));
+  syncSave();
 });
 document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
   await navigator.clipboard.writeText($("#" + b.dataset.copy).textContent);
-  b.textContent = tr("Copied");
-  setTimeout(() => (b.textContent = tr("Copy")), 1500);
+  b.textContent = "Copied";
+  setTimeout(() => (b.textContent = "Copy"), 1500);
 }));
 db.auth.onAuthStateChange((event, session) => {
   if (event === "PASSWORD_RECOVERY") return;
@@ -1313,8 +1285,11 @@ const handle = (selector, task) => $(selector).addEventListener("submit", async 
   if (!validate(f)) return;
   const btn = f.querySelector(".cta");
   btn.disabled = true;
+  busy.add(f);
   await task(f, Object.fromEntries(new FormData(f)));
+  busy.delete(f);
   btn.disabled = false;
+  syncSave();
 });
 handle("#signup-form", async (f, v) => {
   const { data, error } = await db.auth.signUp({ email: v.email, password: v.password, options: { data: { invite_code: v.invite } } });
