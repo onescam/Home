@@ -67,7 +67,7 @@ main{padding:32px 20px}
 .tile{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border:1px solid var(--silver);border-radius:14px;cursor:pointer}
 .sw{position:relative;flex:none;width:56px;height:32px}
 .sw input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:999px;-webkit-appearance:none;appearance:none;background:var(--silver);cursor:pointer;transition:background-color .3s}
-.sw input:checked{background:#2f5fd0}
+.sw input:checked{background:#34c759}
 .sw input:focus{box-shadow:none}
 .sw input:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
 .knob{position:absolute;top:3px;left:3px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff;color:#111;box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .3s cubic-bezier(.22,.8,.3,1);pointer-events:none}
@@ -78,16 +78,21 @@ main{padding:32px 20px}
 .pin{display:flex;gap:8px;justify-content:center}
 .pin input{flex:1;width:auto;min-width:0;max-width:52px;aspect-ratio:1;padding:0;text-align:center;font-size:1.25rem}
 .card.size{display:flex;align-items:center;gap:14px}
-.size input{flex:1;height:32px;padding:0;border:0;background:none;accent-color:#e4ba3f;touch-action:pan-x}
+.size input{flex:1;height:32px;padding:0;border:0;background:none;accent-color:var(--strong);touch-action:pan-x}
 .size input:focus{box-shadow:none}
 .size input:focus-visible{outline:2px solid var(--gold-hi);outline-offset:4px}
 .aa{font-weight:600;color:var(--muted)}
 .aa.big{font-size:1.75rem;color:var(--strong)}
 .screen{position:fixed;inset:0;z-index:35;width:auto;margin:0;padding:76px max(20px,calc((100vw - 520px) / 2)) 24px;overflow-y:auto;background:var(--bg)}
 .screen .back{position:absolute;left:12px;top:15.5px;width:36px;height:36px;padding:0;background:none;border:0;font-size:1.75rem;line-height:1;color:var(--strong)}
-#lang .panel{gap:0;padding:8px 0}
-.opt{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 24px;border:0;border-bottom:1px solid var(--silver);background:none;text-align:left}
+#lang .panel{gap:0;max-height:min(72vh,560px);padding:8px 0;overflow-y:auto}
+#lang .opt:hover{background:rgba(128,128,128,.12)}
+#lang .opt:focus-visible{outline:0}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:16px 24px;border:0;border-bottom:1px solid var(--silver);background:none;text-align:left}
 .opt:last-child{border-bottom:0}
+.opt .flag{flex:none;width:24px;height:18px;border-radius:2px;object-fit:cover;box-shadow:0 0 0 1px rgba(128,128,128,.4)}
+.opt span{flex:1}
+.opt small{margin-left:8px;font-size:.8125rem;color:var(--muted)}
 .opt[aria-checked=true]::after{content:"✓";font-weight:700;color:var(--strong)}
 #confirm{width:min(270px,78vw);padding:0;border:0;border-radius:14px;background:rgba(248,248,250,.94);color:#000;-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);box-shadow:0 12px 40px rgba(0,0,0,.35)}
 #confirm::backdrop{background:rgba(0,0,0,.4)}
@@ -125,7 +130,7 @@ main{padding:32px 20px}
 #lock{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0}
 #lock[open]{display:grid;place-items:center}
 #lock .panel{width:min(360px,92vw)}
-#lock .note{text-align:center}
+#lock .note,#lock-off .note{text-align:center}
 .toast.ok{background:#1f7a46}
 .theming *{transition:background-color .45s ease,color .45s ease,border-color .45s ease!important}
 input{width:100%;padding:14px 16px;border:1px solid var(--silver);border-radius:12px;background:transparent;transition:border-color .2s,box-shadow .2s}
@@ -138,6 +143,13 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .cta:disabled{opacity:.6;cursor:wait}
 .cta.steel{background:linear-gradient(90deg,#3a6be6,#2a4fc0);color:#fff}
 .cta.steel:disabled{filter:none;opacity:.4;cursor:not-allowed}
+.cta.plain{background:none;border:1px solid var(--silver);color:var(--strong)}
+input[readonly]{color:var(--muted)}
+.timeline{position:relative;display:flex;flex-direction:column;gap:14px;margin:0;padding:0 0 0 24px;list-style:none}
+.timeline::before{content:"";position:absolute;top:10px;bottom:10px;left:5px;width:2px;background:var(--silver)}
+.timeline li{position:relative;display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--silver);border-radius:14px;overflow-wrap:anywhere}
+.timeline li::before{content:"";position:absolute;top:20px;left:-24px;width:12px;height:12px;box-sizing:border-box;border:2px solid var(--silver-hi);border-radius:50%;background:var(--bg)}
+.timeline li span:first-child{font-weight:600;color:var(--strong)}
 .bad,.bad:focus{border-color:#e5484d;box-shadow:0 0 0 1px rgba(229,72,77,.45),0 0 14px rgba(229,72,77,.2)}
 .field{position:relative}
 .field input{padding-right:48px}
@@ -145,11 +157,9 @@ input:-webkit-autofill{-webkit-text-fill-color:var(--text);transition:border-col
 .field .eye{position:absolute;top:50%;right:8px;transform:translateY(-50%)}
 .eye:hover{color:var(--silver-hi)}
 .eye svg,.round svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.eye .slash{display:none}
-.eye[aria-pressed=true] .slash{display:block}
+.eye .slash{display:block}
+.eye[aria-pressed=true] .slash{display:none}
 .toast{pointer-events:none;inset:auto;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(92vw,420px);padding:12px 18px;border:0;border-radius:12px;background:#c42b30;color:#fff;font-size:.875rem;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.row[aria-expanded]::after{transition:transform .2s}
-.row[aria-expanded=true]::after{transform:rotate(90deg)}
 .round.danger{color:var(--danger)}
 .theming .knob{transition:transform .3s cubic-bezier(.22,.8,.3,1)!important}
 #translator{position:fixed;top:0;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -267,9 +277,10 @@ body{top:0!important}
 <section class="page stack" id="settings" hidden>
 <div class="group">
 <button class="row" type="button" data-go="blank">KYC Verification</button>
-<button class="row" type="button" data-go="security">Security settings</button>
+<button class="row" type="button" data-go="security">Security Settings</button>
 <button class="row" type="button" data-go="appearance">Appearance</button>
-<button class="row" type="button" data-go="sessions">Access &amp; Security Management</button>
+<button class="row" type="button" data-go="timeline">Account History</button>
+<button class="row" type="button" data-go="sessions">Devices</button>
 </div>
 <button class="row" type="button" data-go="blank">Why AI Trading Bot</button>
 <button class="row" type="button" data-go="blank">Frequently Asked Questions</button>
@@ -291,6 +302,7 @@ body{top:0!important}
 <p class="note" id="wp-text">Set up a 6-digit PIN code required for withdrawals</p>
 <div class="stack" id="wp-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="wp-old" data-len="6"></div></div>
 <div class="stack"><span class="note" id="wp-new-label" hidden>New PIN</span><div class="pin" id="wp-new" data-len="6"></div></div>
+<button class="link" id="wp-forgot" type="button" hidden>Forgot PIN</button>
 <button class="cta steel" type="submit" disabled>Save PIN</button>
 </form>
 <form class="card stack" id="lk-form">
@@ -299,6 +311,7 @@ body{top:0!important}
 <div class="stack" id="lk-old-wrap" hidden><span class="note">Current PIN</span><div class="pin" id="lk-old" data-len="6"></div></div>
 <div class="stack"><span class="note" id="lk-new-label" hidden>New PIN</span><div class="pin" id="lk-new" data-len="6"></div></div>
 <button class="cta steel" type="submit" disabled>Save PIN</button>
+<button class="cta plain" id="lk-off" type="button" hidden>Turn Off PIN Code</button>
 </form>
 <button class="cta danger" id="delete-open" type="button">Delete Account</button>
 </section>
@@ -311,11 +324,12 @@ body{top:0!important}
 <div class="card size"><span class="aa">A</span><input id="size" type="range" min="12" max="22" step="2" aria-label="Text size"><span class="aa big">A</span></div>
 <p class="card">This is a sample text. It shows how big the text will be at the selected size.</p>
 </section>
+<section class="page stack screen" id="timeline" hidden>
+<button class="back" type="button" data-go="settings" aria-label="Back">←</button>
+<ul class="timeline" id="events"></ul>
+</section>
 <section class="page stack screen" id="sessions" hidden>
 <button class="back" type="button" data-go="settings" aria-label="Back">←</button>
-<button class="row" type="button" data-change="password_changed_at" aria-expanded="false"><span>Last password change<small class="note" hidden></small></span></button>
-<button class="row" type="button" data-change="withdraw_changed_at" data-set="withdraw_set" aria-expanded="false"><span>Last withdrawal PIN change<small class="note" hidden></small></span></button>
-<button class="row" type="button" data-change="lock_changed_at" data-set="lock_set" aria-expanded="false"><span>Last site lock PIN change<small class="note" hidden></small></span></button>
 <p class="note">These are all your login histories.</p>
 <ul class="stack" id="history"></ul>
 </section>
@@ -353,9 +367,8 @@ body{top:0!important}
 <dialog id="reset" aria-label="Reset Password">
 <form class="panel" id="reset-form" novalidate>
 <h2>Reset Password</h2>
-<p class="note">Enter the email address on your account. We will send a 6-digit code to it.</p>
 <input name="email" type="email" data-rule="email" autocomplete="email" placeholder="Email Address" aria-label="Email Address">
-<button class="cta" type="submit">Send Request</button>
+<button class="cta steel" type="submit">Send Request</button>
 </form>
 </dialog>
 <dialog id="verify" aria-label="Verification Code">
@@ -391,6 +404,20 @@ body{top:0!important}
 <div class="pin" id="lock-pin"></div>
 </form>
 </dialog>
+<dialog id="lock-off" aria-label="Turn Off PIN Code">
+<form class="panel">
+<p class="note">Enter your PIN to turn it off</p>
+<div class="pin" id="lock-off-pin"></div>
+</form>
+</dialog>
+<dialog id="wp-reset" aria-label="Forgot PIN">
+<form class="panel" id="wp-reset-form" novalidate>
+<p class="note">Enter your account password and choose a new 6-digit PIN code for withdrawals</p>
+<input name="current" type="password" data-rule="password" autocomplete="current-password" placeholder="Account Password" aria-label="Account Password">
+<div class="pin" id="wp-reset-pin" data-len="6"></div>
+<button class="cta steel" type="submit" disabled>Save PIN</button>
+</form>
+</dialog>
 <dialog id="confirm" aria-label="Log Out">
 <form class="panel">
 <div class="ios-body"><p class="ios-title">Log Out</p><p class="ios-msg">Are you sure you want to log out of your account?</p></div>
@@ -408,11 +435,12 @@ const checks = {
   email: (v) => /^[\w.%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(v) ? "" : "Enter a valid email address.",
   password: (v) => v.length < 8 ? "Password must be at least 8 characters." : /[A-Z]/.test(v) && /[a-z]/.test(v) ? "" : "Password needs an uppercase and a lowercase letter.",
   confirm: (v, f) => v === f.password.value ? "" : "Passwords do not match.",
-  current: (v) => /^(?=.*[A-Z])(?=.*[a-z]).{8,}$/.test(v) ? "" : "Enter your current password.",
+  current: (v) => v ? "" : "Enter your current password.",
   invite: (v) => /^\d{10}$/.test(v) ? "" : "Invite code must be 10 digits.",
   code: (v) => /^\d{6}$/.test(v) ? "" : "Enter the 6-digit code."
 };
 let pending = null;
+let recovering = false;
 let toastAt = 0;
 let toastTimer = 0;
 const toast = (text, good = false) => {
@@ -479,6 +507,7 @@ document.addEventListener("input", (e) => {
   el.classList.remove("bad");
   if (box && clean && el.nextElementSibling) el.nextElementSibling.focus();
   if (box && box.id === "lock-pin") unlockWith(pinValue(box));
+  if (box && box.id === "lock-off-pin") disableLock(pinValue(box));
   syncSave();
 });
 const cell = (text, className = "") => Object.assign(document.createElement("span"), { textContent: text, className });
@@ -495,14 +524,14 @@ const loadNetwork = async () => {
     return li;
   }));
 };
-const say = { locked: "Too many attempts. Try again later.", bad_pin: "Incorrect PIN.", bad_password: "Incorrect password.", bad_credentials: "Incorrect password or PIN.", bad_email: "Email does not match your account.", no_pin: "Set a withdrawal PIN first.", invalid: "Invalid PIN.", none: "No PIN is set.", error: "Something went wrong. Try again." };
+const say = { locked: "Too many attempts. Try again later.", bad_pin: "Incorrect PIN.", bad_password: "Incorrect password.", bad_credentials: "Incorrect password or PIN.", bad_email: "Email does not match your account.", no_pin: "Set a withdrawal PIN first.", invalid: "Invalid PIN.", none: "No PIN is set.", weak: "Password needs 8 or more characters with an uppercase and a lowercase letter.", same: "The new password must be different from the current one.", error: "Something went wrong. Try again." };
 const call = async (fn, args) => {
   const { data, error } = await db.rpc(fn, args);
   return error ? "error" : data;
 };
 const pinValue = (box) => Array.from(box.children, (c) => c.value).join("");
 const busy = new WeakSet();
-const syncSave = () => ["#pw-form", "#wp-form", "#lk-form"].forEach((id) => {
+const syncSave = () => ["#pw-form", "#wp-form", "#lk-form", "#wp-reset-form"].forEach((id) => {
   const f = $(id);
   f.querySelector(".cta").disabled = busy.has(f) || !Array.from(f.querySelectorAll("input")).some((i) => i.value);
 });
@@ -537,11 +566,13 @@ const loadSecurity = async () => {
   const l = security.lock_set;
   $("#wp-old-wrap").hidden = !w;
   $("#wp-new-label").hidden = !w;
+  $("#wp-forgot").hidden = !w;
   $("#wp-text").textContent = w ? "Change the PIN code required for withdrawals" : "Set up a 6-digit PIN code required for withdrawals";
   buildPin($("#wp-old"), 6);
   buildPin($("#wp-new"), 6);
   $("#lk-old-wrap").hidden = !l;
   $("#lk-new-label").hidden = !l;
+  $("#lk-off").hidden = !l;
   $("#lk-text").textContent = l ? "Change the PIN code that unlocks the site" : "Set up a PIN code that locks the site";
   buildPin($("#lk-old"), security.lock_digits || 6);
   lockLength(security.lock_digits || 6);
@@ -565,7 +596,85 @@ const unlockWith = async (pin) => {
   $("#lock-pin").firstChild.focus();
   toast(say[r] || say.error);
 };
-const langs = { en: "English", bg: "Български", ru: "Русский", de: "Deutsch", es: "Español", fr: "Français" };
+const disableLock = async (pin) => {
+  if (checking || pin.length !== security.lock_digits) return;
+  checking = true;
+  const r = await call("clear_lock_pin", { p_pin: pin });
+  checking = false;
+  if (r === "ok") {
+    $("#lock-off").close();
+    toast("PIN code turned off.", true);
+    await loadSecurity();
+    return;
+  }
+  buildPin($("#lock-off-pin"), security.lock_digits);
+  markPin($("#lock-off-pin"));
+  $("#lock-off-pin").firstChild.focus();
+  toast(say[r] || say.error);
+};
+const langs = [
+  ["af", "Afrikaans", "Afrikaans", "za"],
+  ["sq", "Shqip", "Albanian", "al"],
+  ["ar", "العربية", "Arabic", "sa"],
+  ["hy", "Հայերեն", "Armenian", "am"],
+  ["az", "Azərbaycan", "Azerbaijani", "az"],
+  ["be", "Беларуская", "Belarusian", "by"],
+  ["bn", "বাংলা", "Bengali", "bd"],
+  ["bs", "Bosanski", "Bosnian", "ba"],
+  ["bg", "Български", "Bulgarian", "bg"],
+  ["zh-CN", "简体中文", "Chinese (Simplified)", "cn"],
+  ["zh-TW", "繁體中文", "Chinese (Traditional)", "tw"],
+  ["hr", "Hrvatski", "Croatian", "hr"],
+  ["cs", "Čeština", "Czech", "cz"],
+  ["da", "Dansk", "Danish", "dk"],
+  ["nl", "Nederlands", "Dutch", "nl"],
+  ["en", "English", "English", "gb"],
+  ["et", "Eesti", "Estonian", "ee"],
+  ["tl", "Filipino", "Filipino", "ph"],
+  ["fi", "Suomi", "Finnish", "fi"],
+  ["fr", "Français", "French", "fr"],
+  ["ka", "ქართული", "Georgian", "ge"],
+  ["de", "Deutsch", "German", "de"],
+  ["el", "Ελληνικά", "Greek", "gr"],
+  ["gu", "ગુજરાતી", "Gujarati", "in"],
+  ["iw", "עברית", "Hebrew", "il"],
+  ["hi", "हिन्दी", "Hindi", "in"],
+  ["hu", "Magyar", "Hungarian", "hu"],
+  ["is", "Íslenska", "Icelandic", "is"],
+  ["id", "Bahasa Indonesia", "Indonesian", "id"],
+  ["ga", "Gaeilge", "Irish", "ie"],
+  ["it", "Italiano", "Italian", "it"],
+  ["ja", "日本語", "Japanese", "jp"],
+  ["kk", "Қазақша", "Kazakh", "kz"],
+  ["km", "ខ្មែរ", "Khmer", "kh"],
+  ["ko", "한국어", "Korean", "kr"],
+  ["lv", "Latviešu", "Latvian", "lv"],
+  ["lt", "Lietuvių", "Lithuanian", "lt"],
+  ["mk", "Македонски", "Macedonian", "mk"],
+  ["ms", "Bahasa Melayu", "Malay", "my"],
+  ["mt", "Malti", "Maltese", "mt"],
+  ["mn", "Монгол", "Mongolian", "mn"],
+  ["ne", "नेपाली", "Nepali", "np"],
+  ["no", "Norsk", "Norwegian", "no"],
+  ["fa", "فارسی", "Persian", "ir"],
+  ["pl", "Polski", "Polish", "pl"],
+  ["pt", "Português", "Portuguese", "pt"],
+  ["ro", "Română", "Romanian", "ro"],
+  ["ru", "Русский", "Russian", "ru"],
+  ["sr", "Српски", "Serbian", "rs"],
+  ["sk", "Slovenčina", "Slovak", "sk"],
+  ["sl", "Slovenščina", "Slovenian", "si"],
+  ["es", "Español", "Spanish", "es"],
+  ["sw", "Kiswahili", "Swahili", "ke"],
+  ["sv", "Svenska", "Swedish", "se"],
+  ["ta", "தமிழ்", "Tamil", "in"],
+  ["th", "ไทย", "Thai", "th"],
+  ["tr", "Türkçe", "Turkish", "tr"],
+  ["uk", "Українська", "Ukrainian", "ua"],
+  ["ur", "اردو", "Urdu", "pk"],
+  ["uz", "Oʻzbek", "Uzbek", "uz"],
+  ["vi", "Tiếng Việt", "Vietnamese", "vn"]
+];
 let translator = null;
 const pick = (code, tries = 40) => {
   const combo = $("select.goog-te-combo");
@@ -579,7 +688,7 @@ const translate = (code) => {
   if (!translator) {
     translator = new Promise((resolve) => {
       window.translatorReady = () => {
-        new google.translate.TranslateElement({ pageLanguage: "en", includedLanguages: Object.keys(langs).join(","), autoDisplay: false }, "translator");
+        new google.translate.TranslateElement({ pageLanguage: "en", includedLanguages: langs.map((l) => l[0]).join(","), autoDisplay: false }, "translator");
         resolve();
       };
       const script = Object.assign(document.createElement("script"), { src: "https://translate.google.com/translate_a/element.js?cb=translatorReady" });
@@ -603,7 +712,7 @@ const syncAppearance = () => {
   document.querySelectorAll("[data-currency]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.currency === prefs.currency)));
   $("#theme").checked = prefs.theme === "light";
   $("#size").value = prefs.text_size;
-  $("#lang-name").textContent = langs[prefs.language];
+  $("#lang-name").textContent = (langs.find((l) => l[0] === prefs.language) || langs.find((l) => l[0] === "en"))[1];
   document.querySelectorAll("#lang .opt").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.code === prefs.language)));
 };
 const savePrefs = () => {
@@ -685,12 +794,6 @@ const where = (ip) => {
   if (!places.has(ip)) places.set(ip, lookup(ip));
   return places.get(ip);
 };
-const when = (iso) => new Date(iso).toLocaleString(prefs.language, { dateStyle: "long", timeStyle: "short" });
-const renderChange = (b) => {
-  const key = b.dataset.change;
-  const isSet = !b.dataset.set || security[b.dataset.set];
-  b.querySelector("small").textContent = security[key] ? when(security[key]) : isSet ? "Unknown" : "Not set yet";
-};
 const trashIcon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>`;
 const trashButton = (id) => {
   const b = Object.assign(document.createElement("button"), { type: "button", className: "round danger", innerHTML: trashIcon });
@@ -721,14 +824,34 @@ const historyRow = (e, active) => {
   return li;
 };
 const loadSessions = async () => {
-  const [, { data: live }, { data: log }] = await Promise.all([
-    refreshSecurity(),
+  const [{ data: live }, { data: log }] = await Promise.all([
     db.rpc("my_sessions"),
     db.from("login_events").select("session_id,ip,user_agent,device_model,device_os,created_at").order("created_at", { ascending: false }).limit(50)
   ]);
-  document.querySelectorAll("[data-change]").forEach(renderChange);
   const active = new Map((live || []).map((x) => [x.id, x.is_current]));
   $("#history").replaceChildren(...(log || []).map((e) => historyRow(e, active)));
+};
+const kinds = {
+  account_created: "Account created",
+  password_changed: "Password changed",
+  withdraw_pin_set: "Withdrawal PIN set",
+  withdraw_pin_changed: "Withdrawal PIN changed",
+  lock_pin_set: "Site lock code set",
+  lock_pin_changed: "Site lock code changed",
+  lock_pin_disabled: "Site lock code turned off"
+};
+const exact = (iso) => new Date(iso).toLocaleString(prefs.language, { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" });
+const eventRow = (e) => {
+  const li = document.createElement("li");
+  const place = cell("Locating…", "meta");
+  const d = e.device_model || e.device_os ? { model: e.device_model, os: e.device_os } : parseUA(e.user_agent);
+  li.append(cell(kinds[e.kind] || e.kind), cell(exact(e.created_at), "meta"), cell([d.model, d.os].filter(Boolean).join(" · ") || "Unknown device", "meta"), place);
+  where(e.ip).then((text) => (place.textContent = text || "Unknown location"));
+  return li;
+};
+const loadTimeline = async () => {
+  const { data } = await db.from("account_events").select("kind,ip,user_agent,device_model,device_os,created_at").order("created_at", { ascending: false }).order("id", { ascending: false }).limit(200);
+  $("#events").replaceChildren(...(data || []).map(eventRow));
 };
 const seen = new Set();
 let channel = null;
@@ -1154,7 +1277,7 @@ const loadMarket = (() => {
     load();
   };
 })();
-const loaders = { network: loadNetwork, market: loadMarket, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, support: loadSupport };
+const loaders = { network: loadNetwork, market: loadMarket, security: loadSecurity, appearance: syncAppearance, sessions: loadSessions, timeline: loadTimeline, support: loadSupport };
 const showView = (name) => {
   $("#detail").close();
   document.querySelectorAll("main > section").forEach((s) => (s.hidden = s.id !== name));
@@ -1165,9 +1288,15 @@ const toggleMenu = (open) => {
   $("#burger").setAttribute("aria-expanded", open);
 };
 document.querySelectorAll("[data-open]").forEach((b) => b.addEventListener("click", () => $("#" + b.dataset.open).showModal()));
+const openReset = (email) => {
+  const input = $("#reset-form").elements.email;
+  input.value = email;
+  input.readOnly = Boolean(email);
+  $("#reset").showModal();
+};
 $("#forgot").addEventListener("click", () => {
   $("#login").close();
-  $("#reset").showModal();
+  openReset("");
 });
 document.querySelectorAll("dialog:not(#detail)").forEach((d) => {
   const f = d.querySelector("form");
@@ -1177,6 +1306,11 @@ document.querySelectorAll("dialog:not(#detail)").forEach((d) => {
     f.querySelectorAll(".bad").forEach((el) => el.classList.remove("bad"));
     f.querySelectorAll(".eye[aria-pressed=true]").forEach((b) => b.click());
   });
+});
+$("#newpass").addEventListener("close", () => {
+  if (!recovering) return;
+  recovering = false;
+  db.auth.signOut({ scope: "local" });
 });
 $("#burger").addEventListener("click", () => toggleMenu(!document.body.classList.contains("menu-open")));
 $("#scrim").addEventListener("click", () => toggleMenu(false));
@@ -1212,16 +1346,29 @@ if (window.visualViewport) {
   visualViewport.addEventListener("resize", fit);
   visualViewport.addEventListener("scroll", fit);
 }
-$("#pw-forgot").addEventListener("click", () => $("#reset").showModal());
+$("#pw-forgot").addEventListener("click", () => openReset(profileEmail));
+$("#wp-forgot").addEventListener("click", () => $("#wp-reset").showModal());
+$("#lk-off").addEventListener("click", () => {
+  buildPin($("#lock-off-pin"), security.lock_digits);
+  $("#lock-off").showModal();
+});
 $("#delete-open").addEventListener("click", () => (security.withdraw_set ? $("#delete").showModal() : toast(say.no_pin)));
 document.querySelectorAll("#lk-len button").forEach((b) => b.addEventListener("click", () => lockLength(Number(b.dataset.len))));
 document.querySelectorAll("[data-currency]").forEach((b) => b.addEventListener("click", () => setPref({ currency: b.dataset.currency })));
 $("#theme").addEventListener("change", (e) => setPref({ theme: e.target.checked ? "light" : "dark" }));
 $("#size").addEventListener("input", (e) => setPref({ text_size: Number(e.target.value) }, false));
 $("#size").addEventListener("change", (e) => setPref({ text_size: Number(e.target.value) }));
-$("#lang-open").addEventListener("click", () => $("#lang").showModal());
-$("#lang form").append(...Object.entries(langs).map(([code, name]) => {
-  const b = Object.assign(document.createElement("button"), { type: "button", className: "opt", textContent: name, translate: false });
+$("#lang-open").addEventListener("click", () => {
+  $("#lang").showModal();
+  $("#lang .opt[aria-checked=true]").scrollIntoView({ block: "center" });
+});
+$("#lang form").append(...langs.map(([code, name, english, country]) => {
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "opt", translate: false });
+  const flag = Object.assign(new Image(), { className: "flag", src: `https://flagcdn.com/w40/${country}.png`, srcset: `https://flagcdn.com/w80/${country}.png 2x`, width: 24, height: 18, alt: "", loading: "lazy" });
+  const label = document.createElement("span");
+  const small = Object.assign(document.createElement("small"), { textContent: english });
+  label.append(name, small);
+  b.append(flag, label);
   b.dataset.code = code;
   b.setAttribute("role", "radio");
   b.addEventListener("click", () => {
@@ -1235,12 +1382,6 @@ syncAppearance();
 document.addEventListener("focusin", (e) => {
   if (e.target.closest && e.target.closest(".pin")) e.target.select();
 });
-document.querySelectorAll("[data-change]").forEach((b) => b.addEventListener("click", () => {
-  const open = b.getAttribute("aria-expanded") !== "true";
-  renderChange(b);
-  b.querySelector("small").hidden = !open;
-  b.setAttribute("aria-expanded", String(open));
-}));
 document.addEventListener("keydown", (e) => {
   const el = e.target;
   if (e.key === "Backspace" && !el.value && el.closest(".pin") && el.previousElementSibling) el.previousElementSibling.focus();
@@ -1255,6 +1396,7 @@ document.addEventListener("paste", (e) => {
   });
   (box.children[Math.min(digits.length, box.children.length) - 1] || box.firstChild).focus();
   if (box.id === "lock-pin") unlockWith(pinValue(box));
+  if (box.id === "lock-off-pin") disableLock(pinValue(box));
   syncSave();
 });
 document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
@@ -1263,7 +1405,11 @@ document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("clic
   setTimeout(() => (b.textContent = "Copy"), 1500);
 }));
 db.auth.onAuthStateChange((event, session) => {
-  if (event === "PASSWORD_RECOVERY") return;
+  if (event === "PASSWORD_RECOVERY") {
+    recovering = true;
+    $("#newpass").showModal();
+    return;
+  }
   const id = session ? session.user.id : null;
   if (id === userId) return;
   userId = id;
@@ -1295,7 +1441,7 @@ handle("#signup-form", async (f, v) => {
   const { data, error } = await db.auth.signUp({ email: v.email, password: v.password, options: { data: { invite_code: v.invite } } });
   if (error) return error.message.includes("Database error") ? problem(f, "Invalid invite code.", "invite") : problem(f, error.message, "email");
   if (data.user && data.user.identities && !data.user.identities.length) return problem(f, "This email is already registered. Log in instead.", "email");
-  pending = { email: v.email, type: "signup" };
+  pending = v.email;
   advance(f, data.session ? "" : "#verify");
 });
 handle("#login-form", async (f, v) => {
@@ -1304,26 +1450,26 @@ handle("#login-form", async (f, v) => {
   advance(f);
 });
 handle("#reset-form", async (f, v) => {
-  const { error } = await db.auth.resetPasswordForEmail(v.email);
+  const { error } = await db.auth.resetPasswordForEmail(v.email, { redirectTo: location.origin + location.pathname });
   if (error) return problem(f, error.message, "email");
-  pending = { email: v.email, type: "recovery" };
-  advance(f, "#verify");
+  advance(f);
+  toast("Password reset link sent. Check your email.", true);
 });
 handle("#verify-form", async (f, v) => {
-  const { error } = await db.auth.verifyOtp({ email: pending.email, token: v.code, type: pending.type });
+  const { error } = await db.auth.verifyOtp({ email: pending, token: v.code, type: "signup" });
   if (error) return problem(f, "Invalid or expired code.", "code");
-  advance(f, pending.type === "recovery" ? "#newpass" : "");
+  advance(f);
 });
 handle("#newpass-form", async (f, v) => {
   const { error } = await db.auth.updateUser({ password: v.password });
   if (error) return problem(f, error.message, "password");
+  recovering = false;
   advance(f);
+  toast("Password updated.", true);
 });
 handle("#pw-form", async (f, v) => {
-  const r = await call("check_password", { p_password: v.current });
-  if (r !== "ok") return problem(f, say[r] || say.error, "current");
-  const { error } = await db.auth.updateUser({ password: v.password });
-  if (error) return problem(f, error.message, "password");
+  const r = await call("change_password", { p_current: v.current, p_new: v.password });
+  if (r !== "ok") return problem(f, say[r] || say.error, r === "weak" || r === "same" ? "password" : "current");
   f.reset();
   toast("Password updated.", true);
 });
@@ -1341,6 +1487,17 @@ const savePin = async (rpc, isSet, oldBox, newBox, oldLen, newLen) => {
 };
 handle("#wp-form", async () => {
   if (await savePin("set_withdraw_pin", security.withdraw_set, $("#wp-old"), $("#wp-new"), 6, 6)) await loadSecurity();
+});
+handle("#wp-reset-form", async (f, v) => {
+  if (!pinOk($("#wp-reset-pin"), 6)) return;
+  const r = await call("reset_withdraw_pin", { p_password: v.current, p_new: pinValue($("#wp-reset-pin")) });
+  if (r !== "ok") {
+    if (r === "invalid") markPin($("#wp-reset-pin"));
+    return problem(f, say[r] || say.error, "current");
+  }
+  advance(f);
+  toast("PIN saved.", true);
+  await loadSecurity();
 });
 handle("#lk-form", async () => {
   const len = Number($("#lk-len [aria-pressed=true]").dataset.len);
